@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engine", "CardsEngine\Engine.csproj", "{B2453FDF-ED07-430F-AF0C-9F1B431DB085}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tester", "Tester\Tester.csproj", "{E606D0C3-FDAA-4448-A434-E4A5E765B8BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{A1FC9E63-C8B0-4E0F-AA56-A4CBCCAE8BC4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B2453FDF-ED07-430F-AF0C-9F1B431DB085}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2453FDF-ED07-430F-AF0C-9F1B431DB085}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2453FDF-ED07-430F-AF0C-9F1B431DB085}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2453FDF-ED07-430F-AF0C-9F1B431DB085}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E606D0C3-FDAA-4448-A434-E4A5E765B8BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E606D0C3-FDAA-4448-A434-E4A5E765B8BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E606D0C3-FDAA-4448-A434-E4A5E765B8BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E606D0C3-FDAA-4448-A434-E4A5E765B8BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1FC9E63-C8B0-4E0F-AA56-A4CBCCAE8BC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1FC9E63-C8B0-4E0F-AA56-A4CBCCAE8BC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1FC9E63-C8B0-4E0F-AA56-A4CBCCAE8BC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1FC9E63-C8B0-4E0F-AA56-A4CBCCAE8BC4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
