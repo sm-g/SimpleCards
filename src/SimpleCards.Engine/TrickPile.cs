@@ -33,7 +33,7 @@ namespace SimpleCards.Engine
 
     public class TrickNDrawTrickPile : TrickPile
     {
-        private List<Tuple<Card, Card>> q;
+        //private List<Tuple<Card, Card>> q;
 
         public TrickNDrawTrickPile()
         {

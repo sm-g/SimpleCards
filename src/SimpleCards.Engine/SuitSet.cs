@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
-using Functional.Maybe;
+using Optional;
 
 namespace SimpleCards.Engine
 {
@@ -12,15 +12,14 @@ namespace SimpleCards.Engine
     /// </summary>
     public class SuitSet : IReadOnlyList<Suit>
     {
-        private List<Suit> suits = new List<Suit>();
+        private readonly List<Suit> _suits = new List<Suit>();
 
         /// <summary>
-        /// Crestes suit set from list of suits.
+        /// Creates suit set from list of suits.
         /// </summary>
-        /// <param name="suits"></param>
         public SuitSet(IEnumerable<Suit> suits)
         {
-            this.suits = new List<Suit>(suits);
+            _suits = new List<Suit>(suits);
         }
 
         private SuitSet()
@@ -29,17 +28,17 @@ namespace SimpleCards.Engine
 
         public int Count
         {
-            get { return suits.Count; }
+            get { return _suits.Count; }
         }
 
         public Suit this[int index]
         {
-            get { return suits[index]; }
+            get { return _suits[index]; }
         }
 
         public Suit this[string name]
         {
-            get { return suits.Find(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase)); }
+            get { return _suits.Find(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase)); }
         }
 
         /// <summary>
@@ -55,28 +54,28 @@ namespace SimpleCards.Engine
             var result = new SuitSet();
             foreach (T suit in Enum.GetValues(typeof(T)))
             {
-                result.suits.Add(new Suit(suit.ToString(), colorOf(suit)));
+                result._suits.Add(new Suit(suit.ToString(), colorOf(suit)));
             }
             return result;
         }
 
-        public Maybe<Suit> GetSuit(string suitName)
+        public Option<Suit> GetSuit(string suitName)
         {
-            var result = suits.Find(suit => suit.Name == suitName);
+            var result = _suits.Find(suit => suit.Name == suitName);
             if (result.Equals(default(Suit)))
-                return Maybe<Suit>.Nothing;
+                return Option.None<Suit>();
 
-            return result.ToMaybe();
+            return result.Some();
         }
 
         public IEnumerator<Suit> GetEnumerator()
         {
-            return suits.GetEnumerator();
+            return _suits.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return suits.GetEnumerator();
+            return _suits.GetEnumerator();
         }
 
         [ContractInvariantMethod]
@@ -84,7 +83,7 @@ namespace SimpleCards.Engine
         private void ObjectInvariant()
         {
             // all unique
-            Contract.Invariant(suits.GroupBy(x => x).Count() == suits.Count);
+            Contract.Invariant(_suits.GroupBy(x => x).Count() == _suits.Count);
         }
     }
 }

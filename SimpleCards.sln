@@ -3,11 +3,30 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engine", "CardsEngine\Engine.csproj", "{B2453FDF-ED07-430F-AF0C-9F1B431DB085}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCards.Engine", "src\SimpleCards.Engine\SimpleCards.Engine.csproj", "{B2453FDF-ED07-430F-AF0C-9F1B431DB085}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tester", "Tester\Tester.csproj", "{E606D0C3-FDAA-4448-A434-E4A5E765B8BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCards.ExampleApp", "src\SimpleCards.ExampleApp\SimpleCards.ExampleApp.csproj", "{E606D0C3-FDAA-4448-A434-E4A5E765B8BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{A1FC9E63-C8B0-4E0F-AA56-A4CBCCAE8BC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCards.Engine.Tests", "test\SimpleCards.Engine.Tests\SimpleCards.Engine.Tests.csproj", "{A1FC9E63-C8B0-4E0F-AA56-A4CBCCAE8BC4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4E0200CD-7691-4B29-AF4C-E9EFF7318A3C}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		CodeMaid.config = CodeMaid.config
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2DB25E2B-D765-4744-AC62-47E82F665E0F}"
+	ProjectSection(SolutionItems) = preProject
+		src\Directory.Build.props = src\Directory.Build.props
+		src\SimpleCards.ruleset = src\SimpleCards.ruleset
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{1C684891-2761-46B4-9ED4-5927326AED98}"
+	ProjectSection(SolutionItems) = preProject
+		test\Directory.Build.props = test\Directory.Build.props
+		test\SimpleCards.Tests.ruleset = test\SimpleCards.Tests.ruleset
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +49,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B2453FDF-ED07-430F-AF0C-9F1B431DB085} = {2DB25E2B-D765-4744-AC62-47E82F665E0F}
+		{E606D0C3-FDAA-4448-A434-E4A5E765B8BA} = {2DB25E2B-D765-4744-AC62-47E82F665E0F}
+		{A1FC9E63-C8B0-4E0F-AA56-A4CBCCAE8BC4} = {1C684891-2761-46B4-9ED4-5927326AED98}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CCBA76C2-C050-4563-B50F-2C4E5D52E6ED}

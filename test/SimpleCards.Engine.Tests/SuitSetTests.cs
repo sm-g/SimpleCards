@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using NUnit.Framework;
+using Optional.Unsafe;
 using SimpleCards.Engine;
 
 namespace SimpleCards.Tests
@@ -14,7 +15,7 @@ namespace SimpleCards.Tests
             var suit = new Suit("s1");
             var set = new SuitSet(new[] { suit });
 
-            var res = set.GetSuit("s1").Value;
+            var res = set.GetSuit("s1").ValueOrFailure();
 
             Assert.AreEqual(res, suit);
         }

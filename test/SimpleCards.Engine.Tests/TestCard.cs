@@ -1,14 +1,13 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
+using Optional.Unsafe;
 using SimpleCards.Engine;
-using System.Collections.Generic;
 
 namespace SimpleCards.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class TestCard
     {
-        [TestMethod]
+        [Test]
         public void TestCardsEquality()
         {
             SuitSet suitset = SuitSet.From<FrenchSuits>(s => s == FrenchSuits.Clubs || s == FrenchSuits.Diamonds ? 1 : 0);
@@ -18,7 +17,7 @@ namespace SimpleCards.Tests
             Card asA = new Card(rankset[0], suitset[0]);
             Card b = new Card(rankset[0], suitset[1]);
             Card c = new Card(rankset[1], suitset[0]);
-            Card d = new Card(rankset[1], suitset.GetSuit("Clubs").Value);
+            Card d = new Card(rankset[1], suitset.GetSuit("Clubs").ValueOrFailure());
 
             Assert.AreEqual(a, a);
             Assert.AreEqual(a, asA);

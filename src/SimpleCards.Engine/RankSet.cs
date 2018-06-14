@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
-using Functional.Maybe;
+using Optional;
 
 namespace SimpleCards.Engine
 {
@@ -12,11 +12,11 @@ namespace SimpleCards.Engine
     /// </summary>
     public class RankSet : IReadOnlyList<Rank>
     {
-        List<Rank> ranks = new List<Rank>();
+        private readonly List<Rank> _ranks = new List<Rank>();
 
         public RankSet(IEnumerable<Rank> ranks)
         {
-            this.ranks = new List<Rank>(ranks);
+            _ranks = new List<Rank>(ranks);
         }
 
         private RankSet()
@@ -25,7 +25,7 @@ namespace SimpleCards.Engine
 
         public Rank this[string name]
         {
-            get { return ranks.Find(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase)); }
+            get { return _ranks.Find(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase)); }
         }
 
         /// <summary>
@@ -41,40 +41,40 @@ namespace SimpleCards.Engine
             var result = new RankSet();
             foreach (T rank in Enum.GetValues(typeof(T)))
             {
-                result.ranks.Add(new Rank(rank.ToString(), valueOf(rank), faced.Contains(rank)));
+                result._ranks.Add(new Rank(rank.ToString(), valueOf(rank), faced.Contains(rank)));
             }
             return result;
         }
 
-        public Maybe<Rank> GetRank(string rankName)
+        public Option<Rank> GetRank(string rankName)
         {
-            var result = ranks.Find(x => x.Name == rankName);
+            var result = _ranks.Find(x => x.Name == rankName);
             if (result.Equals(default(Rank)))
-                return Maybe<Rank>.Nothing;
+                return Option.None<Rank>();
 
-            return result.ToMaybe();
+            return result.Some();
         }
 
         #region IReadOnlyList
 
         public int Count
         {
-            get { return ranks.Count; }
+            get { return _ranks.Count; }
         }
 
         public Rank this[int index]
         {
-            get { return ranks[index]; }
+            get { return _ranks[index]; }
         }
 
         public IEnumerator<Rank> GetEnumerator()
         {
-            return ranks.GetEnumerator();
+            return _ranks.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return ranks.GetEnumerator();
+            return _ranks.GetEnumerator();
         }
 
         #endregion IReadOnlyList
@@ -84,7 +84,7 @@ namespace SimpleCards.Engine
         private void ObjectInvariant()
         {
             // all unique
-            Contract.Invariant(ranks.GroupBy(x => x).Count() == ranks.Count);
+            Contract.Invariant(_ranks.GroupBy(x => x).Count() == _ranks.Count);
         }
     }
 }
