@@ -21,8 +21,8 @@
       <FileName>Card.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Rank" />
       <Property Name="Suit" />
+      <Property Name="Rank" />
     </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
@@ -30,7 +30,7 @@
     <Position X="3.25" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAAAAAAAAAAAAQAAAABAAAAAAAAAAAAAAAAABAAAA=</HashCode>
-      <FileName>Pack.cs</FileName>
+      <FileName>Pile\Pack.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SimpleCards.Engine.Pile" Collapsed="true">
@@ -40,23 +40,23 @@
     </Compartments>
     <TypeIdentifier>
       <HashCode>AgJEAAAABAAEgFAUQAAABAQAIAKAAAAECAgQAARQOBA=</HashCode>
-      <FileName>Pile.cs</FileName>
+      <FileName>Pile\Pile.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="SimpleCards.Engine.RankSet" Collapsed="true">
     <Position X="3" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgAAAAAAAAAAABAACQACAAQAAAAAAAAEAAAQAAAAAAA=</HashCode>
-      <FileName>RankSet.cs</FileName>
+      <HashCode>AgAAAAEAAAAAABAACQAAAAQAAAAAAAAEAAAQAAAAAAA=</HashCode>
+      <FileName>Rank\RankSet.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="SimpleCards.Engine.SuitSet" Collapsed="true">
     <Position X="5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgAAAAAAAgAAQBAACAAAAAQAAAAAAAAEAAAQAAAAAAA=</HashCode>
-      <FileName>SuitSet.cs</FileName>
+      <HashCode>AgAAAAAAAAAAQBAACAAAAAwAAAAAAAAEAAAQAAAAAAA=</HashCode>
+      <FileName>Suit\SuitSet.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
@@ -64,7 +64,7 @@
     <Position X="1.25" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEAAAEAAAAAAAAAACAAAAAAAAAAAAAAACAAAAQAAAAA=</HashCode>
-      <FileName>Hand.cs</FileName>
+      <FileName>Pile\Hand.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
@@ -72,16 +72,13 @@
     <Position X="11.5" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAABAAAA=</HashCode>
-      <FileName>Table.cs</FileName>
+      <FileName>Game\Table.cs</FileName>
     </TypeIdentifier>
-    <ShowAsCollectionAssociation>
-      <Property Name="Zones" />
-    </ShowAsCollectionAssociation>
   </Class>
   <Class Name="SimpleCards.Engine.Zone" Collapsed="true">
     <Position X="11.5" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAABAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAgAAAAAAAABAAAAQAAAAAAAACAAAAAAAAAAA=</HashCode>
       <FileName>Zone.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -92,55 +89,52 @@
     <Position X="5" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Stock.cs</FileName>
+      <FileName>Pile\Stock.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SimpleCards.Engine.Party" Collapsed="true">
     <Position X="5.75" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAAAAAQAAAAgAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Party.cs</FileName>
+      <FileName>Game\Party.cs</FileName>
     </TypeIdentifier>
-    <ShowAsCollectionAssociation>
-      <Property Name="Players" />
-    </ShowAsCollectionAssociation>
   </Class>
   <Class Name="SimpleCards.Engine.Player" Collapsed="true">
     <Position X="3.25" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAAAAAEAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Player.cs</FileName>
+      <FileName>Game\Player.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Hand" />
     </ShowAsAssociation>
   </Class>
-  <Struct Name="SimpleCards.Engine.Rank">
-    <Position X="8.75" Y="3.5" Width="1.5" />
+  <Class Name="SimpleCards.Engine.Suit" Collapsed="true">
+    <Position X="12.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAABAAEAAAAAAQAAAAAAAAAAAAgAAAAAAA=</HashCode>
-      <FileName>Rank.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAEACAAAAQAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Suit\Suit.cs</FileName>
     </TypeIdentifier>
-  </Struct>
-  <Struct Name="SimpleCards.Engine.Suit">
-    <Position X="6.75" Y="3.5" Width="1.5" />
+  </Class>
+  <Class Name="SimpleCards.Engine.Rank" Collapsed="true">
+    <Position X="12.5" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAEAAAAAAQAAAAAAAAAAAAAgAAAAAA=</HashCode>
-      <FileName>Suit.cs</FileName>
+      <HashCode>AAAAAAAAAAAABAAEACAAAAQAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Rank\Rank.cs</FileName>
     </TypeIdentifier>
-  </Struct>
+  </Class>
   <Enum Name="SimpleCards.Engine.DefaultRanks" Collapsed="true">
     <Position X="4.75" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gAAAAAAAAAAggAAAEAAEAIAAAAAFBAAAAAgAAAgAAEE=</HashCode>
-      <FileName>DefaultRanks.cs</FileName>
+      <FileName>Rank\DefaultRanks.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="SimpleCards.Engine.FrenchSuits" Collapsed="true">
     <Position X="7" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAQAAAEAAAAAAAAABAAAAAAAAAAAAAAAAAAAACA=</HashCode>
-      <FileName>FrenchSuits.cs</FileName>
+      <FileName>Suit\FrenchSuits.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />
