@@ -28,16 +28,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!--<PackageReference Include="codecracker.CSharp">
+    <PackageReference Include="codecracker.CSharp">
       <Version>1.0.3</Version>
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
-    -->
-    <!--<PackageReference Include="ErrorProne.NET">
+
+    <PackageReference Include="ErrorProne.NET">
       <Version>0.1.5898.41180</Version>
       <PrivateAssets>All</PrivateAssets>
-    </PackageReference>-->
-    <!--
+    </PackageReference>
     <PackageReference Include="RefactoringEssentials">
       <Version>5.6.0</Version>
       <PrivateAssets>All</PrivateAssets>
@@ -49,6 +48,6 @@
     <PackageReference Include="StyleCop.Analyzers">
       <Version>1.1.0-beta004</Version>
       <PrivateAssets>All</PrivateAssets>
-    </PackageReference>-->
+    </PackageReference>
   </ItemGroup>
 </Project>

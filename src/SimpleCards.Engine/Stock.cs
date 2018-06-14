@@ -10,7 +10,6 @@ namespace SimpleCards.Engine
         public Stock(IEnumerable<Card> cards)
             : base(cards)
         {
-
         }
 
         public bool IsLastVisible { get; set; }

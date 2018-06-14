@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace SimpleCards.Engine.Extensions
 {
@@ -11,18 +10,18 @@ namespace SimpleCards.Engine.Extensions
 
         public KeyEqualityComparer(Func<T, TKey> keyExtractor, IEqualityComparer<TKey> comparer = null)
         {
-            this.KeyExtractor = keyExtractor;
-            this.Comparer = comparer ?? EqualityComparer<TKey>.Default;
+            KeyExtractor = keyExtractor;
+            Comparer = comparer ?? EqualityComparer<TKey>.Default;
         }
 
         public virtual bool Equals(T x, T y)
         {
-            return Comparer.Equals(this.KeyExtractor(x), this.KeyExtractor(y));
+            return Comparer.Equals(KeyExtractor(x), KeyExtractor(y));
         }
 
         public int GetHashCode(T obj)
         {
-            return Comparer.GetHashCode(this.KeyExtractor(obj));
+            return Comparer.GetHashCode(KeyExtractor(obj));
         }
     }
 
@@ -37,7 +36,7 @@ namespace SimpleCards.Engine.Extensions
         {
             // This will use the overload that accepts a TKey parameter
             // instead of an object parameter.
-            return this.KeyExtractor(x).Equals(this.KeyExtractor(y));
+            return KeyExtractor(x).Equals(KeyExtractor(y));
         }
     }
 

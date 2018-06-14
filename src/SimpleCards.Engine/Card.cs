@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace SimpleCards.Engine
 {
@@ -27,7 +26,7 @@ namespace SimpleCards.Engine
         /// <summary>
         /// Cards are equals by value if they have same rank and suit.
         ///
-        /// Use to compare abscract cards, i.e. check Queen of Spades.
+        /// Use to compare abstract cards, i.e. check Queen of Spades.
         /// </summary>
         public bool Equals(Card other)
         {
@@ -37,8 +36,7 @@ namespace SimpleCards.Engine
 
         public override bool Equals(object obj)
         {
-            var other = obj as Card;
-            if (other == null)
+            if (!(obj is Card other))
                 return false;
 
             return Equals(other);
@@ -77,9 +75,7 @@ namespace SimpleCards.Engine
 
             public int Compare(object x, object y)
             {
-                var f = x as Card;
-                var s = y as Card;
-                if (f == null || s == null)
+                if (!(x is Card f) || !(y is Card s))
                     return 0;
                 return Compare(f, s);
             }

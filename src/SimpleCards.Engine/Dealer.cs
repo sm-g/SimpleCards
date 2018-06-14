@@ -8,7 +8,7 @@ namespace SimpleCards.Engine
         {
             game.Pack = new Pack(game.SuitSet, game.RankSet);
             var stock = new Stock(game.Pack) { IsLastVisible = true };
-            game.Table.Zones.Find(x => x.Name == "stock").Pile = stock;
+            game.Table.Zones.Find(x => x.Name == Zone.StockName).Pile = stock;
 
             foreach (var player in game.Parties.SelectMany(x => x.Players))
             {

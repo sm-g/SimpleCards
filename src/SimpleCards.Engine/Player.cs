@@ -5,8 +5,8 @@
         public Player(string name)
         {
             Hand = new Hand(this);
-
         }
+
         public string Name { get; set; }
         public Hand Hand { get; set; }
 

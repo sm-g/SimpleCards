@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Text;
 using SimpleCards.Engine.Extensions;
 
 namespace SimpleCards.Engine
@@ -12,13 +13,12 @@ namespace SimpleCards.Engine
     /// </summary>
     public class Pile : ICollection<Card>, IReadOnlyCollection<Card>
     {
-        internal List<Card> cardsInPile;
         private static Random rnd = new Random();
+        protected List<Card> cardsInPile;
 
         /// <summary>
         /// Creates pile with given cards.
         /// </summary>
-        /// <param name="cards"></param>
         public Pile(IEnumerable<Card> cards)
         {
             cardsInPile = new List<Card>(cards);
@@ -199,10 +199,10 @@ namespace SimpleCards.Engine
                     // group of cards from middle
                     var seed = PeekRandomCard();
                     var index = cardsInPile.IndexOf(seed);
-                    int start = 0;
+                    var start = 0;
                     if (index >= count - 1)
                     {
-                        // take from begining to seed
+                        // take from beginning to seed
                         start = index - count + 1;
                     }
                     else if (Size - index >= count)
@@ -269,12 +269,13 @@ namespace SimpleCards.Engine
 
         public override string ToString()
         {
-            string result = string.Format("Pile with {0} cards, top is {1}, some random is {2}. All cards: \n", Size, PeekTop(), PeekRandomCard());
+            var builder = new StringBuilder($"Pile with {Size} cards, top is {PeekTop()}, some random is {PeekRandomCard()}. All cards: \n");
             foreach (var card in cardsInPile)
             {
-                result += card.ToString() + "\n";
+                builder.Append(card);
+                builder.AppendLine();
             }
-            return result;
+            return builder.ToString();
         }
 
         #region ICollection

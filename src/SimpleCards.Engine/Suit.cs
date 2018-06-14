@@ -7,6 +7,7 @@
         {
             Name = name;
         }
+
         public Suit(string name, int color)
             : this()
         {

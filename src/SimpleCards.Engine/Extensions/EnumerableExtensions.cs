@@ -6,7 +6,7 @@ namespace SimpleCards.Engine.Extensions
 {
     public static class EnumerableExtensions
     {
-        static Random random = new Random();
+        private static readonly Random Random = new Random();
 
         public static void ForAll<T>(this IEnumerable<T> collection, Action<T> action)
         {
@@ -19,7 +19,7 @@ namespace SimpleCards.Engine.Extensions
         public static IEnumerable<IEnumerable<T>> Chunk<T>(this IEnumerable<T> source, int chunksize)
         {
             if (chunksize <= 0)
-                throw new ArgumentException();
+                throw new ArgumentOutOfRangeException(nameof(chunksize));
 
             var pos = 0;
             while (source.Skip(pos).Any())
@@ -75,8 +75,13 @@ namespace SimpleCards.Engine.Extensions
         /// </summary>
         public static bool ScrambledEquals<T>(this IEnumerable<T> list1, IEnumerable<T> list2)
         {
+            if (list1 == null)
+                throw new ArgumentNullException(nameof(list1));
+            if (list2 == null)
+                throw new ArgumentNullException(nameof(list2));
+
             var cnt = new Dictionary<T, int>();
-            foreach (T s in list1)
+            foreach (var s in list1)
             {
                 if (cnt.ContainsKey(s))
                 {
@@ -87,7 +92,7 @@ namespace SimpleCards.Engine.Extensions
                     cnt.Add(s, 1);
                 }
             }
-            foreach (T s in list2)
+            foreach (var s in list2)
             {
                 if (cnt.ContainsKey(s))
                 {
@@ -106,12 +111,13 @@ namespace SimpleCards.Engine.Extensions
         /// </summary>
         public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
 
             var buffer = source.ToList();
-            for (int i = 0; i < buffer.Count; i++)
+            for (var i = 0; i < buffer.Count; i++)
             {
-                int j = random.Next(i, buffer.Count);
+                var j = Random.Next(i, buffer.Count);
                 yield return buffer[j];
 
                 buffer[j] = buffer[i];
@@ -120,10 +126,13 @@ namespace SimpleCards.Engine.Extensions
 
         public static void Shuffle<T>(this IList<T> list)
         {
-            for (int i = list.Count; i > 1; i--)
+            if (list == null)
+                throw new ArgumentNullException(nameof(list));
+
+            for (var i = list.Count; i > 1; i--)
             {
-                int j = random.Next(i); // 0 <= j <= i-1
-                T tmp = list[j];
+                var j = Random.Next(i); // 0 <= j <= i-1
+                var tmp = list[j];
                 list[j] = list[i - 1];
                 list[i - 1] = tmp;
             }
@@ -135,8 +144,13 @@ namespace SimpleCards.Engine.Extensions
         public static bool IsOrdered<T, TKey>(this IEnumerable<T> items, Func<T, TKey> keyExtractor)
             where TKey : IComparable<TKey>
         {
+            if (items == null)
+                throw new ArgumentNullException(nameof(items));
+            if (keyExtractor == null)
+                throw new ArgumentNullException(nameof(keyExtractor));
+
             return items.Zip(items.Skip(1), (a, b) => new { a, b })
-                .All(x => !(keyExtractor(x.a).CompareTo(keyExtractor(x.b)) > 0));
+                .All(x => (keyExtractor(x.a).CompareTo(keyExtractor(x.b)) <= 0));
         }
 
         /// <summary>
@@ -145,6 +159,11 @@ namespace SimpleCards.Engine.Extensions
         public static bool IsStrongOrdered<T, TKey>(this IEnumerable<T> items, Func<T, TKey> keyExtractor)
             where TKey : IComparable<TKey>
         {
+            if (items == null)
+                throw new ArgumentNullException(nameof(items));
+            if (keyExtractor == null)
+                throw new ArgumentNullException(nameof(keyExtractor));
+
             return items.Zip(items.Skip(1), (a, b) => new { a, b })
                 .All(x => keyExtractor(x.a).CompareTo(keyExtractor(x.b)) < 0);
         }
@@ -152,15 +171,15 @@ namespace SimpleCards.Engine.Extensions
         public static string ToSeparatedString(this IEnumerable<Guid> guids)
         {
             if (guids == null)
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(nameof(guids));
 
-            return string.Format("'{0}'", string.Join("','", guids));
+            return $"'{string.Join("','", guids)}'";
         }
 
         public static string ToSeparatedString<T>(this IEnumerable<T> collection, string separator)
         {
             if (collection == null)
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(nameof(collection));
 
             return string.Join(separator, collection);
         }

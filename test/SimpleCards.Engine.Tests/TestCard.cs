@@ -10,14 +10,14 @@ namespace SimpleCards.Tests
         [Test]
         public void TestCardsEquality()
         {
-            SuitSet suitset = SuitSet.From<FrenchSuits>(s => s == FrenchSuits.Clubs || s == FrenchSuits.Diamonds ? 1 : 0);
-            RankSet rankset = RankSet.From<DefaultRanks>(r => (int)r, new DefaultRanks[0]);
+            var suitset = SuitSet.From<FrenchSuits>(s => s == FrenchSuits.Clubs || s == FrenchSuits.Diamonds ? 1 : 0);
+            var rankset = RankSet.From<DefaultRanks>(r => (int)r, new DefaultRanks[0]);
 
-            Card a = new Card(rankset[0], suitset[0]);
-            Card asA = new Card(rankset[0], suitset[0]);
-            Card b = new Card(rankset[0], suitset[1]);
-            Card c = new Card(rankset[1], suitset[0]);
-            Card d = new Card(rankset[1], suitset.GetSuit("Clubs").ValueOrFailure());
+            var a = new Card(rankset[0], suitset[0]);
+            var asA = new Card(rankset[0], suitset[0]);
+            var b = new Card(rankset[0], suitset[1]);
+            var c = new Card(rankset[1], suitset[0]);
+            var d = new Card(rankset[1], suitset.GetSuit("Clubs").ValueOrFailure());
 
             Assert.AreEqual(a, a);
             Assert.AreEqual(a, asA);

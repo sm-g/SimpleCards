@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace SimpleCards.Engine
 {
     /// <summary>
     /// The cards held by one player (owner). Visible to owner.
-    /// 
     /// <remarks>Ordered by adding to hand, in UI may be sorted any other way.</remarks>
     /// </summary>
     public class Hand : Pile, IList<Card>
@@ -17,6 +12,7 @@ namespace SimpleCards.Engine
         {
             Player = p;
         }
+
         public Player Player { get; set; }
 
         public int IndexOf(Card item)

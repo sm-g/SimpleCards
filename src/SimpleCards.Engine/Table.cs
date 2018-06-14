@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace SimpleCards.Engine
 {
@@ -12,6 +8,7 @@ namespace SimpleCards.Engine
         {
             Zones = new List<Zone>();
         }
+
         public List<Zone> Zones { get; set; }
 
         public void Clear()

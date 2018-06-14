@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SimpleCards.Engine
 {
     public class Game
     {
+        private readonly List<AI> _ais = new List<AI>();
+
         public Game(RankSet rs, SuitSet ss, Rules rules, int players)
         {
             RankSet = rs;
@@ -16,7 +16,7 @@ namespace SimpleCards.Engine
 
             Table = new Table();
             Parties = new List<Party>();
-            for (int i = 0; i < players; i++)
+            for (var i = 0; i < players; i++)
             {
                 var player = new Player("player" + i);
                 var party = new Party();
@@ -25,7 +25,10 @@ namespace SimpleCards.Engine
             }
         }
 
-        public Game() { }
+        public Game()
+        {
+        }
+
         public RankSet RankSet { get; set; }
         public SuitSet SuitSet { get; set; }
         public Rules Rules { get; set; }
@@ -35,18 +38,17 @@ namespace SimpleCards.Engine
 
         public Pack Pack { get; set; }
 
-        List<AI> ais = new List<AI>();
         public void StartPlayers()
         {
             foreach (var item in Parties)
             {
-                ais.AddRange(item.Players.Select(x => new AI() { Player = x }));
+                _ais.AddRange(item.Players.Select(x => new AI() { Player = x }));
             }
         }
 
         public void Move()
         {
-
+            throw new NotImplementedException();
         }
     }
 }

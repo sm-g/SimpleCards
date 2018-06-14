@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace SimpleCards.Engine
@@ -16,8 +15,6 @@ namespace SimpleCards.Engine
         /// <summary>
         /// All pairs, triples etc of cards from hand with same rank.
         /// </summary>
-        /// <param name="ai"></param>
-        /// <returns></returns>
         public IEnumerable<Card> GetTuples(AI ai)
         {
             //  var visibleZones = ai.Zones;

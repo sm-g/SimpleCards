@@ -6,12 +6,12 @@ using SimpleCards.Engine;
 
 namespace SimpleCards.Tester
 {
-    internal class Program
+    internal static class Program
     {
         private static void Main(string[] args)
         {
-            SuitSet suitset = SuitSet.From<FrenchSuits>(s => s == FrenchSuits.Clubs || s == FrenchSuits.Diamonds ? 1 : 0);
-            RankSet rankset = RankSet.From<DefaultRanks>(r => (int)r, new[] { DefaultRanks.Jack, DefaultRanks.Queen, DefaultRanks.King });
+            var suitset = SuitSet.From<FrenchSuits>(s => s == FrenchSuits.Clubs || s == FrenchSuits.Diamonds ? 1 : 0);
+            var rankset = RankSet.From<DefaultRanks>(r => (int)r, new[] { DefaultRanks.Jack, DefaultRanks.Queen, DefaultRanks.King });
             var rules = new Rules() { PackSize = 36 };
             var game = new Game(rankset, suitset, rules, 2);
 

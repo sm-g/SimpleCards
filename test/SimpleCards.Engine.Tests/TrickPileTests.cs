@@ -8,20 +8,20 @@ namespace SimpleCards.Tests
     [TestFixture]
     public class TrickPileTests
     {
-        //[Test]
-        //public void PushMiddle_NeverTopOrBottom()
-        //{
-        //    var p = new Party();
-        //    var p2 = new Party();
-        //    var pile = new PlainTrickPile();
-        //    var card = RndCard(1);
-        //    var card2 = RndCard(2);
+        [Test]
+        public void PushMiddle_NeverTopOrBottom()
+        {
+            var p = new Party();
+            var p2 = new Party();
+            var pile = new PlainTrickPile();
+            var card = RndCard(1);
+            var card2 = RndCard(2);
 
-        //    pile.Push(card, p);
-        //    pile.Push(card2, p2);
+            pile.Push(card, p);
+            pile.Push(card2, p2);
 
-        //    pile.
-        //}
+            Assert.Fail();
+        }
 
         //[Test]
         //public void PushMiddle_()

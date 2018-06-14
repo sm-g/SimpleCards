@@ -23,9 +23,8 @@ namespace SimpleCards.Engine
             if (dict.Count == 0)
                 leader = p;
 
-            List<Card> list;
-            if (!dict.TryGetValue(p, out list))
-                dict[p] = (list = new List<Card>());
+            if (!dict.TryGetValue(p, out var list))
+                dict[p] = list = new List<Card>();
 
             list.Add(card);
         }
@@ -43,9 +42,9 @@ namespace SimpleCards.Engine
 
         public void Push(Card card, Player p)
         {
-            if (Defense.Players.Contains(p))
-            {
-            }
+            //if (Defense.Players.Contains(p))
+            //{
+            //}
             // base.Push(card, p);
         }
 

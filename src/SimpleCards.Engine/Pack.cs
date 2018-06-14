@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace SimpleCards.Engine
 {
@@ -13,8 +12,6 @@ namespace SimpleCards.Engine
         /// <summary>
         /// Creates pile with cards of all suits and ranks in set, grouped by suits.
         /// </summary>
-        /// <param name="suits"></param>
-        /// <param name="ranks"></param>
         /// <param name="shuffle">If true, shuffles pile after creation.</param>
         public Pack(SuitSet suits, RankSet ranks, bool shuffle = true, int number = 1)
         {
@@ -23,7 +20,7 @@ namespace SimpleCards.Engine
             {
                 foreach (var rank in ranks)
                 {
-                    for (int i = 0; i < number; i++)
+                    for (var i = 0; i < number; i++)
                     {
                         cardsInPile.Add(new Card(rank, suit));
                     }

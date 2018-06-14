@@ -5,23 +5,23 @@
         public void CreateZones(Game game)
         {
             game.Table.Zones.Add(Discard());
-            game.Table.Zones.Add(Gamefield());
+            game.Table.Zones.Add(GameField());
             game.Table.Zones.Add(Stock());
         }
 
         public Zone Discard()
         {
-            return new Zone() { Name = "discard" };
+            return new Zone() { Name = Zone.DiscardName };
         }
 
-        public Zone Gamefield()
+        public Zone GameField()
         {
-            return new Zone() { Name = "field" };
+            return new Zone() { Name = Zone.GameFieldName };
         }
 
         public Zone Stock()
         {
-            return new Zone() { Name = "stock" };
+            return new Zone() { Name = Zone.StockName };
         }
     }
 }

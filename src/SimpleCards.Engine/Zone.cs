@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SimpleCards.Engine
+﻿namespace SimpleCards.Engine
 {
     public class Zone
     {
+        public const string DiscardName = "discard";
+        public const string GameFieldName = "field";
+        public const string StockName = "stock";
+
         public Zone()
         {
             Pile = new Pile();
