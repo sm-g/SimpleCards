@@ -46,17 +46,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AI.cs" />
     <Compile Include="Card.cs" />
+    <Compile Include="Dealer.cs" />
+    <Compile Include="DefaultRanks.cs" />
     <Compile Include="Exceptions\EmptyException.cs" />
+    <Compile Include="Extensions\Comparers.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="FrenchSuits.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="Hand.cs" />
     <Compile Include="Pack.cs" />
+    <Compile Include="Party.cs" />
     <Compile Include="Pile.cs" />
-    <Compile Include="Extensions.cs" />
+    <Compile Include="PilePosition.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Ranks.cs" />
-    <Compile Include="Suits.cs" />
+    <Compile Include="Rank.cs" />
+    <Compile Include="RankSet.cs" />
+    <Compile Include="Rules.cs" />
+    <Compile Include="RuleVisitor.cs" />
+    <Compile Include="Starter.cs" />
+    <Compile Include="Stock.cs" />
+    <Compile Include="Suit.cs" />
+    <Compile Include="SuitSet.cs" />
+    <Compile Include="Table.cs" />
+    <Compile Include="TrickPile.cs" />
+    <Compile Include="Zone.cs" />
+    <Compile Include="ZoneFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

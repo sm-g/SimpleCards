@@ -7,40 +7,6 @@ using Functional.Maybe;
 
 namespace SimpleCards.Engine
 {
-    public enum DefaultRanks
-    {
-        Ace = 1,
-        Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten,
-        Jack, Queen, King
-    }
-
-    public struct Rank
-    {
-        public Rank(string name, int value, bool isFace = false)
-            : this()
-        {
-            Name = name;
-            Value = value;
-            IsFace = isFace;
-        }
-
-        public string Name { get; private set; }
-
-        /// <summary>
-        /// Gets value of rank in game.
-        ///
-        /// <para>Ranks with same name have diff values in diff games.</para>
-        /// </summary>
-        public int Value { get; private set; }
-
-        public bool IsFace { get; private set; }
-
-        public override string ToString()
-        {
-            return string.Format("{0} ({1})", Name, Value);
-        }
-    }
-
     /// <summary>
     /// Set of ranks in game.
     /// </summary>
@@ -57,16 +23,6 @@ namespace SimpleCards.Engine
         {
         }
 
-        public int Count
-        {
-            get { return ranks.Count; }
-        }
-
-        public Rank this[int index]
-        {
-            get { return ranks[index]; }
-        }
-
         public Rank this[string name]
         {
             get { return ranks.Find(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase)); }
@@ -75,7 +31,7 @@ namespace SimpleCards.Engine
         /// <summary>
         /// Creates rank set from enum.
         /// </summary>
-        public static RankSet From<T>(Func<T, int> valueOf) where T : struct
+        public static RankSet From<T>(Func<T, int> valueOf, T[] faced) where T : struct
         {
             if (!typeof(T).IsEnum)
             {
@@ -85,7 +41,7 @@ namespace SimpleCards.Engine
             var result = new RankSet();
             foreach (T rank in Enum.GetValues(typeof(T)))
             {
-                result.ranks.Add(new Rank(rank.ToString(), valueOf(rank)));
+                result.ranks.Add(new Rank(rank.ToString(), valueOf(rank), faced.Contains(rank)));
             }
             return result;
         }
@@ -99,6 +55,18 @@ namespace SimpleCards.Engine
             return result.ToMaybe();
         }
 
+        #region IReadOnlyList
+
+        public int Count
+        {
+            get { return ranks.Count; }
+        }
+
+        public Rank this[int index]
+        {
+            get { return ranks[index]; }
+        }
+
         public IEnumerator<Rank> GetEnumerator()
         {
             return ranks.GetEnumerator();
@@ -108,6 +76,8 @@ namespace SimpleCards.Engine
         {
             return ranks.GetEnumerator();
         }
+
+        #endregion IReadOnlyList
 
         [ContractInvariantMethod]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]

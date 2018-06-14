@@ -13,7 +13,8 @@ namespace SimpleCards.Tests
         {
             var pile = new Pile(new[] { RndCard(), RndCard(), RndCard() });
             var card = RndCard();
-            pile.PushMiddle(card);
+
+            pile.Push(card, PilePosition.Middle);
 
             Assert.IsTrue(pile.First() != card);
             Assert.IsTrue(pile.Last() != card);
@@ -24,7 +25,8 @@ namespace SimpleCards.Tests
         {
             var pile = new Pile(new[] { RndCard(), RndCard() });
             var card = RndCard();
-            pile.PushMiddle(card);
+
+            pile.Push(card, PilePosition.Middle);
 
             Assert.IsTrue(pile.ElementAt(1) == card);
         }
@@ -34,14 +36,27 @@ namespace SimpleCards.Tests
         {
             var pile = new Pile(new[] { RndCard() });
             var card = RndCard();
-            pile.PushMiddle(card);
+
+            pile.Push(card, PilePosition.Middle);
 
             Assert.IsTrue(pile.ElementAt(1) == card);
         }
 
-        static Card RndCard()
+        [Test]
+        public void PopMiddle_TakesOrderedGroup()
         {
-            return new Card(new Rank("1", 1), new Suit("1"));
+            var pile = new Pile(new[] { RndCard(1), RndCard(2), RndCard(3), RndCard(4) });
+
+            var res = pile.Pop(PilePosition.Middle, 3);
+
+            CollectionAssert.IsOrdered(res, new Card.RankValueComparer());
+            Assert.IsTrue(pile.Size == 1);
+            Assert.IsTrue(pile.First().Rank.Value == 1 || pile.First().Rank.Value == 4);
+        }
+
+        private static Card RndCard(int i = 1)
+        {
+            return new Card(new Rank("1", i), new Suit("1"));
         }
     }
 }

@@ -62,5 +62,27 @@ namespace SimpleCards.Engine
                 return obj.GetHashCode();
             }
         }
+
+        public class RankValueComparer : IComparer<Card>, IComparer
+        {
+
+            public int Compare(Card x, Card y)
+            {
+                if (x.Rank.Value > y.Rank.Value)
+                    return 1;
+                if (x.Rank.Value == y.Rank.Value)
+                    return 0;
+                return -1;
+            }
+
+            public int Compare(object x, object y)
+            {
+                var f = x as Card;
+                var s = y as Card;
+                if (f == null || s == null)
+                    return 0;
+                return Compare(f, s);
+            }
+        }
     }
 }

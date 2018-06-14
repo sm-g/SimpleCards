@@ -7,30 +7,6 @@ using Functional.Maybe;
 
 namespace SimpleCards.Engine
 {
-    public enum FrenchSuits // ♥ ♦ ♣ ♠
-    {
-        Hearts,
-        Diamonds,
-        Clubs,
-        Spades
-    }
-
-    public struct Suit
-    {
-        public Suit(string name)
-            : this()
-        {
-            Name = name;
-        }
-
-        public string Name { get; private set; }
-
-        public override string ToString()
-        {
-            return Name;
-        }
-    }
-
     /// <summary>
     /// Set of suits used in game.
     /// </summary>
@@ -69,7 +45,7 @@ namespace SimpleCards.Engine
         /// <summary>
         /// Creates suit set from enum.
         /// </summary>
-        public static SuitSet From<T>() where T : struct
+        public static SuitSet From<T>(Func<T, int> colorOf) where T : struct
         {
             if (!typeof(T).IsEnum)
             {
@@ -77,9 +53,9 @@ namespace SimpleCards.Engine
             }
 
             var result = new SuitSet();
-            foreach (var suit in Enum.GetValues(typeof(T)))
+            foreach (T suit in Enum.GetValues(typeof(T)))
             {
-                result.suits.Add(new Suit(suit.ToString()));
+                result.suits.Add(new Suit(suit.ToString(), colorOf(suit)));
             }
             return result;
         }
