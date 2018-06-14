@@ -49,10 +49,8 @@ namespace SimpleCards.Engine
         public Option<Rank> GetRank(string rankName)
         {
             var result = _ranks.Find(x => x.Name == rankName);
-            if (result.Equals(default(Rank)))
-                return Option.None<Rank>();
 
-            return result.Some();
+            return result.SomeNotNull();
         }
 
         #region IReadOnlyList

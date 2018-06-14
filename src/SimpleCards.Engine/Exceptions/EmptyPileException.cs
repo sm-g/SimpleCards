@@ -2,13 +2,13 @@
 
 namespace SimpleCards.Engine
 {
-    public class EmptyPileException : Exception
+    public class EmptyPileException : InvalidOperationException
     {
-        public Pile Pile { get; private set; }
-
         public EmptyPileException(Pile pile)
         {
             Pile = pile;
         }
+
+        public Pile Pile { get; }
     }
 }

@@ -25,14 +25,17 @@ namespace SimpleCards.Tests
             var rankset = RankSet.From<DefaultRanks>(r => (int)r, new DefaultRanks[0]);
 
             var a = new Card(rankset[0], suitset[0]);
-            var asA = new Card(rankset[0], suitset[0]);
+            var sameAsA = new Card(rankset[0], suitset[0]);
             var b = new Card(rankset[0], suitset[1]);
             var c = new Card(rankset[1], suitset[0]);
-            var d = new Card(rankset[1], suitset.GetSuit("Clubs").ValueOrFailure());
 
             Assert.AreEqual(a, a);
-            Assert.AreEqual(a, asA);
-            Assert.IsFalse(a == asA);
+            Assert.AreEqual(a, sameAsA);
+            Assert.IsTrue(a == sameAsA);
+
+            Assert.AreNotEqual(a, b);
+            Assert.AreNotEqual(a, c);
+            Assert.AreNotEqual(b, c);
             Assert.IsTrue(a != b);
             Assert.IsTrue(a != c);
             Assert.IsTrue(b != c);

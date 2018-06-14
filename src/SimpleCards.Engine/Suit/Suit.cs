@@ -1,26 +1,32 @@
-﻿namespace SimpleCards.Engine
+﻿using System.Collections.Generic;
+using Value;
+
+namespace SimpleCards.Engine
 {
-    public struct Suit
+    public class Suit : ValueType<Suit>
     {
         public Suit(string name)
-            : this()
         {
             Name = name;
         }
 
         public Suit(string name, int color)
-            : this()
         {
             Name = name;
             Color = color;
         }
 
-        public string Name { get; private set; }
-        public int Color { get; private set; }
+        public string Name { get; }
+        public int Color { get; }
 
         public override string ToString()
         {
             return Name;
+        }
+
+        protected override IEnumerable<object> GetAllAttributesToBeUsedForEquality()
+        {
+            return new object[] { Name, Color };
         }
     }
 }

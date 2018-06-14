@@ -5,6 +5,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using SimpleCards.Engine.Extensions;
+using MoreLinq;
 
 namespace SimpleCards.Engine
 {
@@ -180,20 +181,19 @@ namespace SimpleCards.Engine
 
         public IList<Card> Pop(PilePosition p, ushort count)
         {
-            Contract.Requires(count > 0);
-            Contract.Ensures(Math.Max(Contract.OldValue(Size) - count, 0) == Size);
-            Contract.Ensures(Contract.Result<IList<Card>>().Count <= count);
+            if (count <= 0)
+                throw new ArgumentOutOfRangeException(nameof(count));
 
             if (IsEmpty)
                 throw new EmptyPileException(this);
 
-            IList<Card> res;
+            IList<Card> result;
             switch (p)
             {
                 case PilePosition.Top:
-                    res = cardsInPile.Take(count).ToList();
-                    cardsInPile.RemoveRange(0, res.Count);
-                    return res;
+                    result = cardsInPile.Take(count).ToList();
+                    cardsInPile.RemoveRange(0, result.Count);
+                    return result;
 
                 case PilePosition.Middle:
                     // group of cards from middle
@@ -216,14 +216,14 @@ namespace SimpleCards.Engine
                         start = Math.Max(0, Size - count);
                     }
 
-                    res = cardsInPile.Skip(start).Take(count).ToList();
-                    cardsInPile.RemoveRange(start, res.Count);
-                    return res;
+                    result = cardsInPile.Skip(start).Take(count).ToList();
+                    cardsInPile.RemoveRange(start, result.Count);
+                    return result;
 
                 case PilePosition.Bottom:
-                    res = (cardsInPile as IEnumerable<Card>).Reverse().Take(count).ToList();
-                    cardsInPile.RemoveRange(Size - res.Count, res.Count);
-                    return res;
+                    result = cardsInPile.TakeLast(count).ToList();
+                    cardsInPile.RemoveRange(Size - result.Count, result.Count);
+                    return result;
             }
 
             throw new NotImplementedException();

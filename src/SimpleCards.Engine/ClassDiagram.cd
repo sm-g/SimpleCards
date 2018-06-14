@@ -17,14 +17,13 @@
       </Class>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAABAABAAAAAAAAEgAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAABAABAAAAAAAAEACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Card.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Suit" />
       <Property Name="Rank" />
     </ShowAsAssociation>
-    <Lollipop Position="0.2" />
   </Class>
   <Class Name="SimpleCards.Engine.Pack" Collapsed="true">
     <Position X="3.25" Y="7.75" Width="1.5" />

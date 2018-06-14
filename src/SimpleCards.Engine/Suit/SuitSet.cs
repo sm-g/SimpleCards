@@ -62,10 +62,8 @@ namespace SimpleCards.Engine
         public Option<Suit> GetSuit(string suitName)
         {
             var result = _suits.Find(suit => suit.Name == suitName);
-            if (result.Equals(default(Suit)))
-                return Option.None<Suit>();
 
-            return result.Some();
+            return result.SomeNotNull();
         }
 
         public IEnumerator<Suit> GetEnumerator()

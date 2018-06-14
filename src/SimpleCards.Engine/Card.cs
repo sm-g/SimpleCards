@@ -1,52 +1,37 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Value;
 
 namespace SimpleCards.Engine
 {
     /// <summary>
     /// Physical card.
+    /// <para/>
+    /// Cards are equal (by value) if they have same rank and suit.
+    /// <remarks>
+    /// <c>card1 == card2</c> will compare abstract cards, i.e. check Queen of Spades
+    /// </remarks>
     /// </summary>
-    public sealed class Card : IEquatable<Card>
+    public sealed class Card : ValueType<Card>
     {
-        public Rank Rank { get; private set; }
-        public Suit Suit { get; private set; }
-
         public Card(Rank rank, Suit suit)
         {
             Rank = rank;
             Suit = suit;
         }
 
+        public Rank Rank { get; }
+        public Suit Suit { get; }
+
         public override string ToString()
         {
             return Rank.Name + " " + Suit.Name;
         }
 
-        /// <summary>
-        /// Cards are equals by value if they have same rank and suit.
-        ///
-        /// Use to compare abstract cards, i.e. check Queen of Spades.
-        /// </summary>
-        public bool Equals(Card other)
+        protected override IEnumerable<object> GetAllAttributesToBeUsedForEquality()
         {
-            return Rank.Equals(other.Rank) &&
-                   Suit.Equals(other.Suit);
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (!(obj is Card other))
-                return false;
-
-            return Equals(other);
-        }
-
-        public override int GetHashCode()
-        {
-#pragma warning disable S3249 // Classes directly extending "object" should not call "base" in "GetHashCode" or "Equals"
-            return base.GetHashCode();
-#pragma warning restore S3249 // Classes directly extending "object" should not call "base" in "GetHashCode" or "Equals"
+            return new object[] { Rank, Suit };
         }
 
         public class ByRefComparer : IEqualityComparer<Card>
