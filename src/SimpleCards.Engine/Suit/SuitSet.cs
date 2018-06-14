@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Linq;
 using Optional;
 
 namespace SimpleCards.Engine
@@ -20,6 +18,9 @@ namespace SimpleCards.Engine
         public SuitSet(IEnumerable<Suit> suits)
         {
             _suits = new List<Suit>(suits);
+
+            if (!_suits.AllUnique())
+                throw new ArgumentException("Not unique values");
         }
 
         private SuitSet()
@@ -51,12 +52,12 @@ namespace SimpleCards.Engine
                 throw new ArgumentException("not enum");
             }
 
-            var result = new SuitSet();
+            var set = new List<Suit>();
             foreach (T suit in Enum.GetValues(typeof(T)))
             {
-                result._suits.Add(new Suit(suit.ToString(), colorOf(suit)));
+                set.Add(new Suit(suit.ToString(), colorOf(suit)));
             }
-            return result;
+            return new SuitSet(set);
         }
 
         public Option<Suit> GetSuit(string suitName)
@@ -74,14 +75,6 @@ namespace SimpleCards.Engine
         IEnumerator IEnumerable.GetEnumerator()
         {
             return _suits.GetEnumerator();
-        }
-
-        [ContractInvariantMethod]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        private void ObjectInvariant()
-        {
-            // all unique
-            Contract.Invariant(_suits.GroupBy(x => x).Count() == _suits.Count);
         }
     }
 }

@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
-using SimpleCards.Engine.Extensions;
 using MoreLinq;
 
 namespace SimpleCards.Engine
@@ -48,7 +46,8 @@ namespace SimpleCards.Engine
 
         public void Push(Card card, PilePosition p)
         {
-            Contract.Ensures(Contract.OldValue(Size) == Size + 1);
+            if (cardsInPile.Contains(card, Card.ByRefComparer.Instance))
+                throw new ArgumentException("Given card instance already in pile");
 
             switch (p)
             {
@@ -70,7 +69,11 @@ namespace SimpleCards.Engine
 
         public void Push(IEnumerable<Card> cards, PilePosition p)
         {
-            Contract.Ensures(Contract.OldValue(Size) == Size + cards.Count());
+            if (cards.GroupBy(x => x, Card.ByRefComparer.Instance).Any(x => x.Count() > 1))
+                throw new ArgumentException("Duplicate instances in given cards");
+
+            if (cardsInPile.Intersect(cards, Card.ByRefComparer.Instance).Any())
+                throw new ArgumentException("One of given cards instance already in pile");
 
             switch (p)
             {
@@ -113,8 +116,6 @@ namespace SimpleCards.Engine
 
         public Card Peek(PilePosition p)
         {
-            Contract.Ensures(Contract.OldValue(Size) == Size);
-
             if (IsEmpty)
                 throw new EmptyPileException(this);
 
@@ -139,7 +140,7 @@ namespace SimpleCards.Engine
         /// <returns></returns>
         protected Card PeekTop()
         {
-            return cardsInPile[0];
+            return cardsInPile.First();
         }
 
         /// <summary>
@@ -159,8 +160,6 @@ namespace SimpleCards.Engine
 
         public Card Pop(PilePosition p)
         {
-            Contract.Ensures(Contract.OldValue(Size) - 1 == Size);
-
             if (IsEmpty)
                 throw new EmptyPileException(this);
 
@@ -267,6 +266,16 @@ namespace SimpleCards.Engine
             cardsInPile.Shuffle();
         }
 
+        internal int GetIndexOf(Card card)
+        {
+            for (var i = 0; i < cardsInPile.Count; i++)
+            {
+                if (Card.ByRefComparer.Instance.Equals(card, cardsInPile[i]))
+                    return i;
+            }
+            return -1;
+        }
+
         public override string ToString()
         {
             var builder = new StringBuilder($"Pile with {Size} cards, top is {PeekTop()}, some random is {PeekRandomCard()}. All cards: \n");
@@ -326,13 +335,5 @@ namespace SimpleCards.Engine
         }
 
         #endregion ICollection
-
-        [ContractInvariantMethod]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        private void ObjectInvariant()
-        {
-            // all unique objects
-            Contract.Invariant(cardsInPile.Distinct(new Card.ByRefComparer()).Count() == cardsInPile.Count);
-        }
     }
 }

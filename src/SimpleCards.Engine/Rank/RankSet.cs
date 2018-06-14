@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Linq;
 using Optional;
 
@@ -17,6 +16,9 @@ namespace SimpleCards.Engine
         public RankSet(IEnumerable<Rank> ranks)
         {
             _ranks = new List<Rank>(ranks);
+
+            if (!_ranks.AllUnique())
+                throw new ArgumentException("Not unique values");
         }
 
         private RankSet()
@@ -38,12 +40,12 @@ namespace SimpleCards.Engine
                 throw new ArgumentException("not enum");
             }
 
-            var result = new RankSet();
+            var set = new List<Rank>();
             foreach (T rank in Enum.GetValues(typeof(T)))
             {
-                result._ranks.Add(new Rank(rank.ToString(), valueOf(rank), faced.Contains(rank)));
+                set.Add(new Rank(rank.ToString(), valueOf(rank), faced.Contains(rank)));
             }
-            return result;
+            return new RankSet(set);
         }
 
         public Option<Rank> GetRank(string rankName)
@@ -76,13 +78,5 @@ namespace SimpleCards.Engine
         }
 
         #endregion IReadOnlyList
-
-        [ContractInvariantMethod]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        private void ObjectInvariant()
-        {
-            // all unique
-            Contract.Invariant(_ranks.GroupBy(x => x).Count() == _ranks.Count);
-        }
     }
 }

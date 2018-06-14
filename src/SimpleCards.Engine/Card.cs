@@ -36,6 +36,8 @@ namespace SimpleCards.Engine
 
         public class ByRefComparer : IEqualityComparer<Card>
         {
+            public static readonly ByRefComparer Instance = new ByRefComparer();
+
             public bool Equals(Card x, Card y)
             {
                 return ReferenceEquals(x, y);

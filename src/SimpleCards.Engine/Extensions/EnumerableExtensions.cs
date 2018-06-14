@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 
-namespace SimpleCards.Engine.Extensions
+namespace System.Collections.Generic
 {
     public static class EnumerableExtensions
     {
@@ -14,24 +12,6 @@ namespace SimpleCards.Engine.Extensions
             {
                 action(item);
             }
-        }
-
-        public static IEnumerable<IEnumerable<T>> Chunk<T>(this IEnumerable<T> source, int chunksize)
-        {
-            if (chunksize <= 0)
-                throw new ArgumentOutOfRangeException(nameof(chunksize));
-
-            var pos = 0;
-            while (source.Skip(pos).Any())
-            {
-                yield return source.Skip(pos).Take(chunksize);
-                pos += chunksize;
-            }
-        }
-
-        public static IEnumerable<T> Concat<T>(this IEnumerable<T> collection, T item)
-        {
-            return collection.Concat(new[] { item });
         }
 
         public static IEnumerable<T> Evens<T>(this IEnumerable<T> collection)
@@ -52,21 +32,6 @@ namespace SimpleCards.Engine.Extensions
         public static bool AllUnique<T, TKey>(this IEnumerable<T> collection, Func<T, TKey> selector)
         {
             return collection.Select(x => selector(x)).Distinct().Count() == collection.Count();
-        }
-
-        public static bool IsSingle<T>(this IEnumerable<T> collection)
-        {
-            return !collection.Any() || collection.Distinct().Count() == 1;
-        }
-
-        public static bool IsSingle<T, TKey>(this IEnumerable<T> collection, Func<T, TKey> selector)
-        {
-            return !collection.Any() || collection.Select(x => selector(x)).Distinct().Count() == 1;
-        }
-
-        public static IEnumerable<T> DistinctBy<T, TKey>(this IEnumerable<T> source, Func<T, TKey> keyExtractor, IEqualityComparer<TKey> comparer = null)
-        {
-            return source.Distinct(Compare.By(keyExtractor, comparer));
         }
 
         /// <summary>
@@ -166,22 +131,6 @@ namespace SimpleCards.Engine.Extensions
 
             return items.Zip(items.Skip(1), (a, b) => new { a, b })
                 .All(x => keyExtractor(x.a).CompareTo(keyExtractor(x.b)) < 0);
-        }
-
-        public static string ToSeparatedString(this IEnumerable<Guid> guids)
-        {
-            if (guids == null)
-                throw new ArgumentNullException(nameof(guids));
-
-            return $"'{string.Join("','", guids)}'";
-        }
-
-        public static string ToSeparatedString<T>(this IEnumerable<T> collection, string separator)
-        {
-            if (collection == null)
-                throw new ArgumentNullException(nameof(collection));
-
-            return string.Join(separator, collection);
         }
     }
 }

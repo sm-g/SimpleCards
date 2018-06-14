@@ -21,8 +21,8 @@
       <FileName>Card.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Suit" />
       <Property Name="Rank" />
+      <Property Name="Suit" />
     </ShowAsAssociation>
   </Class>
   <Class Name="SimpleCards.Engine.Pack" Collapsed="true">
@@ -38,7 +38,7 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AgJEAAAABAAEgFAUQAAABAQAIAKAAAAECAgQAARQOBA=</HashCode>
+      <HashCode>AgJEAAAABAAEgFAUQAAABAQAIAKAAEAECAgAAARQOBA=</HashCode>
       <FileName>Pile\Pile.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -46,7 +46,7 @@
   <Class Name="SimpleCards.Engine.RankSet" Collapsed="true">
     <Position X="3" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgAAAAEAAAAAABAACQAAAAQAAAAAAAAEAAAQAAAAAAA=</HashCode>
+      <HashCode>AgAAAAEAAAAAABAACQAAAAQAAAAAAAAEAAAAAAAAAAA=</HashCode>
       <FileName>Rank\RankSet.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -54,7 +54,7 @@
   <Class Name="SimpleCards.Engine.SuitSet" Collapsed="true">
     <Position X="5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgAAAAAAAAAAQBAACAAAAAwAAAAAAAAEAAAQAAAAAAA=</HashCode>
+      <HashCode>AgAAAAAAAAAAQBAACAAAAAwAAAAAAAAEAAAAAAAAAAA=</HashCode>
       <FileName>Suit\SuitSet.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
