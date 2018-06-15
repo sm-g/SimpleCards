@@ -17,8 +17,10 @@ namespace SimpleCards.Engine
         {
             _ranks = new List<Rank>(ranks);
 
-            if (!_ranks.AllUnique())
+            if (!_ranks.AllUnique(z => z.Value))
                 throw new ArgumentException("Not unique values");
+            if (!_ranks.AllUnique(z => z.Name))
+                throw new ArgumentException("Not unique names");
         }
 
         private RankSet()

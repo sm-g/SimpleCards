@@ -19,8 +19,8 @@ namespace SimpleCards.Engine
         {
             _suits = new List<Suit>(suits);
 
-            if (!_suits.AllUnique())
-                throw new ArgumentException("Not unique values");
+            if (!_suits.AllUnique(z => z.Name))
+                throw new ArgumentException("Not unique names");
         }
 
         private SuitSet()

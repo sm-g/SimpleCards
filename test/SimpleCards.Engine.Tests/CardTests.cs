@@ -1,10 +1,6 @@
-﻿using System;
-using System.Linq;
-using NUnit.Framework;
-using Optional.Unsafe;
-using SimpleCards.Engine;
+﻿using NUnit.Framework;
 
-namespace SimpleCards.Tests
+namespace SimpleCards.Engine
 {
     [TestFixture]
     public class CardTests

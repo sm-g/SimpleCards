@@ -1,14 +1,24 @@
 ﻿using System;
-using System.Linq;
 using NUnit.Framework;
 using Optional.Unsafe;
-using SimpleCards.Engine;
 
-namespace SimpleCards.Tests
+namespace SimpleCards.Engine
 {
     [TestFixture]
     public class SuitSetTests
     {
+        [Test]
+        public void Ctor_SuitsWithSameProps_Throws()
+        {
+            Assert.Catch<ArgumentException>(() => new SuitSet(new[] { new Suit("1", 1), new Suit("1", 1) }));
+        }
+
+        [Test]
+        public void Ctor_SuitsWithSameNames_Throws()
+        {
+            Assert.Catch<ArgumentException>(() => new SuitSet(new[] { new Suit("1", 1), new Suit("1", 222) }));
+        }
+
         [Test]
         public void GetSuit_returnsByName()
         {
@@ -17,7 +27,7 @@ namespace SimpleCards.Tests
 
             var res = set.GetSuit("s1").ValueOrFailure();
 
-            Assert.AreEqual(res, suit);
+            Assert.AreSame(res, suit);
         }
 
         [Test]

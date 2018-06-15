@@ -24,13 +24,13 @@ namespace SimpleCards.Tester
 
                 rules.Dealer.Deal(game);
                 const int rounds = 2;
-                for (var i = 0; i < rounds; i++)
+                for (var roundNumber = 0; roundNumber < rounds; roundNumber++)
                 {
-                    Console.WriteLine($"Begin round {i}");
+                    Console.WriteLine($"Begin round {roundNumber}");
 
-                    for (var k = 0; k < 3; k++)
+                    for (var moveNumver = 0; moveNumver < 3; moveNumver++)
                     {
-                        Console.WriteLine($"move #{k}");
+                        Console.WriteLine($"move #{moveNumver}");
 
                         game.Move();
                     }

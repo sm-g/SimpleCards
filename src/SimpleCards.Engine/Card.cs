@@ -55,18 +55,19 @@ namespace SimpleCards.Engine
 
             public int Compare(Card x, Card y)
             {
-                if (x.Rank.Value > y.Rank.Value)
-                    return 1;
-                if (x.Rank.Value == y.Rank.Value)
+                if (x is null && y is null)
                     return 0;
-                return -1;
+                if (y is null)
+                    return 1;
+                if (x is null)
+                    return -1;
+
+                return x.Rank.CompareTo(y.Rank);
             }
 
             public int Compare(object x, object y)
             {
-                if (!(x is Card f) || !(y is Card s))
-                    return 0;
-                return Compare(f, s);
+                return Compare(x as Card, y as Card);
             }
         }
     }

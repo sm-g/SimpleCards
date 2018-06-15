@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using SimpleCards.Engine;
 
-namespace SimpleCards.Tests
+namespace SimpleCards.Engine
 {
     [TestFixture]
     public class PileTests
@@ -311,7 +310,7 @@ namespace SimpleCards.Tests
 
             var result = pile.Pop(PilePosition.Top, 2);
 
-            CollectionAssert.IsOrdered(result, new Card.RankValueComparer());
+            CollectionAssert.IsOrdered(result, Card.RankValueComparer.Instance);
             Assert.AreEqual(2, result.Count, "result size");
             Assert.AreEqual(2, pile.Size);
             Assert.AreSame(source[2], pile.First(), "first");
@@ -338,7 +337,7 @@ namespace SimpleCards.Tests
 
             var result = pile.Pop(PilePosition.Bottom, 2);
 
-            CollectionAssert.IsOrdered(result, new Card.RankValueComparer());
+            CollectionAssert.IsOrdered(result, Card.RankValueComparer.Instance);
             Assert.AreEqual(2, result.Count, "result size");
             Assert.AreEqual(2, pile.Size);
             Assert.AreSame(source[0], pile.First(), "first");
@@ -371,7 +370,7 @@ namespace SimpleCards.Tests
 
             var result = pile.Pop(PilePosition.Middle, 2);
 
-            CollectionAssert.IsOrdered(result, new Card.RankValueComparer());
+            CollectionAssert.IsOrdered(result, Card.RankValueComparer.Instance);
             Assert.AreEqual(2, result.Count, "result size");
             Assert.AreEqual(2, pile.Size);
             Assert.AreSame(source[0], pile.First(), "first");
@@ -386,7 +385,7 @@ namespace SimpleCards.Tests
 
             var result = pile.Pop(PilePosition.Middle, 3);
 
-            CollectionAssert.IsOrdered(result, new Card.RankValueComparer());
+            CollectionAssert.IsOrdered(result, Card.RankValueComparer.Instance);
             Assert.AreEqual(3, result.Count, "result size");
             Assert.AreEqual(1, pile.Size);
             Assert.IsTrue(pile.First().Rank.Value == 1 || pile.First().Rank.Value == 4);
