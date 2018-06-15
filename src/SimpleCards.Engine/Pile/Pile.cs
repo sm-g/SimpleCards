@@ -10,7 +10,7 @@ namespace SimpleCards.Engine
     /// <summary>
     /// A set of cards placed on a surface so that they partially or completely overlap.
     /// </summary>
-    public class Pile : ICollection<Card>, IReadOnlyCollection<Card>
+    public class Pile : IReadOnlyCollection<Card>
     {
         private static Random rnd = new Random();
         protected List<Card> cardsInPile;
@@ -287,41 +287,11 @@ namespace SimpleCards.Engine
             return builder.ToString();
         }
 
-        #region ICollection
-
-        public virtual void Add(Card item)
-        {
-            PushMiddle(item);
-        }
-
-        public virtual void Clear()
-        {
-            cardsInPile.Clear();
-        }
-
-        public bool Contains(Card item)
-        {
-            return cardsInPile.Contains(item);
-        }
-
-        public void CopyTo(Card[] array, int arrayIndex)
-        {
-            cardsInPile.CopyTo(array, arrayIndex);
-        }
+        #region IReadOnlyCollection
 
         public int Count
         {
             get { return cardsInPile.Count; }
-        }
-
-        public virtual bool IsReadOnly
-        {
-            get { return false; }
-        }
-
-        public virtual bool Remove(Card item)
-        {
-            return cardsInPile.Remove(item);
         }
 
         public IEnumerator<Card> GetEnumerator()
@@ -334,6 +304,6 @@ namespace SimpleCards.Engine
             return cardsInPile.GetEnumerator();
         }
 
-        #endregion ICollection
+        #endregion IReadOnlyCollection
     }
 }

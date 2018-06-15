@@ -6,14 +6,16 @@ namespace SimpleCards.Engine
     /// The cards held by one player (owner). Visible to owner.
     /// <remarks>Ordered by adding to hand, in UI may be sorted any other way.</remarks>
     /// </summary>
-    public class Hand : Pile, IList<Card>
+    public class Hand : Pile
     {
         public Hand(Player p)
         {
             Player = p;
         }
 
-        public Player Player { get; set; }
+        public Player Player { get; }
+
+        // TODO we should be able to take concrete card from hand
 
         public int IndexOf(Card item)
         {
@@ -28,6 +30,11 @@ namespace SimpleCards.Engine
         public void RemoveAt(int index)
         {
             cardsInPile.RemoveAt(index);
+        }
+
+        public bool Contains(Card item)
+        {
+            return cardsInPile.Contains(item);
         }
 
         public Card this[int index]

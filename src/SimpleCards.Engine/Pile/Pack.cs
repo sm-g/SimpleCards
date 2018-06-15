@@ -10,17 +10,23 @@ namespace SimpleCards.Engine
     public class Pack : Pile
     {
         /// <summary>
-        /// Creates pile with cards of all suits and ranks in set, grouped by suits.
+        /// Creates pile with cards of all suits and ranks in set.
         /// </summary>
         /// <param name="shuffle">If true, shuffles pile after creation.</param>
-        public Pack(SuitSet suits, RankSet ranks, bool shuffle = true, int number = 1)
+        public Pack(SuitSet suits, RankSet ranks, bool shuffle = false, int decksCount = 1)
         {
-            cardsInPile = new List<Card>();
+            if (suits == null)
+                throw new ArgumentNullException(nameof(suits));
+            if (ranks == null)
+                throw new ArgumentNullException(nameof(ranks));
+            if (decksCount < 1)
+                throw new ArgumentOutOfRangeException(nameof(decksCount));
+
             foreach (var suit in suits)
             {
                 foreach (var rank in ranks)
                 {
-                    for (var i = 0; i < number; i++)
+                    for (var i = 0; i < decksCount; i++)
                     {
                         cardsInPile.Add(new Card(rank, suit));
                     }
@@ -31,29 +37,5 @@ namespace SimpleCards.Engine
                 Shuffle();
             }
         }
-
-        #region ICollection
-
-        public override bool IsReadOnly
-        {
-            get { return true; }
-        }
-
-        public override void Clear()
-        {
-            throw new InvalidOperationException();
-        }
-
-        public override void Add(Card item)
-        {
-            throw new InvalidOperationException();
-        }
-
-        public override bool Remove(Card item)
-        {
-            throw new InvalidOperationException();
-        }
-
-        #endregion ICollection
     }
 }

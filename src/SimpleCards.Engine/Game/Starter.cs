@@ -11,10 +11,11 @@ namespace SimpleCards.Engine
         {
             game.StartPlayers();
 
-            game.Table.Clear();
+            // TODO on new round cards recreated?
+            game.Table.Collect();
             foreach (var player in game.Parties.SelectMany(x => x.Players))
             {
-                player.Hand.Clear();
+                player.Hand.Pop(PilePosition.Top, player.Hand.Size);
             }
         }
 
@@ -23,10 +24,10 @@ namespace SimpleCards.Engine
         /// </summary>
         public void BeginRoundCont(Game game)
         {
-            game.Table.Clear();
+            game.Table.Collect();
             foreach (var player in game.Parties.SelectMany(x => x.Players))
             {
-                player.Hand.Clear();
+                player.Hand.Pop(PilePosition.Top, player.Hand.Size);
             }
         }
     }
