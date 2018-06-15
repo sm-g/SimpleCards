@@ -46,7 +46,7 @@ namespace SimpleCards.Engine
 
         public void Push(Card card, PilePosition p)
         {
-            if (cardsInPile.Contains(card, Card.ByRefComparer.Instance))
+            if (cardsInPile.Contains(card, CardByRefEqualityComparer.Instance))
                 throw new ArgumentException("Given card instance already in pile");
 
             switch (p)
@@ -69,10 +69,10 @@ namespace SimpleCards.Engine
 
         public void Push(IEnumerable<Card> cards, PilePosition p)
         {
-            if (cards.GroupBy(x => x, Card.ByRefComparer.Instance).Any(x => x.Count() > 1))
+            if (cards.GroupBy(x => x, CardByRefEqualityComparer.Instance).Any(x => x.Count() > 1))
                 throw new ArgumentException("Duplicate instances in given cards");
 
-            if (cardsInPile.Intersect(cards, Card.ByRefComparer.Instance).Any())
+            if (cardsInPile.Intersect(cards, CardByRefEqualityComparer.Instance).Any())
                 throw new ArgumentException("One of given cards instance already in pile");
 
             switch (p)
@@ -270,7 +270,7 @@ namespace SimpleCards.Engine
         {
             for (var i = 0; i < cardsInPile.Count; i++)
             {
-                if (Card.ByRefComparer.Instance.Equals(card, cardsInPile[i]))
+                if (CardByRefEqualityComparer.Instance.Equals(card, cardsInPile[i]))
                     return i;
             }
             return -1;

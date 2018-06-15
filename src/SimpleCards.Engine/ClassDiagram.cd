@@ -2,23 +2,9 @@
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="SimpleCards.Engine.Card">
     <Position X="8.75" Y="0.5" Width="1.5" />
-    <NestedTypes>
-      <Class Name="SimpleCards.Engine.Card.ByRefComparer" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Card.cs</NewMemberFileName>
-        </TypeIdentifier>
-        <Lollipop Position="0.2" />
-      </Class>
-      <Class Name="SimpleCards.Engine.Card.RankValueComparer" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Card.cs</NewMemberFileName>
-        </TypeIdentifier>
-        <Lollipop Position="0.2" />
-      </Class>
-    </NestedTypes>
     <TypeIdentifier>
       <HashCode>AAABAABAAAAAAAAEACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Card.cs</FileName>
+      <FileName>Card\Card.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Rank" />
@@ -115,9 +101,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="SimpleCards.Engine.Rank" Collapsed="true">
-    <Position X="12.5" Y="0.75" Width="1.5" />
+    <Position X="12.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAABAQEACCAAgQAAAAAAAAAAAAgAAAABQA=</HashCode>
+      <HashCode>AAAAAAAAAAAABgQEACCAAgQAAAAAAAAAAAAgAAAAByA=</HashCode>
       <FileName>Rank\Rank.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />

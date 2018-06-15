@@ -64,7 +64,7 @@ namespace SimpleCards.Engine
 
             pile.Push(cards, PilePosition.Top);
 
-            Assert.That(pile.Take(2), Is.EquivalentTo(cards).Using(Card.ByRefComparer.Instance));
+            Assert.That(pile.Take(2), Is.EquivalentTo(cards).Using(CardByRefEqualityComparer.Instance));
         }
 
         [Test]
@@ -86,7 +86,7 @@ namespace SimpleCards.Engine
 
             pile.Push(cards, PilePosition.Bottom);
 
-            Assert.That(pile.TakeLast(2), Is.EquivalentTo(cards).Using(Card.ByRefComparer.Instance));
+            Assert.That(pile.TakeLast(2), Is.EquivalentTo(cards).Using(CardByRefEqualityComparer.Instance));
         }
 
         [Test]
@@ -310,7 +310,7 @@ namespace SimpleCards.Engine
 
             var result = pile.Pop(PilePosition.Top, 2);
 
-            CollectionAssert.IsOrdered(result, Card.RankValueComparer.Instance);
+            CollectionAssert.IsOrdered(result, CardByRankValueComparer.Instance);
             Assert.AreEqual(2, result.Count, "result size");
             Assert.AreEqual(2, pile.Size);
             Assert.AreSame(source[2], pile.First(), "first");
@@ -337,7 +337,7 @@ namespace SimpleCards.Engine
 
             var result = pile.Pop(PilePosition.Bottom, 2);
 
-            CollectionAssert.IsOrdered(result, Card.RankValueComparer.Instance);
+            CollectionAssert.IsOrdered(result, CardByRankValueComparer.Instance);
             Assert.AreEqual(2, result.Count, "result size");
             Assert.AreEqual(2, pile.Size);
             Assert.AreSame(source[0], pile.First(), "first");
@@ -370,7 +370,7 @@ namespace SimpleCards.Engine
 
             var result = pile.Pop(PilePosition.Middle, 2);
 
-            CollectionAssert.IsOrdered(result, Card.RankValueComparer.Instance);
+            CollectionAssert.IsOrdered(result, CardByRankValueComparer.Instance);
             Assert.AreEqual(2, result.Count, "result size");
             Assert.AreEqual(2, pile.Size);
             Assert.AreSame(source[0], pile.First(), "first");
@@ -385,7 +385,7 @@ namespace SimpleCards.Engine
 
             var result = pile.Pop(PilePosition.Middle, 3);
 
-            CollectionAssert.IsOrdered(result, Card.RankValueComparer.Instance);
+            CollectionAssert.IsOrdered(result, CardByRankValueComparer.Instance);
             Assert.AreEqual(3, result.Count, "result size");
             Assert.AreEqual(1, pile.Size);
             Assert.IsTrue(pile.First().Rank.Value == 1 || pile.First().Rank.Value == 4);

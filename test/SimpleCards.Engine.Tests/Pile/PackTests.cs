@@ -16,7 +16,7 @@ namespace SimpleCards.Engine
             var pack = new Pack(suitSet, rankSet, shuffle: false);
 
             Assert.AreEqual(suitSet.Count * rankSet.Count, pack.Size);
-            CollectionAssert.IsOrdered(pack.Where(x => x.Suit == suitSet[0]), Card.RankValueComparer.Instance);
+            CollectionAssert.IsOrdered(pack.Where(x => x.Suit == suitSet[0]), CardByRankValueComparer.Instance);
         }
 
         [Test]
@@ -28,7 +28,7 @@ namespace SimpleCards.Engine
             var pack = new Pack(suitSet, rankSet, shuffle: false, decksCount: 3);
 
             Assert.AreEqual(suitSet.Count * rankSet.Count * 3, pack.Size);
-            CollectionAssert.IsOrdered(pack.Where(x => x.Suit == suitSet[0]), Card.RankValueComparer.Instance);
+            CollectionAssert.IsOrdered(pack.Where(x => x.Suit == suitSet[0]), CardByRankValueComparer.Instance);
         }
 
         [Test]
