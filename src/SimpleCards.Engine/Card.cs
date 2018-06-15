@@ -51,6 +51,8 @@ namespace SimpleCards.Engine
 
         public class RankValueComparer : IComparer<Card>, IComparer
         {
+            public static readonly RankValueComparer Instance = new RankValueComparer();
+
             public int Compare(Card x, Card y)
             {
                 if (x.Rank.Value > y.Rank.Value)

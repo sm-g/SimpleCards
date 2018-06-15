@@ -2,11 +2,11 @@
 {
     public class ZoneFactory
     {
-        public void CreateZones(Game game)
+        public void CreateZones(Table table)
         {
-            game.Table.Zones.Add(Discard());
-            game.Table.Zones.Add(GameField());
-            game.Table.Zones.Add(Stock());
+            table.Zones.Add(Discard());
+            table.Zones.Add(GameField());
+            table.Zones.Add(Stock());
         }
 
         public Zone Discard()

@@ -6,15 +6,28 @@ namespace SimpleCards.Engine
     {
         public void Deal(Game game)
         {
-            game.Pack = new Pack(game.SuitSet, game.RankSet);
-            var stock = new Stock(game.Pack) { IsLastVisible = true };
-            game.Table.Zones.Find(x => x.Name == Zone.StockName).Pile = stock;
+            var allCardsForNextGame = game.Table.Collect();
+            foreach (var player in game.Parties.SelectMany(x => x.Players))
+            {
+                allCardsForNextGame.Push(player.Hand.Pop(PilePosition.Top, player.Hand.Size), PilePosition.Bottom);
+            }
+
+            allCardsForNextGame.Shuffle();
+
+            if (allCardsForNextGame.IsEmpty)
+            {
+                // first game
+                allCardsForNextGame = game.Rules.MaterializeRequiredPack(game.SuitSet, game.RankSet);
+            }
 
             foreach (var player in game.Parties.SelectMany(x => x.Players))
             {
-                var dealt = stock.Pop(PilePosition.Top, game.Rules.HandSize);
+                var dealt = allCardsForNextGame.Pop(PilePosition.Top, game.Rules.HandSize);
                 player.Hand.Push(dealt, PilePosition.Top);
             }
+
+            var stock = new Stock(allCardsForNextGame) { IsLastVisible = true };
+            game.Table.Zones.Find(x => x.Name == Zone.StockName).Pile = stock;
         }
     }
 }

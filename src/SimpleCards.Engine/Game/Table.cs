@@ -11,13 +11,15 @@ namespace SimpleCards.Engine
 
         public List<Zone> Zones { get; set; }
 
-        public IReadOnlyCollection<Card> Collect()
+        // TODO there is games where some cards not collected from "Remove From Game" pile
+
+        public Pile Collect()
         {
-            var result = new List<Card>();
+            var result = new Pile();
             foreach (var z in Zones)
             {
                 if (z.Pile.Size > 0)
-                    result.AddRange(z.Pile.Pop(PilePosition.Top, z.Pile.Size));
+                    result.Push(z.Pile.Pop(PilePosition.Top, z.Pile.Size), PilePosition.Bottom);
             }
             return result;
         }

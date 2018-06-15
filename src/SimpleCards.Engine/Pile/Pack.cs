@@ -13,6 +13,7 @@ namespace SimpleCards.Engine
         /// Creates pile with cards of all suits and ranks in set.
         /// </summary>
         /// <param name="shuffle">If true, shuffles pile after creation.</param>
+        /// <param name="decksCount">How many decks required for game.</param>
         public Pack(SuitSet suits, RankSet ranks, bool shuffle = false, int decksCount = 1)
         {
             if (suits == null)

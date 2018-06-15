@@ -28,7 +28,7 @@
   <Class Name="SimpleCards.Engine.Pack" Collapsed="true">
     <Position X="3.25" Y="7.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAIAAAAAAAAAAAAQAAAABAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Pile\Pack.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -38,7 +38,7 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AgJEAAAABAAEgFAUQAAABAQAIAKAAEAECAgAAARQOBA=</HashCode>
+      <HashCode>AgBEAAAABAAEgFAEQAAAAAQAIAKAAEAECAgAAAQAGBA=</HashCode>
       <FileName>Pile\Pile.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -62,15 +62,14 @@
   <Class Name="SimpleCards.Engine.Hand" Collapsed="true">
     <Position X="1.25" Y="7.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AEAAAEAAAAAAAAAACAAAAAAAAAAAAAAACAAAAQAAAAA=</HashCode>
+      <HashCode>AEAAAEAAAAAAAAAACAAAAAAAAAAAAAAACAAAAQAQAAA=</HashCode>
       <FileName>Pile\Hand.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
   </Class>
   <Class Name="SimpleCards.Engine.Table" Collapsed="true">
     <Position X="11.5" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAABAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Game\Table.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -118,9 +117,10 @@
   <Class Name="SimpleCards.Engine.Rank" Collapsed="true">
     <Position X="12.5" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAABAAEACAAAAQAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAABAQEACCAAgQAAAAAAAAAAAAgAAAABQA=</HashCode>
       <FileName>Rank\Rank.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Enum Name="SimpleCards.Engine.DefaultRanks" Collapsed="true">
     <Position X="4.75" Y="6.5" Width="1.5" />

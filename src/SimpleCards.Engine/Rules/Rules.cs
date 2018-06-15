@@ -2,18 +2,20 @@
 {
     public class Rules
     {
-        public Rules()
-        {
-            PackSize = 36;
-            HandSize = 6;
-        }
-
         /// <summary>
-        /// TODO pack generation
+        /// TODO pack generation uses RankSet, not rule.PackSize
         /// </summary>
-        public ushort PackSize { get; set; }
+        public ushort PackSize { get; set; } = 36;
 
-        public ushort HandSize { get; set; }
+        public ushort DecksCount { get; set; } = 1;
+
+        public ushort HandSize { get; set; } = 6;
+
+        public ZoneFactory ZoneFactory { get; } = new ZoneFactory();
+
+        public Dealer Dealer { get; } = new Dealer();
+
+        public Pack MaterializeRequiredPack(SuitSet suits, RankSet ranks) => new Pack(suits, ranks, true, DecksCount);
 
         /// <summary>
         /// Gets cost of card.

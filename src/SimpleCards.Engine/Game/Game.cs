@@ -10,13 +10,16 @@ namespace SimpleCards.Engine
 
         public Game(RankSet rs, SuitSet ss, Rules rules, int players)
         {
-            RankSet = rs;
-            SuitSet = ss;
-            Rules = rules;
+            if (players < 1)
+                throw new ArgumentOutOfRangeException(nameof(players));
+
+            RankSet = rs ?? throw new ArgumentNullException(nameof(rs));
+            SuitSet = ss ?? throw new ArgumentNullException(nameof(ss));
+            Rules = rules ?? throw new ArgumentNullException(nameof(rules));
 
             Table = new Table();
             Parties = new List<Party>();
-            for (var i = 0; i < players; i++)
+            for (var i = 1; i < players + 1; i++)
             {
                 var player = new Player("player" + i);
                 var party = new Party();
@@ -25,21 +28,17 @@ namespace SimpleCards.Engine
             }
         }
 
-        public Game()
+        public RankSet RankSet { get; }
+        public SuitSet SuitSet { get; }
+        public Rules Rules { get; }
+
+        public Table Table { get; }
+        public List<Party> Parties { get; }
+
+        public void Init()
         {
-        }
+            Rules.ZoneFactory.CreateZones(Table);
 
-        public RankSet RankSet { get; set; }
-        public SuitSet SuitSet { get; set; }
-        public Rules Rules { get; set; }
-
-        public Table Table { get; set; }
-        public List<Party> Parties { get; set; }
-
-        public Pack Pack { get; set; }
-
-        public void StartPlayers()
-        {
             foreach (var item in Parties)
             {
                 _ais.AddRange(item.Players.Select(x => new AI() { Player = x }));
