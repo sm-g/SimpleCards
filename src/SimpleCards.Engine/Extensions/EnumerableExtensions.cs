@@ -71,10 +71,13 @@ namespace System.Collections.Generic
             return cnt.Values.All(c => c == 0);
         }
 
+#pragma warning disable S4456 // Parameter validation in yielding methods should be wrapped TODO use morelinq
+
         /// <summary>
         /// from http://stackoverflow.com/questions/1651619/optimal-linq-query-to-get-a-random-sub-collection-shuffle
         /// </summary>
         public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source)
+#pragma warning restore S4456 // Parameter validation in yielding methods should be wrapped
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));

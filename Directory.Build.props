@@ -28,21 +28,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="codecracker.CSharp">
-      <Version>1.0.3</Version>
-      <PrivateAssets>All</PrivateAssets>
-    </PackageReference>
-
     <PackageReference Include="ErrorProne.NET">
       <Version>0.1.5898.41180</Version>
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="RefactoringEssentials">
+    <PackageReference Include="RefactoringEssentials" Condition=" '$(Configuration)' == 'Debug' ">
       <Version>5.6.0</Version>
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
     <PackageReference Include="SonarAnalyzer.CSharp">
-      <Version>6.8.2.4717</Version>
+      <Version>7.11.0.8083</Version>
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
     <PackageReference Include="StyleCop.Analyzers">

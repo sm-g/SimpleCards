@@ -1,17 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="Copy of Rules for ATQB" Description="Code analysis rules for non tests ATQB csproj." ToolsVersion="15.0">
-  <Rules AnalyzerId="CodeCracker.CSharp" RuleNamespace="CodeCracker.CSharp">
-    <Rule Id="CC0001" Action="None" />
-    <Rule Id="CC0009" Action="Info" />
-    <Rule Id="CC0011" Action="None" />
-    <Rule Id="CC0015" Action="None" />
-    <Rule Id="CC0022" Action="None" />
-    <Rule Id="CC0031" Action="None" />
-    <Rule Id="CC0057" Action="Info" />
-    <Rule Id="CC0061" Action="None" />
-    <Rule Id="CC0091" Action="None" />
-    <Rule Id="CC0097" Action="None" />
-  </Rules>
+<RuleSet Name="Rules for scr projects" ToolsVersion="15.0">
   <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
     <Rule Id="CA1001" Action="Warning" />
     <Rule Id="CA1009" Action="Warning" />
@@ -100,8 +88,12 @@
   <Rules AnalyzerId="SonarAnalyzer.CSharp" RuleNamespace="SonarAnalyzer.CSharp">
     <Rule Id="S101" Action="None" />
     <Rule Id="S1075" Action="None" />
+    <!-- Track uses of "TODO" tags -->
+    <Rule Id="S1135" Action="None" />
     <Rule Id="S125" Action="None" />
     <Rule Id="S1481" Action="Info" />
+    <!-- Inheritance list should not be redundant -->
+    <Rule Id="S1939" Action="Info" />
     <Rule Id="S2436" Action="None" />
     <Rule Id="S2743" Action="Info" />
     <Rule Id="S2971" Action="None" />

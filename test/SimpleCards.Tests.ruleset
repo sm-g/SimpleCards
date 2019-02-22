@@ -1,21 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="Rules for ATQB test projects" Description="Code analysis rules for ATQB tests csproj." ToolsVersion="15.0">
-  <Rules AnalyzerId="CodeCracker.CSharp" RuleNamespace="CodeCracker.CSharp">
-    <Rule Id="CC0001" Action="None" />
-    <Rule Id="CC0005" Action="None" />
-    <Rule Id="CC0008" Action="None" />
-    <Rule Id="CC0011" Action="None" />
-    <Rule Id="CC0015" Action="None" />
-    <Rule Id="CC0021" Action="None" />
-    <Rule Id="CC0022" Action="None" />
-    <Rule Id="CC0031" Action="None" />
-    <Rule Id="CC0052" Action="None" />
-    <Rule Id="CC0057" Action="Info" />
-    <Rule Id="CC0061" Action="None" />
-    <Rule Id="CC0091" Action="None" />
-    <Rule Id="CC0097" Action="None" />
-    <Rule Id="CC0105" Action="None" />
-  </Rules>
+<RuleSet Name="Rules for test projects" ToolsVersion="15.0">
   <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
     <Rule Id="CA1001" Action="Warning" />
     <Rule Id="CA1009" Action="Warning" />

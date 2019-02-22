@@ -15,7 +15,7 @@
     <OutputPath>bin\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="morelinq" Version="2.10.0" />
+    <PackageReference Include="morelinq" Version="3.1.0" />
     <PackageReference Include="Optional" Version="4.0.0" />
     <PackageReference Include="Value" Version="1.1.0.1" />
   </ItemGroup>
