@@ -19,13 +19,13 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2DB25E2B-D765-4744-AC62-47E82F665E0F}"
 	ProjectSection(SolutionItems) = preProject
 		src\Directory.Build.props = src\Directory.Build.props
-		src\SimpleCards.ruleset = src\SimpleCards.ruleset
+		src\Rules.ruleset = src\Rules.ruleset
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{1C684891-2761-46B4-9ED4-5927326AED98}"
 	ProjectSection(SolutionItems) = preProject
 		test\Directory.Build.props = test\Directory.Build.props
-		test\SimpleCards.Tests.ruleset = test\SimpleCards.Tests.ruleset
+		test\TestRules.ruleset = test\TestRules.ruleset
 	EndProjectSection
 EndProject
 Global

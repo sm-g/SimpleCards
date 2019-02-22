@@ -3,6 +3,6 @@
   <Import Project="..\Directory.Build.props" />
 
   <PropertyGroup>
-    <CodeAnalysisRuleSet>..\SimpleCards.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\Rules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 </Project>

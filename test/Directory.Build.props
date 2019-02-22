@@ -3,7 +3,7 @@
   <Import Project="..\Directory.Build.props" />
 
   <PropertyGroup>
-    <CodeAnalysisRuleSet>..\SimpleCards.Tests.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\TestRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>
