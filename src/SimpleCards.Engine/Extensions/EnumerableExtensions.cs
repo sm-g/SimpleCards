@@ -1,109 +1,29 @@
 ﻿using System.Linq;
+using MoreLinq;
 
 namespace System.Collections.Generic
 {
     public static class EnumerableExtensions
     {
-        private static readonly Random Random = new Random();
-
-        public static void ForAll<T>(this IEnumerable<T> collection, Action<T> action)
-        {
-            foreach (var item in collection)
-            {
-                action(item);
-            }
-        }
-
-        public static IEnumerable<T> Evens<T>(this IEnumerable<T> collection)
-        {
-            return collection.Where((r, i) => i % 2 == 0);
-        }
-
-        public static IEnumerable<T> Odds<T>(this IEnumerable<T> collection)
-        {
-            return collection.Where((r, i) => i % 2 != 0);
-        }
-
-        public static bool AllUnique<T>(this IEnumerable<T> collection)
-        {
-            return collection.Distinct().Count() == collection.Count();
-        }
-
-        public static bool AllUnique<T, TKey>(this IEnumerable<T> collection, Func<T, TKey> selector)
-        {
-            return collection.Select(x => selector(x)).Distinct().Count() == collection.Count();
-        }
-
-        /// <summary>
-        /// True if two lists contain same items.
-        /// from http://stackoverflow.com/questions/3669970/compare-two-listt-objects-for-equality-ignoring-order
-        /// </summary>
-        public static bool ScrambledEquals<T>(this IEnumerable<T> list1, IEnumerable<T> list2)
-        {
-            if (list1 == null)
-                throw new ArgumentNullException(nameof(list1));
-            if (list2 == null)
-                throw new ArgumentNullException(nameof(list2));
-
-            var cnt = new Dictionary<T, int>();
-            foreach (var s in list1)
-            {
-                if (cnt.ContainsKey(s))
-                {
-                    cnt[s]++;
-                }
-                else
-                {
-                    cnt.Add(s, 1);
-                }
-            }
-            foreach (var s in list2)
-            {
-                if (cnt.ContainsKey(s))
-                {
-                    cnt[s]--;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            return cnt.Values.All(c => c == 0);
-        }
-
-#pragma warning disable S4456 // Parameter validation in yielding methods should be wrapped TODO use morelinq
-
-        /// <summary>
-        /// from http://stackoverflow.com/questions/1651619/optimal-linq-query-to-get-a-random-sub-collection-shuffle
-        /// </summary>
-        public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source)
-#pragma warning restore S4456 // Parameter validation in yielding methods should be wrapped
+        public static bool AllUnique<T, TKey>(this IEnumerable<T> source, Func<T, TKey> selector, IEqualityComparer<TKey> comparer = null)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
+            if (selector == null)
+                throw new ArgumentNullException(nameof(selector));
 
-            var buffer = source.ToList();
-            for (var i = 0; i < buffer.Count; i++)
-            {
-                var j = Random.Next(i, buffer.Count);
-                yield return buffer[j];
-
-                buffer[j] = buffer[i];
-            }
+            return source.CountBy(selector, comparer).All(x => x.Value == 1);
         }
 
-        public static void Shuffle<T>(this IList<T> list)
+        public static bool AllUnique<T, TKey>(this IReadOnlyCollection<T> source, Func<T, TKey> selector, IEqualityComparer<TKey> comparer = null)
         {
-            if (list == null)
-                throw new ArgumentNullException(nameof(list));
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+            if (selector == null)
+                throw new ArgumentNullException(nameof(selector));
 
-            for (var i = list.Count; i > 1; i--)
-            {
-                var j = Random.Next(i); // 0 <= j <= i-1
-                var tmp = list[j];
-                list[j] = list[i - 1];
-                list[i - 1] = tmp;
-            }
+            // use faster implementation when double enumeration is not a problem
+            return source.GroupBy(selector, comparer).Count() == source.Count;
         }
 
         /// <summary>

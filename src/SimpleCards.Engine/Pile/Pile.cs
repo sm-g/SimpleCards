@@ -82,7 +82,11 @@ namespace SimpleCards.Engine
                     return;
 
                 case PilePosition.Middle:
-                    cards.ForAll(x => PushMiddle(x)); // TODO push in sameplace
+                    foreach (var item in cards)
+                    {
+                        // TODO push in sameplace
+                        PushMiddle(item);
+                    }
                     return;
 
                 case PilePosition.Bottom:
@@ -263,7 +267,7 @@ namespace SimpleCards.Engine
 
         public void Shuffle()
         {
-            cardsInPile.Shuffle();
+            cardsInPile = cardsInPile.Shuffle().ToList();
         }
 
         internal int GetIndexOf(Card card)
