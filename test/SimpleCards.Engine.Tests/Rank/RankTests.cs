@@ -1,28 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace SimpleCards.Engine
 {
     [TestFixture]
     public class RankTests
     {
-        [Test]
-        public void EqualsByAllProps()
-        {
-            var a = new Rank("1", 1, false);
-            var sameAsA = new Rank("1", 1, false);
-            var otherFace = new Rank("1", 1, true);
-            var otherName = new Rank("2", 1, false);
-            var otherValue = new Rank("1", 2, false);
-
-            Assert.IsTrue(a.Equals(sameAsA), "same");
-            Assert.IsFalse(a.Equals(otherFace), "face");
-            Assert.IsFalse(a.Equals(otherName), "name");
-            Assert.IsFalse(a.Equals(otherValue), "val");
-        }
-
         [Test]
         public void ComparesByValue()
         {
