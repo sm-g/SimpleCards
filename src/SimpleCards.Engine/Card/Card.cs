@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Value;
+﻿using System.Collections.Generic;
+using ByValue;
 
 namespace SimpleCards.Engine
 {
@@ -12,7 +11,7 @@ namespace SimpleCards.Engine
     /// <c>card1 == card2</c> will compare abstract cards, i.e. check Queen of Spades
     /// </remarks>
     /// </summary>
-    public class Card : ValueType<Card>
+    public class Card : ValueObject
     {
         public Card(Rank rank, Suit suit)
         {
@@ -28,7 +27,7 @@ namespace SimpleCards.Engine
             return Rank.Name + " " + Suit.Name;
         }
 
-        protected override IEnumerable<object> GetAllAttributesToBeUsedForEquality()
+        protected override IEnumerable<object> Reflect()
         {
             return new object[] { Rank, Suit };
         }

@@ -17,6 +17,6 @@
   <ItemGroup>
     <PackageReference Include="morelinq" Version="3.1.0" />
     <PackageReference Include="Optional" Version="4.0.0" />
-    <PackageReference Include="Value" Version="1.1.0.1" />
+    <PackageReference Include="ByValue" Version="0.2.0" />
   </ItemGroup>
 </Project>

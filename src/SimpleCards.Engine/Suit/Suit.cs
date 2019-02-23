@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Value;
+using ByValue;
 
 namespace SimpleCards.Engine
 {
-    public class Suit : ValueType<Suit>
+    public class Suit : ValueObject
     {
         public Suit(string name)
         {
@@ -24,7 +24,7 @@ namespace SimpleCards.Engine
             return Name;
         }
 
-        protected override IEnumerable<object> GetAllAttributesToBeUsedForEquality()
+        protected override IEnumerable<object> Reflect()
         {
             return new object[] { Name, Color };
         }
