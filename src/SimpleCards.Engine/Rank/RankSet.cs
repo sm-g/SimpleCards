@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Optional;
 
@@ -9,27 +9,20 @@ namespace SimpleCards.Engine
     /// <summary>
     /// Set of ranks in game.
     /// </summary>
-    public class RankSet : IReadOnlyList<Rank>
+    public class RankSet : ReadOnlyCollection<Rank>
     {
-        private readonly List<Rank> _ranks = new List<Rank>();
-
         public RankSet(IEnumerable<Rank> ranks)
+            : base(ranks.ToList())
         {
-            _ranks = new List<Rank>(ranks);
-
-            if (!_ranks.AllUnique(z => z.Value))
+            if (!Items.AllUnique(z => z.Value))
                 throw new ArgumentException("Not unique values");
-            if (!_ranks.AllUnique(z => z.Name))
+            if (!Items.AllUnique(z => z.Name))
                 throw new ArgumentException("Not unique names");
-        }
-
-        private RankSet()
-        {
         }
 
         public Rank this[string name]
         {
-            get { return _ranks.Find(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase)); }
+            get { return Items.FirstOrDefault(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase)); }
         }
 
         /// <summary>
@@ -37,43 +30,16 @@ namespace SimpleCards.Engine
         /// </summary>
         public static RankSet From<T>(Func<T, int> valueOf, T[] faced) where T : Enum
         {
-            var set = new List<Rank>();
-            foreach (T rank in Enum.GetValues(typeof(T)))
-            {
-                set.Add(new Rank(rank.ToString(), valueOf(rank), faced.Contains(rank)));
-            }
+            var set = Enum
+                .GetValues(typeof(T))
+                .Cast<T>()
+                .Select(x => new Rank(x.ToString(), valueOf(x), faced.Contains(x)));
             return new RankSet(set);
         }
 
         public Option<Rank> GetRank(string rankName)
         {
-            var result = _ranks.Find(x => x.Name == rankName);
-
-            return result.SomeNotNull();
+            return Items.FirstOrDefault(x => x.Name.Equals(rankName, StringComparison.OrdinalIgnoreCase)).SomeNotNull();
         }
-
-        #region IReadOnlyList
-
-        public int Count
-        {
-            get { return _ranks.Count; }
-        }
-
-        public Rank this[int index]
-        {
-            get { return _ranks[index]; }
-        }
-
-        public IEnumerator<Rank> GetEnumerator()
-        {
-            return _ranks.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return _ranks.GetEnumerator();
-        }
-
-        #endregion IReadOnlyList
     }
 }

@@ -32,10 +32,9 @@
   <Class Name="SimpleCards.Engine.RankSet" Collapsed="true">
     <Position X="3" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgAAAAEAAAAAABAACQAAAAQAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <HashCode>AgAAAAAAAAAAAAAACQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Rank\RankSet.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
   </Class>
   <Class Name="SimpleCards.Engine.SuitSet" Collapsed="true">
     <Position X="5" Y="0.5" Width="1.5" />
