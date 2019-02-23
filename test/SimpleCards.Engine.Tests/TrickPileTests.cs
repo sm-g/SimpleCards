@@ -38,7 +38,7 @@ namespace SimpleCards.Engine
 
         private static Card RndCard(int i = 1)
         {
-            return new Card(new Rank("1", i), new Suit("1"));
+            return new Card(new Rank("1", i), new Suit("1", Color.Black));
         }
     }
 }

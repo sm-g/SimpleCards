@@ -10,19 +10,19 @@ namespace SimpleCards.Engine
         [Test]
         public void Ctor_SuitsWithSameProps_Throws()
         {
-            Assert.Catch<ArgumentException>(() => new SuitSet(new[] { new Suit("1", 1), new Suit("1", 1) }));
+            Assert.Catch<ArgumentException>(() => new SuitSet(new[] { new Suit("1", Color.Black), new Suit("1", Color.Black) }));
         }
 
         [Test]
         public void Ctor_SuitsWithSameNames_Throws()
         {
-            Assert.Catch<ArgumentException>(() => new SuitSet(new[] { new Suit("1", 1), new Suit("1", 222) }));
+            Assert.Catch<ArgumentException>(() => new SuitSet(new[] { new Suit("1", Color.Black), new Suit("1", Color.Red) }));
         }
 
         [Test]
-        public void GetSuit_returnsByName()
+        public void GetSuit_ReturnsByName()
         {
-            var suit = new Suit("s1");
+            var suit = new Suit("s1", Color.Black);
             var set = new SuitSet(new[] { suit });
 
             var res = set.GetSuit("s1").ValueOrFailure();
@@ -31,9 +31,9 @@ namespace SimpleCards.Engine
         }
 
         [Test]
-        public void GetSuit_returnsByName_nothing()
+        public void GetSuit_ReturnsByName_Nothing()
         {
-            var suit = new Suit("s1");
+            var suit = new Suit("s1", Color.Black);
             var set = new SuitSet(new[] { suit });
 
             var res = set.GetSuit("s2").HasValue;

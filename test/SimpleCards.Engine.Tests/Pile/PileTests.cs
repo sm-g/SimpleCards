@@ -395,7 +395,7 @@ namespace SimpleCards.Engine
 
         private static Card RndCard(int i = 1)
         {
-            return new Card(new Rank("rank" + i, i), new Suit("clubs"));
+            return new Card(new Rank("rank" + i, i), new Suit("clubs", Color.Red));
         }
 
         private static void IncValueForKey(Dictionary<int, int> dict, int key)

@@ -1,28 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ByValue;
 
 namespace SimpleCards.Engine
 {
     public class Suit : ValueObject
     {
-        public Suit(string name)
+        public Suit(string name, Color color)
         {
             Name = name;
-        }
-
-        public Suit(string name, int color)
-        {
-            Name = name;
-            Color = color;
+            Color = color ?? throw new ArgumentNullException(nameof(color));
         }
 
         public string Name { get; }
-        public int Color { get; }
+        public Color Color { get; }
 
-        public override string ToString()
-        {
-            return Name;
-        }
+        public override string ToString() => Name;
 
         protected override IEnumerable<object> Reflect()
         {

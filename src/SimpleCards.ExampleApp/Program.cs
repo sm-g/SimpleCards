@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using SimpleCards.Engine;
 
 namespace SimpleCards.Tester
@@ -10,7 +7,7 @@ namespace SimpleCards.Tester
     {
         private static void Main(string[] args)
         {
-            var suitset = SuitSet.From<FrenchSuits>(s => s == FrenchSuits.Clubs || s == FrenchSuits.Diamonds ? 1 : 0);
+            var suitset = SuitSet.From<FrenchSuits>(s => s == FrenchSuits.Clubs || s == FrenchSuits.Diamonds ? Color.Red : Color.Black);
             var rankset = RankSet.From<DefaultRanks>(r => (int)r, new[] { DefaultRanks.Jack, DefaultRanks.Queen, DefaultRanks.King });
             var rules = new Rules();
             var game = new Game(rankset, suitset, rules, 2);

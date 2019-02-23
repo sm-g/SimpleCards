@@ -3,7 +3,7 @@
   <Class Name="SimpleCards.Engine.Card">
     <Position X="8.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAABAABAAAAAAAAEACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAABAABAAAAAAAAEAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Card\Card.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -40,10 +40,9 @@
   <Class Name="SimpleCards.Engine.SuitSet" Collapsed="true">
     <Position X="5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgAAAAAAAAAAQBAACAAAAAwAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <HashCode>AgAAAAAAAAAAQAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Suit\SuitSet.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
   </Class>
   <Class Name="SimpleCards.Engine.Hand" Collapsed="true">
     <Position X="1.25" Y="7.75" Width="1.5" />
@@ -96,17 +95,27 @@
   <Class Name="SimpleCards.Engine.Suit" Collapsed="true">
     <Position X="12.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAEACAAAAQAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAQBAAAAAAAAAAAAgAAAAAA=</HashCode>
       <FileName>Suit\Suit.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Color" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="SimpleCards.Engine.Rank" Collapsed="true">
     <Position X="12.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAABgQEACCAAgQAAAAAAAAAAAAgAAAAByA=</HashCode>
+      <HashCode>AAAAAAAAAAAABgQEAACAAgQBAAAAAAAAAAAgAAAAByA=</HashCode>
       <FileName>Rank\Rank.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SimpleCards.Engine.Color" Collapsed="true">
+    <Position X="15.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Suit\Color.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Enum Name="SimpleCards.Engine.DefaultRanks" Collapsed="true">
     <Position X="4.75" Y="6.5" Width="1.5" />

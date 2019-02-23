@@ -35,13 +35,8 @@ namespace SimpleCards.Engine
         /// <summary>
         /// Creates rank set from enum.
         /// </summary>
-        public static RankSet From<T>(Func<T, int> valueOf, T[] faced) where T : struct
+        public static RankSet From<T>(Func<T, int> valueOf, T[] faced) where T : Enum
         {
-            if (!typeof(T).IsEnum)
-            {
-                throw new ArgumentException("not enum");
-            }
-
             var set = new List<Rank>();
             foreach (T rank in Enum.GetValues(typeof(T)))
             {

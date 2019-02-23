@@ -45,13 +45,8 @@ namespace SimpleCards.Engine
         /// <summary>
         /// Creates suit set from enum.
         /// </summary>
-        public static SuitSet From<T>(Func<T, int> colorOf) where T : struct
+        public static SuitSet From<T>(Func<T, Color> colorOf) where T : Enum
         {
-            if (!typeof(T).IsEnum)
-            {
-                throw new ArgumentException("not enum");
-            }
-
             var set = new List<Suit>();
             foreach (T suit in Enum.GetValues(typeof(T)))
             {

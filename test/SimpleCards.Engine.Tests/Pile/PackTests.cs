@@ -10,7 +10,7 @@ namespace SimpleCards.Engine
         [Test]
         public void Ctor_MakesPileWithAllPossibleCardsOrdered()
         {
-            var suitSet = new SuitSet(new[] { new Suit("s1"), new Suit("s2") });
+            var suitSet = new SuitSet(new[] { new Suit("s1", Color.Black), new Suit("s2", Color.Black) });
             var rankSet = new RankSet(new[] { new Rank("r1", 1), new Rank("r2", 2, true) });
 
             var pack = new Pack(suitSet, rankSet, shuffle: false);
@@ -22,7 +22,7 @@ namespace SimpleCards.Engine
         [Test]
         public void Ctor_WhenManyDecks_MakesPileWithAllPossibleCardsOrdered()
         {
-            var suitSet = new SuitSet(new[] { new Suit("s1"), new Suit("s2") });
+            var suitSet = new SuitSet(new[] { new Suit("s1", Color.Black), new Suit("s2", Color.Black) });
             var rankSet = RankSet.From<DefaultRanks>(r => (int)r, new[] { DefaultRanks.Jack, DefaultRanks.Queen, DefaultRanks.King });
 
             var pack = new Pack(suitSet, rankSet, shuffle: false, decksCount: 3);
@@ -34,7 +34,7 @@ namespace SimpleCards.Engine
         [Test]
         public void Ctor_WhenShuffle_MakesPileWithAllPossibleCardsShuffled()
         {
-            var suitSet = new SuitSet(new[] { new Suit("s1"), new Suit("s2") });
+            var suitSet = new SuitSet(new[] { new Suit("s1", Color.Black), new Suit("s2", Color.Black) });
             var rankSet = RankSet.From<DefaultRanks>(r => (int)r, new[] { DefaultRanks.Jack, DefaultRanks.Queen, DefaultRanks.King });
 
             var pack = new Pack(suitSet, rankSet, shuffle: true);
