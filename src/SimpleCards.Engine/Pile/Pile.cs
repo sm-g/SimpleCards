@@ -184,6 +184,13 @@ namespace SimpleCards.Engine
             throw new NotImplementedException();
         }
 
+        public List<Card> PopAll()
+        {
+            var result = cardsInPile.ToList();
+            cardsInPile.Clear();
+            return result;
+        }
+
         public List<Card> Pop(PilePosition p, ushort count)
         {
             if (count <= 0)

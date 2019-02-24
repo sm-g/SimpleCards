@@ -18,14 +18,16 @@ namespace SimpleCards.Engine
             Rules = rules ?? throw new ArgumentNullException(nameof(rules));
 
             Table = new Table();
-            Parties = new List<Party>();
+            var parties = new List<Party>();
             for (var i = 1; i < players + 1; i++)
             {
                 var player = new Player("player" + i);
                 var party = new Party();
                 party.Players.Add(player);
-                Parties.Add(party);
+                parties.Add(party);
             }
+
+            Parties = parties;
         }
 
         public RankSet RankSet { get; }
@@ -33,7 +35,7 @@ namespace SimpleCards.Engine
         public Rules Rules { get; }
 
         public Table Table { get; }
-        public List<Party> Parties { get; }
+        public IReadOnlyList<Party> Parties { get; }
 
         public void Init()
         {

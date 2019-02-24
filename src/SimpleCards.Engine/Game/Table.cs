@@ -18,8 +18,7 @@ namespace SimpleCards.Engine
             var result = new Pile();
             foreach (var z in Zones)
             {
-                if (z.Pile.Size > 0)
-                    result.Push(z.Pile.Pop(PilePosition.Top, z.Pile.Size), PilePosition.Bottom);
+                result.Push(z.Pile.PopAll(), PilePosition.Bottom);
             }
             return result;
         }

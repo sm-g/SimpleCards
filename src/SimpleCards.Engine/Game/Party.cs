@@ -10,8 +10,8 @@ namespace SimpleCards.Engine
             Players = new List<Player>();
         }
 
-        public string Name { get; set; }
-        public IList<Player> Players { get; set; }
+        public string Name { get; }
+        public IList<Player> Players { get; }
 
         public override string ToString()
         {

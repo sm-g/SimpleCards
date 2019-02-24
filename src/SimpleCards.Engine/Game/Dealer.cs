@@ -9,7 +9,7 @@ namespace SimpleCards.Engine
             var allCardsForNextGame = game.Table.Collect();
             foreach (var player in game.Parties.SelectMany(x => x.Players))
             {
-                allCardsForNextGame.Push(player.Hand.Pop(PilePosition.Top, player.Hand.Size), PilePosition.Bottom);
+                allCardsForNextGame.Push(player.Hand.PopAll(), PilePosition.Bottom);
             }
 
             allCardsForNextGame.Shuffle();
