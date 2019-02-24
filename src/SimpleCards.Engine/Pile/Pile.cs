@@ -15,7 +15,9 @@ namespace SimpleCards.Engine
     /// </remarks>
     public class Pile : IEnumerable<Card>
     {
-        protected List<Card> cardsInPile;
+#pragma warning disable SA1307 // Accessible fields should begin with upper-case letter
+        protected internal List<Card> cardsInPile;
+#pragma warning restore SA1307 // Accessible fields should begin with upper-case letter
 
         /// <summary>
         /// Creates pile with given cards.
@@ -51,22 +53,7 @@ namespace SimpleCards.Engine
             if (cardsInPile.Contains(card, CardByRefEqualityComparer.Instance))
                 throw new ArgumentException("Given card instance already in pile", nameof(card));
 
-            switch (p)
-            {
-                case PilePosition.Top:
-                    PushTop(card);
-                    return;
-
-                case PilePosition.Middle:
-                    PushMiddle(card);
-                    return;
-
-                case PilePosition.Bottom:
-                    PushBottom(card);
-                    return;
-            }
-
-            throw new NotImplementedException();
+            p.Push(this, card);
         }
 
         public void Push(IReadOnlyCollection<Card> cards, PilePosition p)
@@ -77,47 +64,7 @@ namespace SimpleCards.Engine
             if (cardsInPile.Intersect(cards, CardByRefEqualityComparer.Instance).Any())
                 throw new ArgumentException("One of given cards instance already in pile", nameof(cards));
 
-            switch (p)
-            {
-                case PilePosition.Top:
-                    cardsInPile.InsertRange(0, cards);
-                    return;
-
-                case PilePosition.Middle:
-                    foreach (var item in cards)
-                    {
-                        // TODO push in sameplace
-                        PushMiddle(item);
-                    }
-                    return;
-
-                case PilePosition.Bottom:
-                    cardsInPile.AddRange(cards);
-                    return;
-            }
-        }
-
-        protected void PushTop(Card card)
-        {
-            cardsInPile.Insert(0, card);
-        }
-
-        protected void PushBottom(Card card)
-        {
-            cardsInPile.Add(card);
-        }
-
-        protected void PushMiddle(Card card)
-        {
-            if (cardsInPile.Count < 2)
-            {
-                cardsInPile.Add(card);
-            }
-            else
-            {
-                var i = Random.Next(1, Size);
-                cardsInPile.Insert(i, card);
-            }
+            p.Push(this, cards);
         }
 
         public Card Peek(PilePosition p)
@@ -125,43 +72,7 @@ namespace SimpleCards.Engine
             if (IsEmpty)
                 throw new EmptyPileException(this);
 
-            switch (p)
-            {
-                case PilePosition.Top:
-                    return PeekTop();
-
-                case PilePosition.Middle:
-                    return PeekRandomCard();
-
-                case PilePosition.Bottom:
-                    return PeekBottom();
-            }
-
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Returns card at top of the pile.
-        /// </summary>
-        /// <returns></returns>
-        protected Card PeekTop()
-        {
-            return cardsInPile.First();
-        }
-
-        /// <summary>
-        /// Returns card at bottom of the pile.
-        /// </summary>
-        /// <returns></returns>
-        protected Card PeekBottom()
-        {
-            return cardsInPile.Last();
-        }
-
-        protected Card PeekRandomCard()
-        {
-            var i = Random.Next(0, Size);
-            return cardsInPile[i];
+            return p.Peek(this);
         }
 
         public Card Pop(PilePosition p)
@@ -169,19 +80,7 @@ namespace SimpleCards.Engine
             if (IsEmpty)
                 throw new EmptyPileException(this);
 
-            switch (p)
-            {
-                case PilePosition.Top:
-                    return PopTop();
-
-                case PilePosition.Middle:
-                    return PopRandomCard();
-
-                case PilePosition.Bottom:
-                    return PopBottom();
-            }
-
-            throw new NotImplementedException();
+            return p.Pop(this);
         }
 
         public List<Card> PopAll()
@@ -199,79 +98,7 @@ namespace SimpleCards.Engine
             if (IsEmpty)
                 throw new EmptyPileException(this);
 
-            List<Card> result;
-            switch (p)
-            {
-                case PilePosition.Top:
-                    result = cardsInPile.Take(count).ToList();
-                    cardsInPile.RemoveRange(0, result.Count);
-                    return result;
-
-                case PilePosition.Middle:
-                    // group of cards from middle
-                    var seed = PeekRandomCard();
-                    var index = cardsInPile.IndexOf(seed);
-                    var start = 0;
-                    if (index >= count - 1)
-                    {
-                        // take from beginning to seed
-                        start = index - count + 1;
-                    }
-                    else if (Size - index >= count)
-                    {
-                        // take from seed to ending
-                        start = index;
-                    }
-                    else
-                    {
-                        // take around seed
-                        start = Math.Max(0, Size - count);
-                    }
-
-                    result = cardsInPile.Skip(start).Take(count).ToList();
-                    cardsInPile.RemoveRange(start, result.Count);
-                    return result;
-
-                case PilePosition.Bottom:
-                    result = cardsInPile.TakeLast(count).ToList();
-                    cardsInPile.RemoveRange(Size - result.Count, result.Count);
-                    return result;
-            }
-
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Returns card at top of the pile and removes it from the pile.
-        /// </summary>
-        /// <returns></returns>
-        protected Card PopTop()
-        {
-            var card = cardsInPile[0];
-            cardsInPile.Remove(card);
-            return card;
-        }
-
-        /// <summary>
-        /// Returns card at bottom of the pile and removes it from the pile.
-        /// </summary>
-        /// <returns></returns>
-        protected Card PopBottom()
-        {
-            var card = cardsInPile.Last();
-            cardsInPile.Remove(card);
-            return card;
-        }
-
-        /// <summary>
-        /// Returns random card from the pile and removes it from the pile.
-        /// </summary>
-        /// <returns></returns>
-        protected Card PopRandomCard()
-        {
-            var card = PeekRandomCard();
-            cardsInPile.Remove(card);
-            return card;
+            return p.Pop(this, count);
         }
 
         public void Shuffle()
@@ -294,7 +121,7 @@ namespace SimpleCards.Engine
             if (IsEmpty)
                 return "Empty pile";
 
-            var builder = new StringBuilder($"Pile with {Size} cards, top is {PeekTop()}, some random is {PeekRandomCard()}. All cards: \n");
+            var builder = new StringBuilder($"Pile with {Size} cards, top is {PilePosition.Top.Peek(this)}, bottom is {PilePosition.Bottom.Peek(this)}. All cards: \n");
             foreach (var card in cardsInPile)
             {
                 builder.Append(card);
