@@ -48,7 +48,7 @@ namespace SimpleCards.Engine
 
             public override void Push(Pile pile, Card card)
             {
-                if (pile.cardsInPile.Count < 2)
+                if (pile.IsEmpty)
                 {
                     pile.cardsInPile.Add(card);
                 }
@@ -61,10 +61,14 @@ namespace SimpleCards.Engine
 
             public override void Push(Pile pile, IReadOnlyCollection<Card> cards)
             {
-                foreach (var item in cards)
+                if (pile.IsEmpty)
                 {
-                    // TODO push in sameplace
-                    Push(pile, item);
+                    pile.cardsInPile.AddRange(cards);
+                }
+                else
+                {
+                    var i = Random.Next(1, pile.Size);
+                    pile.cardsInPile.InsertRange(i, cards);
                 }
             }
         }

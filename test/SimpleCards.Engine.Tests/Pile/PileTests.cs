@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using AutoFixture;
 
 using NUnit.Framework;
@@ -112,8 +113,8 @@ namespace SimpleCards.Engine
                 IncValueForKey(dict, pile.GetIndexOf(addedCard));
             }
             Assert.That(dict.Select(x => x.Value), Has.All.GreaterThan(1));
-            Assert.IsFalse(dict.ContainsKey(0));
-            Assert.IsFalse(dict.ContainsKey(10));
+            Assert.IsFalse(dict.ContainsKey(0), "not first");
+            Assert.IsFalse(dict.ContainsKey(10), "not last");
         }
 
         [Test]
@@ -155,8 +156,8 @@ namespace SimpleCards.Engine
                 IncValueForKey(dict, pile.GetIndexOf(cards[1]));
             }
             Assert.That(dict.Select(x => x.Value), Has.All.GreaterThan(1));
-            Assert.IsFalse(dict.ContainsKey(0));
-            Assert.IsFalse(dict.ContainsKey(4));
+            Assert.IsFalse(dict.ContainsKey(0), "not first");
+            Assert.IsFalse(dict.ContainsKey(4), "not last");
         }
 
         [Test]

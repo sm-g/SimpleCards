@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 using MoreLinq;
 
 namespace SimpleCards.Engine
@@ -13,7 +14,7 @@ namespace SimpleCards.Engine
     /// <remarks>
     /// Not inherit from List to hide irrelevant methods (such as Add, Insert).
     /// </remarks>
-    public class Pile : IEnumerable<Card>
+    public class Pile : IReadOnlyList<Card>
     {
 #pragma warning disable SA1307 // Accessible fields should begin with upper-case letter
         protected internal List<Card> cardsInPile;
@@ -143,5 +144,13 @@ namespace SimpleCards.Engine
         }
 
         #endregion IEnumerable
+
+        #region IReadOnlyList
+
+        int IReadOnlyCollection<Card>.Count => cardsInPile.Count;
+
+        Card IReadOnlyList<Card>.this[int index] => cardsInPile[index];
+
+        #endregion IReadOnlyList
     }
 }
