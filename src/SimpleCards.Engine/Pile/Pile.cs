@@ -10,9 +10,11 @@ namespace SimpleCards.Engine
     /// <summary>
     /// A set of cards placed on a surface so that they partially or completely overlap.
     /// </summary>
-    public class Pile : IReadOnlyCollection<Card>
+    /// <remarks>
+    /// Not inherit from List to hide irrelevant methods (such as Add, Insert).
+    /// </remarks>
+    public class Pile : IEnumerable<Card>
     {
-        private static Random rnd = new Random();
         protected List<Card> cardsInPile;
 
         /// <summary>
@@ -47,7 +49,7 @@ namespace SimpleCards.Engine
         public void Push(Card card, PilePosition p)
         {
             if (cardsInPile.Contains(card, CardByRefEqualityComparer.Instance))
-                throw new ArgumentException("Given card instance already in pile");
+                throw new ArgumentException("Given card instance already in pile", nameof(card));
 
             switch (p)
             {
@@ -67,13 +69,13 @@ namespace SimpleCards.Engine
             throw new NotImplementedException();
         }
 
-        public void Push(IEnumerable<Card> cards, PilePosition p)
+        public void Push(IReadOnlyCollection<Card> cards, PilePosition p)
         {
-            if (cards.GroupBy(x => x, CardByRefEqualityComparer.Instance).Any(x => x.Count() > 1))
-                throw new ArgumentException("Duplicate instances in given cards");
+            if (!cards.AllUnique(x => x, CardByRefEqualityComparer.Instance))
+                throw new ArgumentException("Duplicate instances in given cards", nameof(cards));
 
             if (cardsInPile.Intersect(cards, CardByRefEqualityComparer.Instance).Any())
-                throw new ArgumentException("One of given cards instance already in pile");
+                throw new ArgumentException("One of given cards instance already in pile", nameof(cards));
 
             switch (p)
             {
@@ -113,7 +115,7 @@ namespace SimpleCards.Engine
             }
             else
             {
-                var i = rnd.Next(1, Size);
+                var i = Random.Next(1, Size);
                 cardsInPile.Insert(i, card);
             }
         }
@@ -158,7 +160,7 @@ namespace SimpleCards.Engine
 
         protected Card PeekRandomCard()
         {
-            var i = rnd.Next(Size);
+            var i = Random.Next(0, Size);
             return cardsInPile[i];
         }
 
@@ -182,7 +184,7 @@ namespace SimpleCards.Engine
             throw new NotImplementedException();
         }
 
-        public IList<Card> Pop(PilePosition p, ushort count)
+        public List<Card> Pop(PilePosition p, ushort count)
         {
             if (count <= 0)
                 throw new ArgumentOutOfRangeException(nameof(count));
@@ -190,7 +192,7 @@ namespace SimpleCards.Engine
             if (IsEmpty)
                 throw new EmptyPileException(this);
 
-            IList<Card> result;
+            List<Card> result;
             switch (p)
             {
                 case PilePosition.Top:
@@ -282,6 +284,9 @@ namespace SimpleCards.Engine
 
         public override string ToString()
         {
+            if (IsEmpty)
+                return "Empty pile";
+
             var builder = new StringBuilder($"Pile with {Size} cards, top is {PeekTop()}, some random is {PeekRandomCard()}. All cards: \n");
             foreach (var card in cardsInPile)
             {
@@ -291,12 +296,7 @@ namespace SimpleCards.Engine
             return builder.ToString();
         }
 
-        #region IReadOnlyCollection
-
-        public int Count
-        {
-            get { return cardsInPile.Count; }
-        }
+        #region IEnumerable
 
         public IEnumerator<Card> GetEnumerator()
         {
@@ -308,6 +308,6 @@ namespace SimpleCards.Engine
             return cardsInPile.GetEnumerator();
         }
 
-        #endregion IReadOnlyCollection
+        #endregion IEnumerable
     }
 }

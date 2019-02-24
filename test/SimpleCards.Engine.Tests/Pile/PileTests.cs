@@ -15,11 +15,7 @@ namespace SimpleCards.Engine
 
             var result = new Pile(source);
 
-            Assert.IsTrue(result.Size == 4);
-            Assert.AreSame(source[0], result.ElementAt(0), "0");
-            Assert.AreSame(source[1], result.ElementAt(1), "1");
-            Assert.AreSame(source[2], result.ElementAt(2), "2");
-            Assert.AreSame(source[3], result.ElementAt(3), "3");
+            Assert.That(result, Is.EqualTo(source).Using(CardByRefEqualityComparer.Instance));
         }
 
         #region Push
@@ -64,7 +60,7 @@ namespace SimpleCards.Engine
 
             pile.Push(cards, PilePosition.Top);
 
-            Assert.That(pile.Take(2), Is.EquivalentTo(cards).Using(CardByRefEqualityComparer.Instance));
+            CollectionAssert.AreEqual(cards, pile.Take(2));
         }
 
         [Test]
@@ -86,7 +82,7 @@ namespace SimpleCards.Engine
 
             pile.Push(cards, PilePosition.Bottom);
 
-            Assert.That(pile.TakeLast(2), Is.EquivalentTo(cards).Using(CardByRefEqualityComparer.Instance));
+            CollectionAssert.AreEqual(cards, pile.TakeLast(2));
         }
 
         [Test]
@@ -310,11 +306,8 @@ namespace SimpleCards.Engine
 
             var result = pile.Pop(PilePosition.Top, 2);
 
-            CollectionAssert.IsOrdered(result, CardByRankValueComparer.Instance);
-            Assert.AreEqual(2, result.Count, "result size");
-            Assert.AreEqual(2, pile.Size);
-            Assert.AreSame(source[2], pile.First(), "first");
-            Assert.AreSame(source[3], pile.Last(), "last");
+            CollectionAssert.AreEqual(new[] { source[0], source[1] }, result);
+            CollectionAssert.AreEqual(new[] { source[2], source[3] }, pile);
         }
 
         [Test]
@@ -337,11 +330,8 @@ namespace SimpleCards.Engine
 
             var result = pile.Pop(PilePosition.Bottom, 2);
 
-            CollectionAssert.IsOrdered(result, CardByRankValueComparer.Instance);
-            Assert.AreEqual(2, result.Count, "result size");
-            Assert.AreEqual(2, pile.Size);
-            Assert.AreSame(source[0], pile.First(), "first");
-            Assert.AreSame(source[1], pile.Last(), "last");
+            CollectionAssert.AreEqual(new[] { source[2], source[3] }, result);
+            CollectionAssert.AreEqual(new[] { source[0], source[1] }, pile);
         }
 
         [Test]
@@ -368,13 +358,16 @@ namespace SimpleCards.Engine
             var source = new[] { RndCard(1), RndCard(2), RndCard(3), RndCard(4) };
             var pile = new Pile(source);
 
-            var result = pile.Pop(PilePosition.Middle, 2);
+            using (Random.Returing(new[] { 2 }))
+            {
+                var result = pile.Pop(PilePosition.Middle, 2);
 
-            CollectionAssert.IsOrdered(result, CardByRankValueComparer.Instance);
-            Assert.AreEqual(2, result.Count, "result size");
-            Assert.AreEqual(2, pile.Size);
-            Assert.AreSame(source[0], pile.First(), "first");
-            Assert.AreSame(source[3], pile.Last(), "last");
+                CollectionAssert.AreEqual(new[] { source[1], source[2] }, result);
+                Assert.AreEqual(2, result.Count, "result size");
+                Assert.AreEqual(2, pile.Size);
+                Assert.AreSame(source[0], pile.First(), "first");
+                Assert.AreSame(source[3], pile.Last(), "last");
+            }
         }
 
         [Test]
@@ -385,7 +378,6 @@ namespace SimpleCards.Engine
 
             var result = pile.Pop(PilePosition.Middle, 3);
 
-            CollectionAssert.IsOrdered(result, CardByRankValueComparer.Instance);
             Assert.AreEqual(3, result.Count, "result size");
             Assert.AreEqual(1, pile.Size);
             Assert.IsTrue(pile.First().Rank.Value == 1 || pile.First().Rank.Value == 4);
