@@ -84,13 +84,6 @@ namespace SimpleCards.Engine
             return p.Pop(this);
         }
 
-        public List<Card> PopAll()
-        {
-            var result = cardsInPile.ToList();
-            cardsInPile.Clear();
-            return result;
-        }
-
         public List<Card> Pop(PilePosition p, ushort count)
         {
             if (count <= 0)
@@ -100,6 +93,13 @@ namespace SimpleCards.Engine
                 throw new EmptyPileException(this);
 
             return p.Pop(this, count);
+        }
+
+        public List<Card> PopAll()
+        {
+            var result = cardsInPile.ToList();
+            cardsInPile.Clear();
+            return result;
         }
 
         public void Shuffle()
