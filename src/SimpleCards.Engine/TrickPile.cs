@@ -9,14 +9,14 @@ namespace SimpleCards.Engine
         protected Dictionary<Party, List<Card>> dict = new Dictionary<Party, List<Card>>();
         protected Party leader;
 
-        public Dictionary<Party, List<Card>> AllCards { get { return dict; } }
+        public Dictionary<Party, List<Card>> AllCards => dict;
 
         public abstract void Push(Card card, Party p);
     }
 
     public class PlainTrickPile : TrickPile
     {
-        public IEnumerable<Card> Tricks { get { return dict.Values.SelectMany(x => x); } }
+        public IEnumerable<Card> Tricks => dict.Values.SelectMany(x => x);
 
         public override void Push(Card card, Party p)
         {
@@ -32,7 +32,7 @@ namespace SimpleCards.Engine
 
     public class TrickNDrawTrickPile : TrickPile
     {
-        //private List<Tuple<Card, Card>> q;
+        ////private List<Tuple<Card, Card>> q;
 
         public TrickNDrawTrickPile()
         {
@@ -42,10 +42,10 @@ namespace SimpleCards.Engine
 
         public void Push(Card card, Player p)
         {
-            //if (Defense.Players.Contains(p))
-            //{
-            //}
-            // base.Push(card, p);
+            ////if (Defense.Players.Contains(p))
+            ////{
+            ////}
+            //// base.Push(card, p);
         }
 
         public override void Push(Card card, Party p)

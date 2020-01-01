@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+
 using Optional;
 
 namespace SimpleCards.Engine
@@ -28,7 +29,8 @@ namespace SimpleCards.Engine
         /// <summary>
         /// Creates rank set from enum.
         /// </summary>
-        public static RankSet From<T>(Func<T, int> valueOf, T[] faced) where T : Enum
+        public static RankSet From<T>(Func<T, int> valueOf, T[] faced)
+            where T : Enum
         {
             var set = Enum
                 .GetValues(typeof(T))

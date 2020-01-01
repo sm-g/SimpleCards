@@ -1,4 +1,5 @@
 ﻿using System;
+
 using AutoFixture.Kernel;
 
 namespace SimpleCards.Engine
@@ -10,7 +11,8 @@ namespace SimpleCards.Engine
             var t = request as Type;
             if (typeof(PilePosition).Equals(t))
             {
-                var allValues = new[] {
+                var allValues = new[]
+                {
                     PilePosition.Bottom,
                     PilePosition.Middle,
                     PilePosition.Top,

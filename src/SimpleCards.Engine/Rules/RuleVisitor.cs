@@ -17,8 +17,10 @@ namespace SimpleCards.Engine
         /// </summary>
         public IEnumerable<Card> GetTuples(AI ai)
         {
-            //  var visibleZones = ai.Zones;
-            return ai.Player.Hand.GroupBy(x => x.Rank).Where(g => g.Count() > 1).SelectMany(x => x);
+            return ai.Player.Hand
+                .GroupBy(x => x.Rank)
+                .Where(g => g.Count() > 1)
+                .SelectMany(x => x);
         }
     }
 }

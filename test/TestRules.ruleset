@@ -1,9 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RuleSet Name="Rules for test projects" ToolsVersion="15.0">
   <Include Path="..\src\Rules.ruleset" Action="Default" />
-    <Rules AnalyzerId="SonarAnalyzer.CSharp" RuleNamespace="SonarAnalyzer.CSharp">
-    <!-- Fields should not have public accessibility -->
-    <Rule Id="S1104" Action="None" />
+  <Rules AnalyzerId="SonarAnalyzer.CSharp" RuleNamespace="SonarAnalyzer.CSharp">
     <!-- Local variables should not shadow class fields -->
     <Rule Id="S1117" Action="None" />
     <!-- Unused method parameters should be removed -->

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+
 using NUnit.Framework;
 
 namespace SimpleCards.Engine
@@ -28,7 +29,8 @@ namespace SimpleCards.Engine
             var pack = new Pack(suitSet, rankSet, shuffle: false, decksCount: 2);
 
             Assert.AreEqual(suitSet.Count * rankSet.Count * 2, pack.Size);
-            CollectionAssert.AreEqual(new[] {
+            CollectionAssert.AreEqual(new[]
+            {
                 new Card(rankSet[0], suitSet[0]),
                 new Card(rankSet[0], suitSet[0]),
                 new Card(rankSet[1], suitSet[0]),
@@ -47,7 +49,8 @@ namespace SimpleCards.Engine
             var pack = new Pack(suitSet, rankSet, shuffle: true);
 
             Assert.AreEqual(suitSet.Count * rankSet.Count, pack.Size);
-            CollectionAssert.AreNotEqual(new[] {
+            CollectionAssert.AreNotEqual(new[]
+            {
                 new Card(rankSet[0], suitSet[0]),
                 new Card(rankSet[0], suitSet[0]),
                 new Card(rankSet[1], suitSet[0]),

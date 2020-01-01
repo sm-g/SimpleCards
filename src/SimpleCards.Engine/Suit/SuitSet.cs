@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+
 using Optional;
 
 namespace SimpleCards.Engine
@@ -29,7 +30,8 @@ namespace SimpleCards.Engine
         /// <summary>
         /// Creates suit set from enum.
         /// </summary>
-        public static SuitSet From<T>(Func<T, Color> colorOf) where T : Enum
+        public static SuitSet From<T>(Func<T, Color> colorOf)
+            where T : Enum
         {
             var set = Enum
                 .GetValues(typeof(T))
