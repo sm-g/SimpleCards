@@ -6,25 +6,25 @@ namespace SimpleCards.Engine
 {
     public abstract class TrickPile
     {
-        protected Dictionary<Party, List<Card>> dict = new Dictionary<Party, List<Card>>();
-        protected Party leader;
+        public Dictionary<Party, List<Card>> AllCards => Dict;
 
-        public Dictionary<Party, List<Card>> AllCards => dict;
+        protected Dictionary<Party, List<Card>> Dict { get; } = new Dictionary<Party, List<Card>>();
+        protected Party Leader { get; set; }
 
         public abstract void Push(Card card, Party p);
     }
 
     public class PlainTrickPile : TrickPile
     {
-        public IEnumerable<Card> Tricks => dict.Values.SelectMany(x => x);
+        public IEnumerable<Card> Tricks => Dict.Values.SelectMany(x => x);
 
         public override void Push(Card card, Party p)
         {
-            if (dict.Count == 0)
-                leader = p;
+            if (Dict.Count == 0)
+                Leader = p;
 
-            if (!dict.TryGetValue(p, out var list))
-                dict[p] = list = new List<Card>();
+            if (!Dict.TryGetValue(p, out var list))
+                Dict[p] = list = new List<Card>();
 
             list.Add(card);
         }

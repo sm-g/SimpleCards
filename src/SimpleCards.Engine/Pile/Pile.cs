@@ -16,16 +16,14 @@ namespace SimpleCards.Engine
     /// </remarks>
     public class Pile : IReadOnlyList<Card>
     {
-#pragma warning disable SA1307 // Accessible fields should begin with upper-case letter
-        protected internal List<Card> cardsInPile;
-#pragma warning restore SA1307 // Accessible fields should begin with upper-case letter
+        protected internal List<Card> CardsInPile;
 
         /// <summary>
         /// Creates pile with given cards.
         /// </summary>
         public Pile(IEnumerable<Card> cards)
         {
-            cardsInPile = new List<Card>(cards);
+            CardsInPile = new List<Card>(cards);
         }
 
         /// <summary>
@@ -33,7 +31,7 @@ namespace SimpleCards.Engine
         /// </summary>
         public Pile()
         {
-            cardsInPile = new List<Card>();
+            CardsInPile = new List<Card>();
         }
 
         /// <summary>
@@ -41,7 +39,7 @@ namespace SimpleCards.Engine
         /// </summary>
         public ushort Size
         {
-            get { return (ushort)cardsInPile.Count; }
+            get { return (ushort)CardsInPile.Count; }
         }
 
         public bool IsEmpty
@@ -51,7 +49,7 @@ namespace SimpleCards.Engine
 
         public void Push(Card card, PilePosition p)
         {
-            if (cardsInPile.Contains(card, CardByRefEqualityComparer.Instance))
+            if (CardsInPile.Contains(card, CardByRefEqualityComparer.Instance))
                 throw new ArgumentException("Given card instance already in pile", nameof(card));
 
             p.Push(this, card);
@@ -62,7 +60,7 @@ namespace SimpleCards.Engine
             if (!cards.AllUnique(x => x, CardByRefEqualityComparer.Instance))
                 throw new ArgumentException("Duplicate instances in given cards", nameof(cards));
 
-            if (cardsInPile.Intersect(cards, CardByRefEqualityComparer.Instance).Any())
+            if (CardsInPile.Intersect(cards, CardByRefEqualityComparer.Instance).Any())
                 throw new ArgumentException("One of given cards instance already in pile", nameof(cards));
 
             p.Push(this, cards);
@@ -97,21 +95,21 @@ namespace SimpleCards.Engine
 
         public List<Card> PopAll()
         {
-            var result = cardsInPile.ToList();
-            cardsInPile.Clear();
+            var result = CardsInPile.ToList();
+            CardsInPile.Clear();
             return result;
         }
 
         public void Shuffle()
         {
-            cardsInPile = cardsInPile.Shuffle().ToList();
+            CardsInPile = CardsInPile.Shuffle().ToList();
         }
 
         internal int GetIndexOf(Card card)
         {
-            for (var i = 0; i < cardsInPile.Count; i++)
+            for (var i = 0; i < CardsInPile.Count; i++)
             {
-                if (CardByRefEqualityComparer.Instance.Equals(card, cardsInPile[i]))
+                if (CardByRefEqualityComparer.Instance.Equals(card, CardsInPile[i]))
                     return i;
             }
             return -1;
@@ -123,7 +121,7 @@ namespace SimpleCards.Engine
                 return "Empty pile";
 
             var builder = new StringBuilder($"Pile with {Size} cards, top is {PilePosition.Top.Peek(this)}, bottom is {PilePosition.Bottom.Peek(this)}. All cards: \n");
-            foreach (var card in cardsInPile)
+            foreach (var card in CardsInPile)
             {
                 builder.Append(card);
                 builder.AppendLine();
@@ -135,21 +133,21 @@ namespace SimpleCards.Engine
 
         public IEnumerator<Card> GetEnumerator()
         {
-            return cardsInPile.GetEnumerator();
+            return CardsInPile.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return cardsInPile.GetEnumerator();
+            return CardsInPile.GetEnumerator();
         }
 
         #endregion IEnumerable
 
         #region IReadOnlyList
 
-        int IReadOnlyCollection<Card>.Count => cardsInPile.Count;
+        int IReadOnlyCollection<Card>.Count => CardsInPile.Count;
 
-        Card IReadOnlyList<Card>.this[int index] => cardsInPile[index];
+        Card IReadOnlyList<Card>.this[int index] => CardsInPile[index];
 
         #endregion IReadOnlyList
     }

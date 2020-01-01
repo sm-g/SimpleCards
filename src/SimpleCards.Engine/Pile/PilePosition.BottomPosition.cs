@@ -19,19 +19,19 @@ namespace SimpleCards.Engine
 
             public override List<Card> Pop(Pile pile, ushort count)
             {
-                var result = pile.cardsInPile.TakeLast(count).ToList();
-                pile.cardsInPile.RemoveRange(pile.cardsInPile.Count - result.Count, result.Count);
+                var result = pile.CardsInPile.TakeLast(count).ToList();
+                pile.CardsInPile.RemoveRange(pile.CardsInPile.Count - result.Count, result.Count);
                 return result;
             }
 
             public override void Push(Pile pile, Card card)
             {
-                pile.cardsInPile.Add(card);
+                pile.CardsInPile.Add(card);
             }
 
             public override void Push(Pile pile, IReadOnlyCollection<Card> cards)
             {
-                pile.cardsInPile.AddRange(cards);
+                pile.CardsInPile.AddRange(cards);
             }
         }
     }

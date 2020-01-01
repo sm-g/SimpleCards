@@ -22,7 +22,7 @@ namespace SimpleCards.Engine
         public Card Pop(Pile pile)
         {
             var card = Peek(pile);
-            pile.cardsInPile.Remove(card);
+            pile.CardsInPile.Remove(card);
             return card;
         }
 

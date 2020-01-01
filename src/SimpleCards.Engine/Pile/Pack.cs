@@ -29,7 +29,7 @@ namespace SimpleCards.Engine
                 {
                     for (var i = 0; i < decksCount; i++)
                     {
-                        cardsInPile.Add(new Card(rank, suit));
+                        CardsInPile.Add(new Card(rank, suit));
                     }
                 }
             }

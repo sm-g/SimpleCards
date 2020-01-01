@@ -16,14 +16,14 @@ namespace SimpleCards.Engine
             public override Card Peek(Pile pile)
             {
                 var i = Random.Next(0, pile.Size);
-                return pile.cardsInPile[i];
+                return pile.CardsInPile[i];
             }
 
             public override List<Card> Pop(Pile pile, ushort count)
             {
                 // group of cards from middle
                 var seed = Peek(pile);
-                var index = pile.cardsInPile.IndexOf(seed);
+                var index = pile.CardsInPile.IndexOf(seed);
                 var start = 0;
                 if (index >= count - 1)
                 {
@@ -41,8 +41,8 @@ namespace SimpleCards.Engine
                     start = Math.Max(0, pile.Size - count);
                 }
 
-                var result = pile.cardsInPile.Skip(start).Take(count).ToList();
-                pile.cardsInPile.RemoveRange(start, result.Count);
+                var result = pile.CardsInPile.Skip(start).Take(count).ToList();
+                pile.CardsInPile.RemoveRange(start, result.Count);
                 return result;
             }
 
@@ -50,12 +50,12 @@ namespace SimpleCards.Engine
             {
                 if (pile.IsEmpty)
                 {
-                    pile.cardsInPile.Add(card);
+                    pile.CardsInPile.Add(card);
                 }
                 else
                 {
                     var i = Random.Next(1, pile.Size);
-                    pile.cardsInPile.Insert(i, card);
+                    pile.CardsInPile.Insert(i, card);
                 }
             }
 
@@ -63,12 +63,12 @@ namespace SimpleCards.Engine
             {
                 if (pile.IsEmpty)
                 {
-                    pile.cardsInPile.AddRange(cards);
+                    pile.CardsInPile.AddRange(cards);
                 }
                 else
                 {
                     var i = Random.Next(1, pile.Size);
-                    pile.cardsInPile.InsertRange(i, cards);
+                    pile.CardsInPile.InsertRange(i, cards);
                 }
             }
         }

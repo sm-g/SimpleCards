@@ -3,7 +3,7 @@
     public class Rules
     {
         /// <summary>
-        /// TODO pack generation uses RankSet, not rule.PackSize
+        /// TODO pack generation uses RankSet, not rule.PackSize.
         /// </summary>
         public ushort PackSize { get; set; } = 36;
 

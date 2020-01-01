@@ -15,7 +15,7 @@
 
         public bool Contains(Card item)
         {
-            return cardsInPile.Contains(item);
+            return CardsInPile.Contains(item);
         }
     }
 }

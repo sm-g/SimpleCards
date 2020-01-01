@@ -20,8 +20,8 @@ namespace SimpleCards.Tester
                 Console.WriteLine($"game #{gameNumber}");
 
                 rules.Dealer.Deal(game);
-                const int rounds = 2;
-                for (var roundNumber = 0; roundNumber < rounds; roundNumber++)
+                const int Rounds = 2;
+                for (var roundNumber = 0; roundNumber < Rounds; roundNumber++)
                 {
                     Console.WriteLine($"Begin round {roundNumber}");
 
