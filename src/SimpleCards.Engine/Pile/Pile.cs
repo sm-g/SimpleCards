@@ -37,9 +37,9 @@ namespace SimpleCards.Engine
         /// <summary>
         /// Quantity of cards in the pile.
         /// </summary>
-        public ushort Size
+        public int Size
         {
-            get { return (ushort)CardsInPile.Count; }
+            get { return CardsInPile.Count; }
         }
 
         public bool IsEmpty
@@ -82,7 +82,7 @@ namespace SimpleCards.Engine
             return p.Pop(this);
         }
 
-        public List<Card> Pop(PilePosition p, ushort count)
+        public List<Card> Pop(PilePosition p, int count)
         {
             if (count <= 0)
                 throw new ArgumentOutOfRangeException(nameof(count));

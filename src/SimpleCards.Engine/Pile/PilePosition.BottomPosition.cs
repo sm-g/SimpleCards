@@ -17,7 +17,7 @@ namespace SimpleCards.Engine
                 return pile.Last();
             }
 
-            public override List<Card> Pop(Pile pile, ushort count)
+            public override List<Card> Pop(Pile pile, int count)
             {
                 var result = pile.CardsInPile.TakeLast(count).ToList();
                 pile.CardsInPile.RemoveRange(pile.CardsInPile.Count - result.Count, result.Count);

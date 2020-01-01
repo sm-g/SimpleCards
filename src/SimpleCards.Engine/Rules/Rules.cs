@@ -2,14 +2,9 @@
 {
     public class Rules
     {
-        /// <summary>
-        /// TODO pack generation uses RankSet, not rule.PackSize.
-        /// </summary>
-        public ushort PackSize { get; set; } = 36;
+        public int DecksCount { get; set; } = 1;
 
-        public ushort DecksCount { get; set; } = 1;
-
-        public ushort HandSize { get; set; } = 6;
+        public int HandSize { get; set; } = 6;
 
         public ZoneFactory ZoneFactory { get; } = new ZoneFactory();
 

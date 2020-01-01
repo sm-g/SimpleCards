@@ -17,7 +17,7 @@ namespace SimpleCards.Engine
                 return pile.First();
             }
 
-            public override List<Card> Pop(Pile pile, ushort count)
+            public override List<Card> Pop(Pile pile, int count)
             {
                 var result = pile.CardsInPile.Take(count).ToList();
                 pile.CardsInPile.RemoveRange(0, result.Count);

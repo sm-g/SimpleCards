@@ -26,7 +26,7 @@ namespace SimpleCards.Engine
             return card;
         }
 
-        public abstract List<Card> Pop(Pile pile, ushort count);
+        public abstract List<Card> Pop(Pile pile, int count);
 
         public abstract void Push(Pile pile, Card card);
 

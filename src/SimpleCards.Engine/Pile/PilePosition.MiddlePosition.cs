@@ -19,7 +19,7 @@ namespace SimpleCards.Engine
                 return pile.CardsInPile[i];
             }
 
-            public override List<Card> Pop(Pile pile, ushort count)
+            public override List<Card> Pop(Pile pile, int count)
             {
                 // group of cards from middle
                 var seed = Peek(pile);
