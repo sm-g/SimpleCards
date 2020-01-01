@@ -5,8 +5,14 @@ namespace SimpleCards.Engine
 {
     public class Party
     {
-        public Party()
+        public Party(string name)
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new System.ArgumentException("Not set", nameof(name));
+            }
+
+            Name = name;
             Players = new List<Player>();
         }
 

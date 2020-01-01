@@ -9,7 +9,7 @@ namespace SimpleCards.Engine
         public Dictionary<Party, List<Card>> AllCards => Dict;
 
         protected Dictionary<Party, List<Card>> Dict { get; } = new Dictionary<Party, List<Card>>();
-        protected Party Leader { get; set; }
+        protected Party? Leader { get; set; }
 
         public abstract void Push(Card card, Party p);
     }
@@ -38,7 +38,7 @@ namespace SimpleCards.Engine
         {
         }
 
-        public Party Defense { get; set; }
+        public Party? Defense { get; set; }
 
         public void Push(Card card, Player p)
         {

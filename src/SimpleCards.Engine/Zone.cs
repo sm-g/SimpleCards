@@ -6,12 +6,18 @@
         public const string GameFieldName = "field";
         public const string StockName = "stock";
 
-        public Zone()
+        public Zone(string name)
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new System.ArgumentException("Not set", nameof(name));
+            }
+
+            Name = name;
             Pile = new Pile();
         }
 
-        public string Name { get; set; }
-        public Pile Pile { get; set; }
+        public string Name { get; }
+        public Pile Pile { get; }
     }
 }

@@ -11,17 +11,17 @@
 
         public Zone Discard()
         {
-            return new Zone() { Name = Zone.DiscardName };
+            return new Zone(Zone.DiscardName);
         }
 
         public Zone GameField()
         {
-            return new Zone() { Name = Zone.GameFieldName };
+            return new Zone(Zone.GameFieldName);
         }
 
         public Zone Stock()
         {
-            return new Zone() { Name = Zone.StockName };
+            return new Zone(Zone.StockName);
         }
     }
 }

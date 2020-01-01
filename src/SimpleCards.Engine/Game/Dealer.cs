@@ -6,12 +6,7 @@ namespace SimpleCards.Engine
     {
         public void Deal(Game game)
         {
-            var allCardsForNextGame = game.Table.Collect();
-            foreach (var player in game.Parties.SelectMany(x => x.Players))
-            {
-                allCardsForNextGame.Push(player.Hand.PopAll(), PilePosition.Bottom);
-            }
-
+            var allCardsForNextGame = CollectAllCards(game);
             allCardsForNextGame.Shuffle();
 
             if (allCardsForNextGame.IsEmpty)
@@ -27,7 +22,19 @@ namespace SimpleCards.Engine
             }
 
             var stock = new Stock(allCardsForNextGame) { IsLastVisible = true };
-            game.Table.Zones.Find(x => x.Name == Zone.StockName).Pile = stock;
+            var stockPileOnTable = game.Table.Zones.Find(x => x.Name == Zone.StockName).Pile;
+            stockPileOnTable.Push(stock, PilePosition.Bottom);
+        }
+
+        private static Pile CollectAllCards(Game game)
+        {
+            var result = game.Table.Collect();
+            foreach (var player in game.Parties.SelectMany(x => x.Players))
+            {
+                result.Push(player.Hand.PopAll(), PilePosition.Bottom);
+            }
+
+            return result;
         }
     }
 }

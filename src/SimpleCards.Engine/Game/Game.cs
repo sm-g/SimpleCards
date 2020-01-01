@@ -22,7 +22,7 @@ namespace SimpleCards.Engine
             for (var i = 1; i < players + 1; i++)
             {
                 var player = new Player("player" + i);
-                var party = new Party();
+                var party = new Party("friends");
                 party.Players.Add(player);
                 parties.Add(party);
             }

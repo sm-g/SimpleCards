@@ -8,8 +8,8 @@ namespace SimpleCards.Engine
         [Test]
         public void PushMiddle_NeverTopOrBottom()
         {
-            var p = new Party();
-            var p2 = new Party();
+            var p = new Party("good boys");
+            var p2 = new Party("bad boys");
             var pile = new PlainTrickPile();
             var card = RndCard(1);
             var card2 = RndCard(2);

@@ -6,7 +6,7 @@
         {
         }
 
-        public Player Player { get; set; }
+        public Player? Player { get; set; }
         public int Strength { get; set; }
     }
 }
