@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoFixture;
+
 using NUnit.Framework;
 
 namespace SimpleCards.Engine
@@ -8,6 +10,14 @@ namespace SimpleCards.Engine
     [TestFixture]
     public class PileTests
     {
+        private readonly Fixture _f;
+
+        public PileTests()
+        {
+            _f = new Fixture();
+            _f.Customizations.Add(new PilePositionBuilder());
+        }
+
         [Test]
         public void Ctor_UsesGivenCardsInGivenOrder()
         {
@@ -21,8 +31,9 @@ namespace SimpleCards.Engine
         #region Push
 
         [Test]
-        public void Push_AddsCard([Values] PilePosition position)
+        public void Push_AddsCard()
         {
+            var position = _f.Create<PilePosition>();
             var pile = new Pile();
             var card = RndCard();
 
@@ -32,8 +43,9 @@ namespace SimpleCards.Engine
         }
 
         [Test]
-        public void Push_AddsAllCards([Values] PilePosition position)
+        public void Push_AddsAllCards()
         {
+            var position = _f.Create<PilePosition>();
             var pile = new Pile();
 
             pile.Push(new[] { RndCard(), RndCard() }, position);
@@ -148,8 +160,9 @@ namespace SimpleCards.Engine
         }
 
         [Test]
-        public void Push_EmptyPile_Ok([Values] PilePosition position)
+        public void Push_EmptyPile_Ok()
         {
+            var position = _f.Create<PilePosition>();
             var pile = new Pile();
             var card = RndCard();
 
@@ -159,33 +172,39 @@ namespace SimpleCards.Engine
         }
 
         [Test]
-        public void Push_CardInstanceAlreadyInPile_Throws([Values] PilePosition position)
+        public void Push_CardInstanceAlreadyInPile_Throws()
         {
+            var position = _f.Create<PilePosition>();
             var pile = new Pile();
             var card = RndCard();
             pile.Push(card, position);
 
-            Assert.Catch<ArgumentException>(() => pile.Push(card, position));
+            var ex = Assert.Catch<ArgumentException>(() => pile.Push(card, position));
+            Assert.That(ex.Message, Contains.Substring("instance already in pile").IgnoreCase);
         }
 
         [Test]
-        public void Push_DuplicateOfCardInstance_Throws([Values] PilePosition position)
+        public void Push_DuplicateOfCardInstance_Throws()
         {
+            var position = _f.Create<PilePosition>();
             var pile = new Pile();
             var card = RndCard();
 
-            Assert.Catch<ArgumentException>(() => pile.Push(new[] { card, card }, position));
+            var ex = Assert.Catch<ArgumentException>(() => pile.Push(new[] { card, card }, position));
+            Assert.That(ex.Message, Contains.Substring("Duplicate instances").IgnoreCase);
         }
 
         [Test]
-        public void Push_SetWithCardInstanceAlreadyInPile_Throws([Values] PilePosition position)
+        public void Push_SetWithCardInstanceAlreadyInPile_Throws()
         {
+            var position = _f.Create<PilePosition>();
             var pile = new Pile();
             var card = RndCard();
             pile.Push(card, position);
             pile.Push(RndCard(), position);
 
-            Assert.Catch<ArgumentException>(() => pile.Push(new[] { RndCard(), card }, position));
+            var ex = Assert.Catch<ArgumentException>(() => pile.Push(new[] { RndCard(), card }, position));
+            Assert.That(ex.Message, Contains.Substring("instance already in pile").IgnoreCase);
         }
 
         #endregion Push
@@ -193,8 +212,9 @@ namespace SimpleCards.Engine
         #region Peek
 
         [Test]
-        public void Peek_FromEmptyPile_Throws([Values] PilePosition position)
+        public void Peek_FromEmptyPile_Throws()
         {
+            var position = _f.Create<PilePosition>();
             var pile = new Pile();
 
             Assert.Catch<EmptyPileException>(() => pile.Peek(position));
@@ -248,24 +268,27 @@ namespace SimpleCards.Engine
         #region Pop
 
         [Test]
-        public void Pop_FromEmptyPile_Throws([Values] PilePosition position)
+        public void Pop_FromEmptyPile_Throws()
         {
+            var position = _f.Create<PilePosition>();
             var pile = new Pile();
 
             Assert.Catch<EmptyPileException>(() => pile.Pop(position));
         }
 
         [Test]
-        public void Pop_ManyFromEmptyPile_Throws([Values] PilePosition position)
+        public void Pop_ManyFromEmptyPile_Throws()
         {
+            var position = _f.Create<PilePosition>();
             var pile = new Pile();
 
             Assert.Catch<EmptyPileException>(() => pile.Pop(position, 2));
         }
 
         [Test]
-        public void Pop_MoreThanCardsInPile_ReturnsAllCards([Values] PilePosition position)
+        public void Pop_MoreThanCardsInPile_ReturnsAllCards()
         {
+            var position = _f.Create<PilePosition>();
             var pile = new Pile(new[] { RndCard() });
 
             var result = pile.Pop(position, 2);
@@ -276,8 +299,9 @@ namespace SimpleCards.Engine
         }
 
         [Test]
-        public void Pop_CountExactlyAsSizeOfPile_EmptyPile([Values] PilePosition position)
+        public void Pop_CountExactlyAsSizeOfPile_EmptyPile()
         {
+            var position = _f.Create<PilePosition>();
             var pile = new Pile(new[] { RndCard(), RndCard() });
 
             pile.Pop(position, 2);
