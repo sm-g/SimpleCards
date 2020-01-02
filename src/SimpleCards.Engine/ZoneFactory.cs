@@ -7,7 +7,7 @@ namespace SimpleCards.Engine
         /// <summary>
         /// Creates <see cref="Zone"/>s specific for some concrete game.
         /// </summary>
-        public List<Zone> CreateZones()
+        public virtual List<Zone> CreateZones()
         {
             return new List<Zone>
             {

@@ -48,6 +48,9 @@ namespace SimpleCards.Engine
             {
                 var dealtPacket = allCardsForNextGame.Pop(PilePosition.Top, _rules.HandSize);
 
+                if (dealtPacket.Count < _rules.HandSize)
+                    throw new NotImplementedException("Can not deal at end of game");
+
                 Debug.Assert(player.Hand.IsEmpty, "hand not empty before HandOut");
                 player.Hand.Push(dealtPacket, PilePosition.Default);
             }

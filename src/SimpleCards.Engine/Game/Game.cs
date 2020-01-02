@@ -54,6 +54,16 @@ namespace SimpleCards.Engine
                                      select (party, player);
             if (!playersWithParties.AllUnique(x => x.player))
                 throw new ArgumentException("There is player in many parties at same time", nameof(parties));
+
+            var maxPlayers = Rules.GetMaxPlayers(SuitSet, RankSet);
+            var playersCount = playersWithParties.Count();
+            if (playersCount > maxPlayers)
+            {
+                var ex = new ArgumentException("Too many players", nameof(parties));
+                ex.Data.Add(nameof(playersCount), playersCount);
+                ex.Data.Add(nameof(maxPlayers), maxPlayers);
+                throw ex;
+            }
         }
     }
 }

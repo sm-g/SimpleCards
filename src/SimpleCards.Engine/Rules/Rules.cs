@@ -11,6 +11,12 @@
 
         public Pack MaterializeRequiredPack(SuitSet suits, RankSet ranks) => new Pack(suits, ranks, true, DecksCount);
 
+        public int GetMaxPlayers(SuitSet suits, RankSet ranks)
+        {
+            var pack = MaterializeRequiredPack(suits, ranks);
+            return pack.Size / HandSize;
+        }
+
         /// <summary>
         /// Gets cost of card.
         /// </summary>
