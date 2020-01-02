@@ -15,7 +15,8 @@ namespace SimpleCards.Engine
 
             var pack = new Pack(suitSet, rankSet, shuffle: false);
 
-            Assert.AreEqual(suitSet.Count * rankSet.Count, pack.Size);
+            var expectedPackSize = suitSet.Count * rankSet.Count;
+            Assert.AreEqual(expectedPackSize, pack.Size);
             CollectionAssert.AreEqual(rankSet, pack.Where(x => x.Suit == suitSet[0]).Select(x => x.Rank));
             CollectionAssert.AreEqual(suitSet, pack.Where(x => x.Rank == rankSet[0]).Select(x => x.Suit));
         }
@@ -25,10 +26,12 @@ namespace SimpleCards.Engine
         {
             var suitSet = new SuitSet(new[] { new Suit("s1", Color.Black), new Suit("s2", Color.Black) });
             var rankSet = new RankSet(new[] { new Rank("r1", 1), new Rank("r2", 2, true) });
+            var decksCount = 2;
 
-            var pack = new Pack(suitSet, rankSet, shuffle: false, decksCount: 2);
+            var pack = new Pack(suitSet, rankSet, shuffle: false, decksCount);
 
-            Assert.AreEqual(suitSet.Count * rankSet.Count * 2, pack.Size);
+            var expectedPackSize = suitSet.Count * rankSet.Count * decksCount;
+            Assert.AreEqual(expectedPackSize, pack.Size);
             CollectionAssert.AreEqual(new[]
             {
                 new Card(rankSet[0], suitSet[0]),

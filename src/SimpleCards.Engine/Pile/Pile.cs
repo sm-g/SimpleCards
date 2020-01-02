@@ -16,8 +16,6 @@ namespace SimpleCards.Engine
     /// </remarks>
     public class Pile : IReadOnlyList<Card>
     {
-        protected internal List<Card> CardsInPile;
-
         /// <summary>
         /// Creates pile with given cards.
         /// </summary>
@@ -37,25 +35,21 @@ namespace SimpleCards.Engine
         /// <summary>
         /// Quantity of cards in the pile.
         /// </summary>
-        public int Size
-        {
-            get { return CardsInPile.Count; }
-        }
+        public int Size => CardsInPile.Count;
 
-        public bool IsEmpty
-        {
-            get { return Size == 0; }
-        }
+        public bool IsEmpty => Size == 0;
 
-        public void Push(Card card, PilePosition p)
+        protected internal List<Card> CardsInPile { get; private set; }
+
+        public void Push(Card card, PilePosition position)
         {
             if (CardsInPile.Contains(card, CardByRefEqualityComparer.Instance))
                 throw new ArgumentException("Given card instance already in pile", nameof(card));
 
-            p.Push(this, card);
+            position.Push(this, card);
         }
 
-        public void Push(IReadOnlyCollection<Card> cards, PilePosition p)
+        public void Push(IReadOnlyCollection<Card> cards, PilePosition position)
         {
             if (!cards.AllUnique(x => x, CardByRefEqualityComparer.Instance))
                 throw new ArgumentException("Duplicate instances in given cards", nameof(cards));
@@ -63,26 +57,26 @@ namespace SimpleCards.Engine
             if (CardsInPile.Intersect(cards, CardByRefEqualityComparer.Instance).Any())
                 throw new ArgumentException("One of given cards instance already in pile", nameof(cards));
 
-            p.Push(this, cards);
+            position.Push(this, cards);
         }
 
-        public Card Peek(PilePosition p)
+        public Card Peek(PilePosition position)
         {
             if (IsEmpty)
                 throw new EmptyPileException(this);
 
-            return p.Peek(this);
+            return position.Peek(this);
         }
 
-        public Card Pop(PilePosition p)
+        public Card Pop(PilePosition position)
         {
             if (IsEmpty)
                 throw new EmptyPileException(this);
 
-            return p.Pop(this);
+            return position.Pop(this);
         }
 
-        public List<Card> Pop(PilePosition p, int count)
+        public List<Card> Pop(PilePosition position, int count)
         {
             if (count <= 0)
                 throw new ArgumentOutOfRangeException(nameof(count));
@@ -90,7 +84,7 @@ namespace SimpleCards.Engine
             if (IsEmpty)
                 throw new EmptyPileException(this);
 
-            return p.Pop(this, count);
+            return position.Pop(this, count);
         }
 
         public List<Card> PopAll()
@@ -131,15 +125,9 @@ namespace SimpleCards.Engine
 
         #region IEnumerable
 
-        public IEnumerator<Card> GetEnumerator()
-        {
-            return CardsInPile.GetEnumerator();
-        }
+        public IEnumerator<Card> GetEnumerator() => CardsInPile.GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return CardsInPile.GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => CardsInPile.GetEnumerator();
 
         #endregion IEnumerable
 

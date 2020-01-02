@@ -6,16 +6,16 @@
     /// </summary>
     public class Hand : Pile
     {
-        public Hand(Player p)
+        public Hand(Player player)
         {
-            Player = p;
+            Player = player;
         }
 
         public Player Player { get; }
 
-        public bool Contains(Card item)
+        public bool Contains(Card card)
         {
-            return CardsInPile.Contains(item);
+            return CardsInPile.Contains(card);
         }
     }
 }

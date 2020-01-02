@@ -8,13 +8,13 @@ namespace SimpleCards.Engine
     {
         private readonly List<AI> _ais = new List<AI>();
 
-        public Game(RankSet rs, SuitSet ss, Rules rules, int players)
+        public Game(RankSet ranks, SuitSet suits, Rules rules, int players)
         {
             if (players < 1)
                 throw new ArgumentOutOfRangeException(nameof(players));
 
-            RankSet = rs ?? throw new ArgumentNullException(nameof(rs));
-            SuitSet = ss ?? throw new ArgumentNullException(nameof(ss));
+            RankSet = ranks ?? throw new ArgumentNullException(nameof(ranks));
+            SuitSet = suits ?? throw new ArgumentNullException(nameof(suits));
             Rules = rules ?? throw new ArgumentNullException(nameof(rules));
 
             Table = new Table();
@@ -22,7 +22,7 @@ namespace SimpleCards.Engine
             for (var i = 1; i < players + 1; i++)
             {
                 var player = new Player("player" + i);
-                var party = new Party("friends");
+                var party = new Party("friends of " + player.Name);
                 party.Players.Add(player);
                 parties.Add(party);
             }

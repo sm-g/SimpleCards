@@ -11,20 +11,20 @@ namespace SimpleCards.Engine
         protected Dictionary<Party, List<Card>> Dict { get; } = new Dictionary<Party, List<Card>>();
         protected Party? Leader { get; set; }
 
-        public abstract void Push(Card card, Party p);
+        public abstract void Push(Card card, Party party);
     }
 
     public class PlainTrickPile : TrickPile
     {
         public IEnumerable<Card> Tricks => Dict.Values.SelectMany(x => x);
 
-        public override void Push(Card card, Party p)
+        public override void Push(Card card, Party party)
         {
             if (Dict.Count == 0)
-                Leader = p;
+                Leader = party;
 
-            if (!Dict.TryGetValue(p, out var list))
-                Dict[p] = list = new List<Card>();
+            if (!Dict.TryGetValue(party, out var list))
+                Dict[party] = list = new List<Card>();
 
             list.Add(card);
         }
@@ -40,7 +40,7 @@ namespace SimpleCards.Engine
 
         public Party? Defense { get; set; }
 
-        public void Push(Card card, Player p)
+        public void Push(Card card, Player player)
         {
             ////if (Defense.Players.Contains(p))
             ////{
@@ -48,7 +48,7 @@ namespace SimpleCards.Engine
             //// base.Push(card, p);
         }
 
-        public override void Push(Card card, Party p)
+        public override void Push(Card card, Party party)
         {
             throw new NotImplementedException();
         }

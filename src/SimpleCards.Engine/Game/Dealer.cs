@@ -15,18 +15,19 @@ namespace SimpleCards.Engine
                 allCardsForNextGame = game.Rules.MaterializeRequiredPack(game.SuitSet, game.RankSet);
             }
 
-            foreach (var player in game.Parties.SelectMany(x => x.Players))
-            {
-                var dealt = allCardsForNextGame.Pop(PilePosition.Top, game.Rules.HandSize);
-                player.Hand.Push(dealt, PilePosition.Top);
-            }
+            HandOut(game, allCardsForNextGame);
 
+            PutRestOnStock(game, allCardsForNextGame);
+        }
+
+        private static void PutRestOnStock(Game game, Pile allCardsForNextGame)
+        {
             var stock = new Stock(allCardsForNextGame) { IsLastVisible = true };
             var stockPileOnTable = game.Table.Zones.Find(x => x.Name == Zone.StockName).Pile;
             stockPileOnTable.Push(stock, PilePosition.Bottom);
         }
 
-        private static Pile CollectAllCards(Game game)
+        private Pile CollectAllCards(Game game)
         {
             var result = game.Table.Collect();
             foreach (var player in game.Parties.SelectMany(x => x.Players))
@@ -35,6 +36,15 @@ namespace SimpleCards.Engine
             }
 
             return result;
+        }
+
+        private void HandOut(Game game, Pile allCardsForNextGame)
+        {
+            foreach (var player in game.Parties.SelectMany(x => x.Players))
+            {
+                var dealtPacket = allCardsForNextGame.Pop(PilePosition.Top, game.Rules.HandSize);
+                player.Hand.Push(dealtPacket, PilePosition.Top);
+            }
         }
     }
 }
