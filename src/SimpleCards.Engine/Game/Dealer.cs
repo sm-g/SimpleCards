@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
@@ -6,11 +7,15 @@ namespace SimpleCards.Engine
 {
     public class Dealer
     {
-        private readonly Game _game;
+        private readonly Table _table;
+        private readonly Rules _rules;
+        private readonly IReadOnlyList<Party> _parties;
 
-        public Dealer(Game game)
+        public Dealer(Table table, Rules rules, IReadOnlyList<Party> parties)
         {
-            _game = game ?? throw new ArgumentNullException(nameof(game));
+            _table = table ?? throw new ArgumentNullException(nameof(table));
+            _rules = rules ?? throw new ArgumentNullException(nameof(rules));
+            _parties = parties ?? throw new ArgumentNullException(nameof(parties));
         }
 
         public void Deal()
@@ -28,8 +33,8 @@ namespace SimpleCards.Engine
 
         private Pile CollectAllCards()
         {
-            var result = _game.Table.Collect();
-            foreach (var player in _game.Parties.SelectMany(x => x.Players))
+            var result = _table.Collect();
+            foreach (var player in _parties.SelectMany(x => x.Players))
             {
                 result.Push(player.Hand.PopAll(), PilePosition.Default);
             }
@@ -39,9 +44,9 @@ namespace SimpleCards.Engine
 
         private void HandOut(Pile allCardsForNextGame)
         {
-            foreach (var player in _game.Parties.SelectMany(x => x.Players))
+            foreach (var player in _parties.SelectMany(x => x.Players))
             {
-                var dealtPacket = allCardsForNextGame.Pop(PilePosition.Top, _game.Rules.HandSize);
+                var dealtPacket = allCardsForNextGame.Pop(PilePosition.Top, _rules.HandSize);
 
                 Debug.Assert(player.Hand.IsEmpty, "hand not empty before HandOut");
                 player.Hand.Push(dealtPacket, PilePosition.Default);
@@ -53,7 +58,7 @@ namespace SimpleCards.Engine
             if (allCardsForNextGame.IsEmpty)
                 return;
 
-            var stockZone = _game.Table.Stock;
+            var stockZone = _table.Stock;
             if (stockZone == null)
             {
                 throw new InvalidOperationException("There is no Stock in current game, the rest of collected cards lost");

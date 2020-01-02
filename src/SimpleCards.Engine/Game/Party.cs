@@ -21,7 +21,7 @@ namespace SimpleCards.Engine
 
         public override string ToString()
         {
-            return string.Format("party of {0}, first {1}", Players.Count, Players.Any() ? Players[0].Name : "none");
+            return $"{Name} party of {Players.Count}, first - {(Players.Any() ? Players[0].Name : "none")}";
         }
     }
 }

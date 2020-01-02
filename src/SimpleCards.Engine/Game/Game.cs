@@ -8,26 +8,16 @@ namespace SimpleCards.Engine
     {
         private readonly List<AI> _ais = new List<AI>();
 
-        public Game(RankSet ranks, SuitSet suits, Rules rules, int players)
+        public Game(RankSet ranks, SuitSet suits, Rules rules, IReadOnlyList<Party> parties)
         {
-            if (players < 1)
-                throw new ArgumentOutOfRangeException(nameof(players));
-
             RankSet = ranks ?? throw new ArgumentNullException(nameof(ranks));
             SuitSet = suits ?? throw new ArgumentNullException(nameof(suits));
             Rules = rules ?? throw new ArgumentNullException(nameof(rules));
 
             Table = new Table(Rules.ZoneFactory);
-            var parties = new List<Party>();
-            for (var i = 1; i < players + 1; i++)
-            {
-                var player = new Player("player" + i);
-                var party = new Party("friends of " + player.Name);
-                party.Players.Add(player);
-                parties.Add(party);
-            }
+            Parties = parties ?? throw new ArgumentNullException(nameof(parties));
 
-            Parties = parties;
+            EnsurePartiesValid(parties);
         }
 
         public RankSet RankSet { get; }
@@ -52,6 +42,18 @@ namespace SimpleCards.Engine
         public void Move()
         {
             throw new NotImplementedException();
+        }
+
+        private void EnsurePartiesValid(IReadOnlyList<Party> parties)
+        {
+            if (!parties.AllUnique(x => x.Name))
+                throw new ArgumentException("There are parties with same names", nameof(parties));
+
+            var playersWithParties = from party in parties
+                                     from player in party.Players
+                                     select (party, player);
+            if (!playersWithParties.AllUnique(x => x.player))
+                throw new ArgumentException("There is player in many parties at same time", nameof(parties));
         }
     }
 }

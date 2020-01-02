@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using SimpleCards.Engine;
 
@@ -11,8 +12,9 @@ namespace SimpleCards.Tester
             var suitset = SuitSet.From<FrenchSuits>(s => s == FrenchSuits.Clubs || s == FrenchSuits.Diamonds ? Color.Red : Color.Black);
             var rankset = RankSet.From<DefaultRanks>(r => (int)r, new[] { DefaultRanks.Jack, DefaultRanks.Queen, DefaultRanks.King });
             var rules = new Rules();
-            var game = new Game(rankset, suitset, rules, 2);
-            var dealer = new Dealer(game);
+            var parties = CreateParties(2);
+            var game = new Game(rankset, suitset, rules, parties);
+            var dealer = new Dealer(game.Table, rules, game.Parties);
             game.Init();
 
             for (var gameNumber = 0; gameNumber < 2; gameNumber++)
@@ -35,6 +37,20 @@ namespace SimpleCards.Tester
                     }
                 }
             }
+        }
+
+        private static List<Party> CreateParties(int playersCount)
+        {
+            var parties = new List<Party>();
+            for (var i = 1; i < playersCount + 1; i++)
+            {
+                var player = new Player("player" + i);
+                var party = new Party("friends of " + player.Name);
+                party.Players.Add(player);
+                parties.Add(party);
+            }
+
+            return parties;
         }
     }
 }
