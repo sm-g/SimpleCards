@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 
 namespace SimpleCards.Engine
@@ -30,7 +31,7 @@ namespace SimpleCards.Engine
             var result = _game.Table.Collect();
             foreach (var player in _game.Parties.SelectMany(x => x.Players))
             {
-                result.Push(player.Hand.PopAll(), PilePosition.Bottom);
+                result.Push(player.Hand.PopAll(), PilePosition.Default);
             }
 
             return result;
@@ -41,7 +42,9 @@ namespace SimpleCards.Engine
             foreach (var player in _game.Parties.SelectMany(x => x.Players))
             {
                 var dealtPacket = allCardsForNextGame.Pop(PilePosition.Top, _game.Rules.HandSize);
-                player.Hand.Push(dealtPacket, PilePosition.Top);
+
+                Debug.Assert(player.Hand.IsEmpty, "hand not empty before HandOut");
+                player.Hand.Push(dealtPacket, PilePosition.Default);
             }
         }
 

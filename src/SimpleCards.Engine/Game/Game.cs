@@ -41,7 +41,7 @@ namespace SimpleCards.Engine
         {
             var pack = Rules.MaterializeRequiredPack(SuitSet, RankSet);
 
-            Table.GameField.Pile.Push(pack, PilePosition.Bottom);
+            Table.GameField.Pile.Push(pack, PilePosition.Default);
 
             foreach (var item in Parties)
             {

@@ -20,12 +20,7 @@ namespace SimpleCards.Engine
 
         public Pile Collect()
         {
-            var result = new Pile();
-            foreach (var z in Zones)
-            {
-                result.Push(z.Pile.PopAll(), PilePosition.Bottom);
-            }
-            return result;
+            return new Pile(Zones.SelectMany(z => z.Pile.PopAll()));
         }
     }
 }
