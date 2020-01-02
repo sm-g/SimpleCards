@@ -1,4 +1,6 @@
-﻿namespace SimpleCards.Engine
+﻿using System;
+
+namespace SimpleCards.Engine
 {
     public class Zone
     {
@@ -10,7 +12,7 @@
         {
             if (string.IsNullOrEmpty(name))
             {
-                throw new System.ArgumentException("Not set", nameof(name));
+                throw new ArgumentException("Not set", nameof(name));
             }
 
             Name = name;
@@ -19,7 +21,17 @@
 
         public string Name { get; }
 
-        // TODO allow to set pile on zone explicitly (to have stock as Stock class)
-        public Pile Pile { get; }
+        public Pile Pile { get; private set; }
+
+        /// <summary>
+        /// Sets pile on zone explicitly.
+        /// </summary>
+        public void PlacePile(Pile pile)
+        {
+            if (!Pile.IsEmpty)
+                throw new InvalidOperationException("Current pile of this zone is not empty");
+
+            Pile = pile;
+        }
     }
 }

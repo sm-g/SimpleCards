@@ -71,7 +71,7 @@ namespace SimpleCards.Engine
             {
                 IsLastVisible = true
             };
-            stockZone.Pile.Push(stock, PilePosition.Bottom);
+            stockZone.PlacePile(stock);
         }
     }
 }
