@@ -18,6 +18,8 @@
         }
 
         public string Name { get; }
+
+        // TODO allow to set pile on zone explicitly (to have stock as Stock class)
         public Pile Pile { get; }
     }
 }

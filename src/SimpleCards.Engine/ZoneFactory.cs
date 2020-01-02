@@ -1,12 +1,20 @@
-﻿namespace SimpleCards.Engine
+﻿using System.Collections.Generic;
+
+namespace SimpleCards.Engine
 {
     public class ZoneFactory
     {
-        public void CreateZones(Table table)
+        /// <summary>
+        /// Creates <see cref="Zone"/>s specific for some concrete game.
+        /// </summary>
+        public List<Zone> CreateZones()
         {
-            table.Zones.Add(Discard());
-            table.Zones.Add(GameField());
-            table.Zones.Add(Stock());
+            return new List<Zone>
+            {
+                Discard(),
+                GameField(),
+                Stock()
+            };
         }
 
         public Zone Discard()

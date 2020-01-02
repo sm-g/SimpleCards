@@ -17,7 +17,7 @@ namespace SimpleCards.Engine
             SuitSet = suits ?? throw new ArgumentNullException(nameof(suits));
             Rules = rules ?? throw new ArgumentNullException(nameof(rules));
 
-            Table = new Table();
+            Table = new Table(Rules.ZoneFactory);
             var parties = new List<Party>();
             for (var i = 1; i < players + 1; i++)
             {
@@ -39,7 +39,9 @@ namespace SimpleCards.Engine
 
         public void Init()
         {
-            Rules.ZoneFactory.CreateZones(Table);
+            var pack = Rules.MaterializeRequiredPack(SuitSet, RankSet);
+
+            Table.GameField.Pile.Push(pack, PilePosition.Bottom);
 
             foreach (var item in Parties)
             {

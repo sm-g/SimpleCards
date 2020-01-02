@@ -1,36 +1,34 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace SimpleCards.Engine
 {
     public class Dealer
     {
-        public void Deal(Game game)
+        private readonly Game _game;
+
+        public Dealer(Game game)
         {
-            var allCardsForNextGame = CollectAllCards(game);
+            _game = game ?? throw new ArgumentNullException(nameof(game));
+        }
+
+        public void Deal()
+        {
+            var allCardsForNextGame = CollectAllCards();
             allCardsForNextGame.Shuffle();
 
             if (allCardsForNextGame.IsEmpty)
-            {
-                // first game
-                allCardsForNextGame = game.Rules.MaterializeRequiredPack(game.SuitSet, game.RankSet);
-            }
+                throw new InvalidOperationException("There is no cards to be used in next deal");
 
-            HandOut(game, allCardsForNextGame);
+            HandOut(allCardsForNextGame);
 
-            PutRestOnStock(game, allCardsForNextGame);
+            PutRestOnStock(allCardsForNextGame);
         }
 
-        private static void PutRestOnStock(Game game, Pile allCardsForNextGame)
+        private Pile CollectAllCards()
         {
-            var stock = new Stock(allCardsForNextGame) { IsLastVisible = true };
-            var stockPileOnTable = game.Table.Zones.Find(x => x.Name == Zone.StockName).Pile;
-            stockPileOnTable.Push(stock, PilePosition.Bottom);
-        }
-
-        private Pile CollectAllCards(Game game)
-        {
-            var result = game.Table.Collect();
-            foreach (var player in game.Parties.SelectMany(x => x.Players))
+            var result = _game.Table.Collect();
+            foreach (var player in _game.Parties.SelectMany(x => x.Players))
             {
                 result.Push(player.Hand.PopAll(), PilePosition.Bottom);
             }
@@ -38,13 +36,31 @@ namespace SimpleCards.Engine
             return result;
         }
 
-        private void HandOut(Game game, Pile allCardsForNextGame)
+        private void HandOut(Pile allCardsForNextGame)
         {
-            foreach (var player in game.Parties.SelectMany(x => x.Players))
+            foreach (var player in _game.Parties.SelectMany(x => x.Players))
             {
-                var dealtPacket = allCardsForNextGame.Pop(PilePosition.Top, game.Rules.HandSize);
+                var dealtPacket = allCardsForNextGame.Pop(PilePosition.Top, _game.Rules.HandSize);
                 player.Hand.Push(dealtPacket, PilePosition.Top);
             }
+        }
+
+        private void PutRestOnStock(Pile allCardsForNextGame)
+        {
+            if (allCardsForNextGame.IsEmpty)
+                return;
+
+            var stockZone = _game.Table.Stock;
+            if (stockZone == null)
+            {
+                throw new InvalidOperationException("There is no Stock in current game, the rest of collected cards lost");
+            }
+
+            var stock = new Stock(allCardsForNextGame)
+            {
+                IsLastVisible = true
+            };
+            stockZone.Pile.Push(stock, PilePosition.Bottom);
         }
     }
 }

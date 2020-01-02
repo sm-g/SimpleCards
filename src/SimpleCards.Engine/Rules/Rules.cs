@@ -4,11 +4,10 @@
     {
         public int DecksCount { get; set; } = 1;
 
+        // TODO HandSize depends on players count
         public int HandSize { get; set; } = 6;
 
         public ZoneFactory ZoneFactory { get; } = new ZoneFactory();
-
-        public Dealer Dealer { get; } = new Dealer();
 
         public Pack MaterializeRequiredPack(SuitSet suits, RankSet ranks) => new Pack(suits, ranks, true, DecksCount);
 

@@ -1,4 +1,5 @@
 ﻿using System;
+
 using SimpleCards.Engine;
 
 namespace SimpleCards.Tester
@@ -11,6 +12,7 @@ namespace SimpleCards.Tester
             var rankset = RankSet.From<DefaultRanks>(r => (int)r, new[] { DefaultRanks.Jack, DefaultRanks.Queen, DefaultRanks.King });
             var rules = new Rules();
             var game = new Game(rankset, suitset, rules, 2);
+            var dealer = new Dealer(game);
             game.Init();
 
             for (var gameNumber = 0; gameNumber < 2; gameNumber++)
@@ -19,7 +21,7 @@ namespace SimpleCards.Tester
 
                 Console.WriteLine($"game #{gameNumber}");
 
-                rules.Dealer.Deal(game);
+                dealer.Deal();
                 const int Rounds = 2;
                 for (var roundNumber = 0; roundNumber < Rounds; roundNumber++)
                 {
