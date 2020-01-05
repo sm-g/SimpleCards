@@ -24,7 +24,7 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AgBEAAAABAAEgFAEQAAAAAQAIAKAAEAECAgAAAQAGBA=</HashCode>
+      <HashCode>gABEAAAAAAAEgBCEAABAAAAAAACAAEAEAAAAAAAAGAA=</HashCode>
       <FileName>Pile\Pile.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -46,21 +46,24 @@
   <Class Name="SimpleCards.Engine.Hand" Collapsed="true">
     <Position X="1.25" Y="7.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AEAAAEAAAAAAAAAACAAAAAAAAAAAAAAACAAAAQAQAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAQAQAAA=</HashCode>
       <FileName>Pile\Hand.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SimpleCards.Engine.Table" Collapsed="true">
-    <Position X="11.5" Y="5" Width="1.5" />
+    <Position X="11.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAIACgAEAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Game\Table.cs</FileName>
     </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Zones" />
+    </ShowAsCollectionAssociation>
   </Class>
   <Class Name="SimpleCards.Engine.Zone" Collapsed="true">
     <Position X="11.5" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAgAAAAAAAABAAAAQAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAgAAAAAAAABAAAAQAAAAAAACCAAAAAAAAAAA=</HashCode>
       <FileName>Zone.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -75,11 +78,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="SimpleCards.Engine.Party" Collapsed="true">
-    <Position X="5.75" Y="9" Width="1.5" />
+    <Position X="5.75" Y="9.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAAAAAQAAAAgAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Game\Party.cs</FileName>
     </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Players" />
+    </ShowAsCollectionAssociation>
   </Class>
   <Class Name="SimpleCards.Engine.Player" Collapsed="true">
     <Position X="3.25" Y="9" Width="1.5" />
@@ -114,6 +120,23 @@
     <TypeIdentifier>
       <HashCode>AAAEAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Suit\Color.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleCards.Engine.Parties" Collapsed="true">
+    <Position X="5.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Game\Parties.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Players" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="SimpleCards.Engine.Action" Collapsed="true">
+    <Position X="11.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>Moves\Action.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Enum Name="SimpleCards.Engine.DefaultRanks" Collapsed="true">

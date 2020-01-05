@@ -21,7 +21,7 @@ namespace SimpleCards.Engine
                 throw new ArgumentException("Not unique names");
         }
 
-        public Rank this[string name]
+        public Rank? this[string name]
         {
             get { return Items.FirstOrDefault(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase)); }
         }

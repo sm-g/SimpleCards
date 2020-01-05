@@ -2,6 +2,9 @@
 
 namespace SimpleCards.Engine
 {
+    /// <summary>
+    /// Zone can have different purpose, known by <see cref="Rules"/> and <see cref="AI"/>.
+    /// </summary>
     public class Zone
     {
         public const string DiscardName = "discard";

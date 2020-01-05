@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+
+using Pastel;
 
 using SimpleCards.Engine;
 
-namespace SimpleCards.Tester
+namespace SimpleCards.ExampleApp
 {
     internal static class Program
     {
         private static void Main(string[] args)
         {
-            var suitset = SuitSet.From<FrenchSuits>(s => s == FrenchSuits.Clubs || s == FrenchSuits.Diamonds ? Color.Red : Color.Black);
+            var suitset = SuitSet.From<FrenchSuits>(s => s == FrenchSuits.Hearts || s == FrenchSuits.Diamonds ? Color.Red : Color.Black);
             var rankset = RankSet.From<DefaultRanks>(r => (int)r, new[] { DefaultRanks.Jack, DefaultRanks.Queen, DefaultRanks.King });
             var rules = new Rules();
             var parties = CreateParties(2);
@@ -21,25 +24,48 @@ namespace SimpleCards.Tester
             {
                 // score incremented between games
 
-                Console.WriteLine($"game #{gameNumber}");
+                Log($"game #{gameNumber}");
 
-                dealer.Deal();
-                const int Rounds = 2;
-                for (var roundNumber = 0; roundNumber < Rounds; roundNumber++)
+                do
                 {
-                    Console.WriteLine($"Begin round {roundNumber}");
+                    // deal each round is optional
+                    Log($"Begin round");
+                    dealer.Deal();
+                    game.RoundManager.BeginRound();
 
-                    for (var moveNumver = 0; moveNumver < 3; moveNumver++)
+                    // every player make single move or until allowed
+
+                    for (var moveNumver = 0; moveNumver < 4; moveNumver++)
                     {
-                        Console.WriteLine($"move #{moveNumver}");
+                        Log($"move #{moveNumver}, wait move of {game.RoundManager.CurrentPlayer}");
+                        ConsoleWriter.PrintHand(game.RoundManager.CurrentPlayer);
 
-                        game.Move();
+                        var movement = GetMovement(game.RoundManager.CurrentPlayer);
+
+                        Log($"{game.RoundManager.CurrentPlayer} plays {ConsoleWriter.GetCardView(movement.Card!)}");
+                        game.Move(movement);
                     }
+
+                    Log($"End round ");
+                    game.RoundManager.EndRound();
                 }
+                while (!rules.Ending.IsEnded(game));
             }
         }
 
-        private static List<Party> CreateParties(int playersCount)
+        private static Movement GetMovement(Player currentPlayer)
+        {
+            Console.WriteLine($"enter command (0-based number of card to play)");
+            var command = Console.ReadLine();
+            var numberOfCardToPlay = int.Parse(command);
+
+            // in UI new instance will be created
+            var selectedCard = currentPlayer.Hand.ElementAt(numberOfCardToPlay);
+
+            return new Movement(currentPlayer.Name, Engine.Action.PlayCard, selectedCard);
+        }
+
+        private static Parties CreateParties(int playersCount)
         {
             var parties = new List<Party>();
             for (var i = 1; i < playersCount + 1; i++)
@@ -50,7 +76,33 @@ namespace SimpleCards.Tester
                 parties.Add(party);
             }
 
-            return parties;
+            return new Parties(parties);
+        }
+
+        private static void Log(string message) => Console.WriteLine("LOG: " + message);
+    }
+
+    internal static class ConsoleWriter
+    {
+        private static readonly Dictionary<Suit, string> SuitToPip = new Dictionary<Suit, string>
+        {
+            [new Suit(FrenchSuits.Hearts.ToString(), Color.Red)] = "♥".Pastel("ff0000"),
+            [new Suit(FrenchSuits.Diamonds.ToString(), Color.Red)] = "♦".Pastel("ff0000"),
+            [new Suit(FrenchSuits.Clubs.ToString(), Color.Black)] = "♣".Pastel("ffffff"),
+            [new Suit(FrenchSuits.Spades.ToString(), Color.Black)] = "♠".Pastel("ffffff"),
+        };
+
+        public static void PrintHand(Player player)
+        {
+            var allCards = string.Join(",", player.Hand.Select(GetCardView));
+            Console.WriteLine($"Hand of {player}: {allCards}");
+        }
+
+        public static string GetCardView(Card card)
+        {
+            var coloredSuit = SuitToPip[card.Suit];
+            var rank = card.Rank.IsFace ? card.Rank.Name[0].ToString() : card.Rank.Value.ToString();
+            return rank + coloredSuit;
         }
     }
 }

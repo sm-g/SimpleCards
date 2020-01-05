@@ -2,10 +2,10 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <OutputType>Exe</OutputType>
-    <RootNamespace>SimpleCards.Tester</RootNamespace>
-    <AssemblyName>SimpleCards.Tester</AssemblyName>
-    <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Pastel" Version="1.3.1" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SimpleCards.Engine\SimpleCards.Engine.csproj" />
   </ItemGroup>

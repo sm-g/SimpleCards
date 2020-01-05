@@ -41,12 +41,24 @@ namespace SimpleCards.Engine
             }
         }
 
-        public void Move()
+        public void Move(Movement movement)
         {
-            throw new NotImplementedException();
+            var player = Parties.Players.FirstOrDefault(x => x.Name == movement.PlayerName);
+            if (player == null)
+                throw new ArgumentException($"There is no player {movement.PlayerName} in game");
+
+            if (movement.Action == Action.PlayCard)
+            {
+                var selectedCard = player.Hand.GetCard(movement.Card!);
+                Table.GameField.Pile.Push(selectedCard, PilePosition.Top);
+            }
+            else
+            {
+                throw new ArgumentException("Unknown action type: " + movement.Action);
+            }
+
+            RoundManager.OnMove();
         }
-
-
 
         private void EnsurePartiesValid(Parties parties)
         {

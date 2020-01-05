@@ -22,7 +22,7 @@ namespace SimpleCards.Engine
                 throw new ArgumentException("Not unique names");
         }
 
-        public Suit this[string name]
+        public Suit? this[string name]
         {
             get { return Items.FirstOrDefault(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase)); }
         }

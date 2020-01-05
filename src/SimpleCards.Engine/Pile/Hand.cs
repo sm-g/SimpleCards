@@ -1,4 +1,6 @@
-﻿namespace SimpleCards.Engine
+﻿using System;
+
+namespace SimpleCards.Engine
 {
     /// <summary>
     /// The cards held by one player (owner). Visible to owner.
@@ -16,6 +18,16 @@
         public bool Contains(Card card)
         {
             return CardsInPile.Contains(card);
+        }
+
+        public Card GetCard(Card card)
+        {
+            var firstMatch = CardsInPile.Find(x => x.Equals(card));
+            if (firstMatch == null)
+                throw new ArgumentException($"There is no card {card} in hand");
+
+            CardsInPile.Remove(firstMatch);
+            return firstMatch;
         }
     }
 }
