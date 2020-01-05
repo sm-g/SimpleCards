@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace SimpleCards.Engine
@@ -9,7 +10,7 @@ namespace SimpleCards.Engine
         {
             if (string.IsNullOrEmpty(name))
             {
-                throw new System.ArgumentException("Not set", nameof(name));
+                throw new ArgumentException("Not set", nameof(name));
             }
 
             Name = name;

@@ -8,7 +8,7 @@ namespace SimpleCards.Engine
     {
         private readonly List<AI> _ais = new List<AI>();
 
-        public Game(RankSet ranks, SuitSet suits, Rules rules, IReadOnlyList<Party> parties)
+        public Game(RankSet ranks, SuitSet suits, Rules rules, Parties parties)
         {
             RankSet = ranks ?? throw new ArgumentNullException(nameof(ranks));
             SuitSet = suits ?? throw new ArgumentNullException(nameof(suits));
@@ -16,6 +16,7 @@ namespace SimpleCards.Engine
 
             Table = new Table(Rules.ZoneFactory);
             Parties = parties ?? throw new ArgumentNullException(nameof(parties));
+            RoundManager = new RoundManager(parties);
 
             EnsurePartiesValid(parties);
         }
@@ -25,7 +26,8 @@ namespace SimpleCards.Engine
         public Rules Rules { get; }
 
         public Table Table { get; }
-        public IReadOnlyList<Party> Parties { get; }
+        public Parties Parties { get; }
+        public RoundManager RoundManager { get; }
 
         public void Init()
         {
@@ -44,19 +46,12 @@ namespace SimpleCards.Engine
             throw new NotImplementedException();
         }
 
-        private void EnsurePartiesValid(IReadOnlyList<Party> parties)
+
+
+        private void EnsurePartiesValid(Parties parties)
         {
-            if (!parties.AllUnique(x => x.Name))
-                throw new ArgumentException("There are parties with same names", nameof(parties));
-
-            var playersWithParties = from party in parties
-                                     from player in party.Players
-                                     select (party, player);
-            if (!playersWithParties.AllUnique(x => x.player))
-                throw new ArgumentException("There is player in many parties at same time", nameof(parties));
-
             var maxPlayers = Rules.GetMaxPlayers(SuitSet, RankSet);
-            var playersCount = playersWithParties.Count();
+            var playersCount = parties.Players.Count();
             if (playersCount > maxPlayers)
             {
                 var ex = new ArgumentException("Too many players", nameof(parties));

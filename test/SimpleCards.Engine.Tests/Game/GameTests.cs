@@ -13,7 +13,7 @@ namespace SimpleCards.Engine
 
         public GameTests()
         {
-            _suitset = SuitSet.From<FrenchSuits>(s => s == FrenchSuits.Clubs || s == FrenchSuits.Diamonds ? Color.Red : Color.Black);
+            _suitset = SuitSet.From<FrenchSuits>(s => s == FrenchSuits.Hearts || s == FrenchSuits.Diamonds ? Color.Red : Color.Black);
             _rankset = new RankSet(new[]
             {
                 new Rank("r1", 1),
@@ -37,7 +37,7 @@ namespace SimpleCards.Engine
             Assert.That(ex.ParamName, Is.EqualTo("parties"));
         }
 
-        private static List<Party> CreateParites(int playersCount)
+        private static Parties CreateParites(int playersCount)
         {
             var parties = new List<Party>();
             for (var i = 1; i < playersCount + 1; i++)
@@ -48,7 +48,7 @@ namespace SimpleCards.Engine
                 parties.Add(party);
             }
 
-            return parties;
+            return new Parties(parties);
         }
     }
 }
