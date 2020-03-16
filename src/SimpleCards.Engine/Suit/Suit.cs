@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using ByValue;
 
 namespace SimpleCards.Engine
@@ -8,11 +9,11 @@ namespace SimpleCards.Engine
     {
         public Suit(string name, Color color)
         {
-            Name = name;
+            Name = new Name(name);
             Color = color ?? throw new ArgumentNullException(nameof(color));
         }
 
-        public string Name { get; }
+        public Name Name { get; }
         public Color Color { get; }
 
         public override string ToString() => Name;

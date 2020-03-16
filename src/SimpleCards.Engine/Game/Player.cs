@@ -4,16 +4,11 @@
     {
         public Player(string name)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new System.ArgumentException("Null or empty", nameof(name));
-            }
-
-            Name = name;
+            Name = new Name(name);
             Hand = new Hand(this);
         }
 
-        public string Name { get; }
+        public Name Name { get; }
         public Hand Hand { get; }
 
         public override string ToString()

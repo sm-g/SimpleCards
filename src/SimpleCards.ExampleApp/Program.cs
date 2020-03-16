@@ -101,8 +101,13 @@ namespace SimpleCards.ExampleApp
         public static string GetCardView(Card card)
         {
             var coloredSuit = SuitToPip[card.Suit];
-            var rank = card.Rank.IsFace ? card.Rank.Name[0].ToString() : card.Rank.Value.ToString();
+            var rank = GetRankView(card.Rank);
             return rank + coloredSuit;
         }
+
+        // not is Rank itself, depends on game
+        private static string GetRankView(Rank rank) => rank.IsFace || rank.Value == 14
+            ? rank.Name.Initial
+            : rank.Value.ToString();
     }
 }

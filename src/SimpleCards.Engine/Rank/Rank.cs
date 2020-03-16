@@ -13,12 +13,12 @@ namespace SimpleCards.Engine
     {
         public Rank(string name, int value, bool isFace = false)
         {
-            Name = name;
+            Name = new Name(name);
             Value = value;
             IsFace = isFace;
         }
 
-        public string Name { get; }
+        public Name Name { get; }
 
         /// <summary>
         /// Gets value of rank in game.

@@ -21,7 +21,7 @@ namespace SimpleCards.Engine
 
         public Rank? this[string name]
         {
-            get { return Items.FirstOrDefault(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase)); }
+            get { return Items.FirstOrDefault(x => x.Name.Equals(name)); }
         }
 
         /// <summary>

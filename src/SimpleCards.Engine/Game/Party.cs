@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace SimpleCards.Engine
@@ -8,16 +7,11 @@ namespace SimpleCards.Engine
     {
         public Party(string name)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException("Not set", nameof(name));
-            }
-
-            Name = name;
+            Name = new Name(name);
             Players = new List<Player>();
         }
 
-        public string Name { get; }
+        public Name Name { get; }
         public IList<Player> Players { get; }
 
         public override string ToString()

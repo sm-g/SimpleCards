@@ -10,19 +10,31 @@ namespace SimpleCards.Engine
         [Test]
         public void Ctor_RanksWithSameProps_Throws()
         {
-            Assert.Catch<ArgumentException>(() => new RankSet(new[] { new Rank("1", 1), new Rank("1", 1) }));
+            Assert.Catch<ArgumentException>(() => new RankSet(new[]
+            {
+                new Rank("1", 1),
+                new Rank("1", 1)
+            }));
         }
 
         [Test]
         public void Ctor_RanksWithSameValues_Throws()
         {
-            Assert.Catch<ArgumentException>(() => new RankSet(new[] { new Rank("1", 1), new Rank("222", 1) }));
+            Assert.Catch<ArgumentException>(() => new RankSet(new[]
+            {
+                new Rank("1", 1),
+                new Rank("222", 1)
+            }));
         }
 
         [Test]
         public void Ctor_RanksWithSameNames_Throws()
         {
-            Assert.Catch<ArgumentException>(() => new RankSet(new[] { new Rank("1", 1), new Rank("1", 222) }));
+            Assert.Catch<ArgumentException>(() => new RankSet(new[]
+            {
+                new Rank("1", 1),
+                new Rank("1", 222)
+            }));
         }
 
         [Test]

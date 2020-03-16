@@ -2,14 +2,14 @@
 {
     public class Movement
     {
-        public Movement(string playerName, Action action, Card? card = null)
+        public Movement(Name playerName, Action action, Card? card = null)
         {
             PlayerName = playerName;
             Action = action;
             Card = card;
         }
 
-        public string PlayerName { get; }
+        public Name PlayerName { get; }
         public Action Action { get; }
         public Card? Card { get; }
     }

@@ -7,22 +7,17 @@ namespace SimpleCards.Engine
     /// </summary>
     public class Zone
     {
-        public const string DiscardName = "discard";
-        public const string GameFieldName = "field";
-        public const string StockName = "stock";
+        public static readonly Name DiscardName = new Name("discard");
+        public static readonly Name GameFieldName = new Name("field");
+        public static readonly Name StockName = new Name("stock");
 
         public Zone(string name)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException("Not set", nameof(name));
-            }
-
-            Name = name;
+            Name = new Name(name);
             Pile = new Pile();
         }
 
-        public string Name { get; }
+        public Name Name { get; }
 
         public Pile Pile { get; private set; }
 

@@ -10,13 +10,21 @@ namespace SimpleCards.Engine
         [Test]
         public void Ctor_SuitsWithSameProps_Throws()
         {
-            Assert.Catch<ArgumentException>(() => new SuitSet(new[] { new Suit("1", Color.Black), new Suit("1", Color.Black) }));
+            Assert.Catch<ArgumentException>(() => new SuitSet(new[]
+            {
+                new Suit("1", Color.Black),
+                new Suit("1", Color.Black)
+            }));
         }
 
         [Test]
         public void Ctor_SuitsWithSameNames_Throws()
         {
-            Assert.Catch<ArgumentException>(() => new SuitSet(new[] { new Suit("1", Color.Black), new Suit("1", Color.Red) }));
+            Assert.Catch<ArgumentException>(() => new SuitSet(new[]
+            {
+                new Suit("1", Color.Black),
+                new Suit("1", Color.Red)
+            }));
         }
 
         [Test]
