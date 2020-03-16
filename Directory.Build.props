@@ -31,11 +31,11 @@
 
   <ItemGroup>
     <PackageReference Include="Roslynator.Analyzers">
-      <Version>2.2.0</Version>
+      <Version>2.3.0</Version>
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
     <PackageReference Include="SonarAnalyzer.CSharp">
-      <Version>8.1.0.13383</Version>
+      <Version>8.4.0.15306</Version>
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
     <PackageReference Include="StyleCop.Analyzers">
