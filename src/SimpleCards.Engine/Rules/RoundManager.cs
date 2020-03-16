@@ -1,25 +1,29 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
+using MoreLinq;
+
 namespace SimpleCards.Engine
 {
     public class RoundManager
     {
-        private readonly Parties _parties;
-        private readonly List<Player> _players;
+        private readonly IReadOnlyList<Player> _players;
         private int _currentPlayerIndex;
 
         public RoundManager(Parties parties)
         {
-            _parties = parties;
-            _players = parties.Players.ToList();
+            _players = parties.Players;
 
             var eldest = GetEldestPlayer();
-            _currentPlayerIndex = _players.IndexOf(eldest);
+            _currentPlayerIndex = _players
+                .Index()
+                .First(pair => pair.Value == eldest)
+                .Key;
         }
 
         public Player CurrentPlayer => _players[_currentPlayerIndex];
 
+        // GetEldestPlayer logic depends on game
         public Player GetEldestPlayer() => _players[0];
 
         public void BeginRound()

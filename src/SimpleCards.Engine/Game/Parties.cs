@@ -11,9 +11,12 @@ namespace SimpleCards.Engine
             : base(parties)
         {
             EnsurePartiesValid(parties);
+
+            // assume Players list of Party will not change (however it _could_ be changed by code, because it is IList)
+            Players = Items.SelectMany(party => party.Players).ToList();
         }
 
-        public IEnumerable<Player> Players => Items.SelectMany(party => party.Players);
+        public IReadOnlyList<Player> Players { get; }
 
         private void EnsurePartiesValid(IList<Party> parties)
         {

@@ -157,7 +157,7 @@ namespace SimpleCards.Engine
             Assert.That(ex.Message, Contains.Substring("no cards to be used in next deal").IgnoreCase);
         }
 
-        private static List<Party> CreateParties(int playersCount)
+        private static Parties CreateParties(int playersCount)
         {
             var parties = new List<Party>();
             for (var i = 1; i < playersCount + 1; i++)
@@ -168,7 +168,7 @@ namespace SimpleCards.Engine
                 parties.Add(party);
             }
 
-            return parties;
+            return new Parties(parties);
         }
 
         private void ScatterCardsOnTable(Table table, int count)

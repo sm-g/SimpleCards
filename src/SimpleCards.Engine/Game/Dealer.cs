@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
@@ -9,9 +8,9 @@ namespace SimpleCards.Engine
     {
         private readonly Table _table;
         private readonly Rules _rules;
-        private readonly IReadOnlyList<Party> _parties;
+        private readonly Parties _parties;
 
-        public Dealer(Table table, Rules rules, IReadOnlyList<Party> parties)
+        public Dealer(Table table, Rules rules, Parties parties)
         {
             _table = table ?? throw new ArgumentNullException(nameof(table));
             _rules = rules ?? throw new ArgumentNullException(nameof(rules));
@@ -37,7 +36,7 @@ namespace SimpleCards.Engine
 
             // why Dealer take cards from players?
             // maybe players should put their cards on Table before dealing?
-            foreach (var player in _parties.SelectMany(x => x.Players))
+            foreach (var player in _parties.Players)
             {
                 result.Push(player.Hand.PopAll(), PilePosition.Default);
             }
@@ -47,13 +46,13 @@ namespace SimpleCards.Engine
 
         private void HandOut(Pile allCardsForNextGame)
         {
-            var totalHands = _parties.SelectMany(x => x.Players).Count();
+            var totalHands = _parties.Players.Count();
             if (allCardsForNextGame.Size < totalHands * _rules.HandSize)
             {
                 throw new InvalidOperationException($"Not enough free cards ({allCardsForNextGame.Size}) to hand out between {totalHands} players");
             }
 
-            foreach (var player in _parties.SelectMany(x => x.Players))
+            foreach (var player in _parties.Players)
             {
                 var dealtPacket = allCardsForNextGame.Pop(PilePosition.Top, _rules.HandSize);
 
