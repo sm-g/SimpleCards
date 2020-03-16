@@ -28,7 +28,7 @@ namespace SimpleCards.Engine
             {
                 HandSize = 5
             };
-            var parties = CreateParties(2);
+            var parties = PartiesBuilder.CreateParties(2);
             var sut = new Dealer(table, rules, parties);
 
             sut.Deal();
@@ -47,7 +47,7 @@ namespace SimpleCards.Engine
             {
                 HandSize = 5
             };
-            var parties = CreateParties(2);
+            var parties = PartiesBuilder.CreateParties(2);
             parties[0].Players[0].Hand.Push(_f.Create<Card>(), PilePosition.Default);
             parties[1].Players[0].Hand.Push(_f.Create<Card>(), PilePosition.Default);
             var sut = new Dealer(table, rules, parties);
@@ -67,7 +67,7 @@ namespace SimpleCards.Engine
             {
                 HandSize = 5
             };
-            var parties = CreateParties(2);
+            var parties = PartiesBuilder.CreateParties(2);
             var sut = new Dealer(table, rules, parties);
 
             sut.Deal();
@@ -85,7 +85,7 @@ namespace SimpleCards.Engine
             {
                 HandSize = 5
             };
-            var parties = CreateParties(2);
+            var parties = PartiesBuilder.CreateParties(2);
             var sut = new Dealer(table, rules, parties);
 
             sut.Deal();
@@ -105,7 +105,7 @@ namespace SimpleCards.Engine
             {
                 HandSize = 5
             };
-            var parties = CreateParties(2);
+            var parties = PartiesBuilder.CreateParties(2);
             var sut = new Dealer(table, rules, parties);
 
             sut.Deal();
@@ -122,7 +122,7 @@ namespace SimpleCards.Engine
             {
                 HandSize = 6
             };
-            var parties = CreateParties(2);
+            var parties = PartiesBuilder.CreateParties(2);
             var sut = new Dealer(table, rules, parties);
 
             var ex = Assert.Catch<InvalidOperationException>(() => sut.Deal());
@@ -138,7 +138,7 @@ namespace SimpleCards.Engine
             {
                 HandSize = 1
             };
-            var parties = CreateParties(2);
+            var parties = PartiesBuilder.CreateParties(2);
             var sut = new Dealer(table, rules, parties);
 
             var ex = Assert.Catch<InvalidOperationException>(() => sut.Deal());
@@ -150,25 +150,11 @@ namespace SimpleCards.Engine
         {
             var table = new Table(new ZoneFactory());
             var rules = new Rules();
-            var parties = CreateParties(2);
+            var parties = PartiesBuilder.CreateParties(2);
             var sut = new Dealer(table, rules, parties);
 
             var ex = Assert.Catch<InvalidOperationException>(() => sut.Deal());
             Assert.That(ex.Message, Contains.Substring("no cards to be used in next deal").IgnoreCase);
-        }
-
-        private static Parties CreateParties(int playersCount)
-        {
-            var parties = new List<Party>();
-            for (var i = 1; i < playersCount + 1; i++)
-            {
-                var player = new Player("player" + i);
-                var party = new Party("friends of " + player.Name);
-                party.Players.Add(player);
-                parties.Add(party);
-            }
-
-            return new Parties(parties);
         }
 
         private void ScatterCardsOnTable(Table table, int count)

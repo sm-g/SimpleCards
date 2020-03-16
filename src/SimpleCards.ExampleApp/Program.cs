@@ -13,7 +13,7 @@ namespace SimpleCards.ExampleApp
         private static void Main(string[] args)
         {
             var suitset = SuitSet.From<FrenchSuits>(s => s == FrenchSuits.Hearts || s == FrenchSuits.Diamonds ? Color.Red : Color.Black);
-            var rankset = RankSet.From<DefaultRanks>(r => (int)r, new[] { DefaultRanks.Jack, DefaultRanks.Queen, DefaultRanks.King });
+            var rankset = RankSet.From<DurakRanks>(r => (int)r, new[] { DurakRanks.Jack, DurakRanks.Queen, DurakRanks.King });
             var rules = new Rules();
             var parties = CreateParties(2);
             var game = new Game(rankset, suitset, rules, parties);
@@ -26,14 +26,16 @@ namespace SimpleCards.ExampleApp
 
                 Log($"game #{gameNumber}");
 
+                dealer.Deal();
+                var roundNumber = 0;
                 do
                 {
-                    // deal each round is optional
-                    Log($"Begin round");
-                    dealer.Deal();
+                    Log($"Begin round #{roundNumber}");
                     game.RoundManager.BeginRound();
 
-                    // every player make single move or until allowed
+                    // assume single movement per player
+
+                    // every player make single PlayCard move or until allowed
 
                     for (var moveNumver = 0; moveNumver < 4; moveNumver++)
                     {
@@ -46,10 +48,14 @@ namespace SimpleCards.ExampleApp
                         game.Move(movement);
                     }
 
-                    Log($"End round ");
+                    Log($"End round #{roundNumber++}");
+                    ConsoleWriter.PrintTable(game.Table, Log);
+
                     game.RoundManager.EndRound();
                 }
                 while (!rules.Ending.IsEnded(game));
+
+                Log($"game #{gameNumber} ended");
             }
         }
 
@@ -96,6 +102,14 @@ namespace SimpleCards.ExampleApp
         {
             var allCards = string.Join(",", player.Hand.Select(GetCardView));
             Console.WriteLine($"Hand of {player}: {allCards}");
+        }
+
+        public static void PrintTable(Table table, Action<string> printer)
+        {
+            foreach (var zone in table.Zones)
+            {
+                printer($"{zone.Name}: {zone.Pile}");
+            }
         }
 
         public static string GetCardView(Card card)

@@ -16,4 +16,17 @@
         Queen,
         King
     }
+
+    public enum DurakRanks
+    {
+        Six = 6,
+        Seven,
+        Eight,
+        Nine,
+        Ten,
+        Jack = 11,
+        Queen,
+        King,
+        Ace
+    }
 }

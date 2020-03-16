@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 using NUnit.Framework;
 
@@ -30,25 +29,11 @@ namespace SimpleCards.Engine
             {
                 HandSize = 4
             };
-            var parties = CreateParites(5);
+            var parties = PartiesBuilder.CreateParties(5);
 
             var ex = Assert.Catch<ArgumentException>(() => new Game(_rankset, _suitset, rules, parties));
             Assert.That(ex.Message, Contains.Substring("Too many players").IgnoreCase);
             Assert.That(ex.ParamName, Is.EqualTo("parties"));
-        }
-
-        private static Parties CreateParites(int playersCount)
-        {
-            var parties = new List<Party>();
-            for (var i = 1; i < playersCount + 1; i++)
-            {
-                var player = new Player("player" + i);
-                var party = new Party("friends of " + player.Name);
-                party.Players.Add(player);
-                parties.Add(party);
-            }
-
-            return new Parties(parties);
         }
     }
 }
