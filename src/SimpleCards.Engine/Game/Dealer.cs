@@ -34,6 +34,9 @@ namespace SimpleCards.Engine
         private Pile CollectAllCards()
         {
             var result = _table.Collect();
+
+            // why Dealer take cards from players?
+            // maybe players should put their cards on Table before dealing?
             foreach (var player in _parties.SelectMany(x => x.Players))
             {
                 result.Push(player.Hand.PopAll(), PilePosition.Default);
@@ -44,6 +47,12 @@ namespace SimpleCards.Engine
 
         private void HandOut(Pile allCardsForNextGame)
         {
+            var totalHands = _parties.SelectMany(x => x.Players).Count();
+            if (allCardsForNextGame.Size < totalHands * _rules.HandSize)
+            {
+                throw new InvalidOperationException($"Not enough free cards ({allCardsForNextGame.Size}) to hand out between {totalHands} players");
+            }
+
             foreach (var player in _parties.SelectMany(x => x.Players))
             {
                 var dealtPacket = allCardsForNextGame.Pop(PilePosition.Top, _rules.HandSize);
@@ -64,7 +73,7 @@ namespace SimpleCards.Engine
             var stockZone = _table.Stock;
             if (stockZone == null)
             {
-                throw new InvalidOperationException("There is no Stock in current game, the rest of collected cards lost");
+                throw new InvalidOperationException($"There is no Stock in current game, the rest ({allCardsForNextGame.Size}) of collected cards lost");
             }
 
             var stock = new Stock(allCardsForNextGame)
