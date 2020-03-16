@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-using Optional;
-
 namespace SimpleCards.Engine
 {
     /// <summary>
@@ -38,11 +36,6 @@ namespace SimpleCards.Engine
                 .Cast<T>()
                 .Select(x => new Suit(x.ToString(), colorOf(x)));
             return new SuitSet(set);
-        }
-
-        public Option<Suit> GetSuit(string suitName)
-        {
-            return Items.FirstOrDefault(x => x.Name.Equals(suitName, StringComparison.OrdinalIgnoreCase)).SomeNotNull();
         }
     }
 }

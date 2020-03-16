@@ -1,6 +1,6 @@
 ﻿using System;
+
 using NUnit.Framework;
-using Optional.Unsafe;
 
 namespace SimpleCards.Engine
 {
@@ -20,25 +20,25 @@ namespace SimpleCards.Engine
         }
 
         [Test]
-        public void GetSuit_ReturnsByName()
+        public void Get_suit_by_name_returns_ignoring_case()
         {
             var suit = new Suit("s1", Color.Black);
             var set = new SuitSet(new[] { suit });
 
-            var res = set.GetSuit("s1").ValueOrFailure();
+            var result = set["s1"];
 
-            Assert.AreSame(res, suit);
+            Assert.AreSame(result, suit);
         }
 
         [Test]
-        public void GetSuit_ReturnsByName_Nothing()
+        public void Get_suit_by_name_returns_null()
         {
             var suit = new Suit("s1", Color.Black);
             var set = new SuitSet(new[] { suit });
 
-            var res = set.GetSuit("s2").HasValue;
+            var result = set["s2"];
 
-            Assert.AreEqual(false, res);
+            Assert.IsNull(result);
         }
     }
 }

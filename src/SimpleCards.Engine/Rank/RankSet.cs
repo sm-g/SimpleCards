@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-using Optional;
-
 namespace SimpleCards.Engine
 {
     /// <summary>
@@ -37,11 +35,6 @@ namespace SimpleCards.Engine
                 .Cast<T>()
                 .Select(x => new Rank(x.ToString(), valueOf(x), faced.Contains(x)));
             return new RankSet(set);
-        }
-
-        public Option<Rank> GetRank(string rankName)
-        {
-            return Items.FirstOrDefault(x => x.Name.Equals(rankName, StringComparison.OrdinalIgnoreCase)).SomeNotNull();
         }
     }
 }
