@@ -16,7 +16,7 @@ namespace SimpleCards.Engine
 
             Table = new Table(Rules.ZoneFactory);
             Parties = parties;
-            RoundManager = new RoundManager(Table, rules, parties);
+            Round = new Round(Table, rules, parties);
 
             EnsurePartiesValid(parties);
         }
@@ -27,7 +27,7 @@ namespace SimpleCards.Engine
 
         public Table Table { get; }
         public Parties Parties { get; }
-        public RoundManager RoundManager { get; }
+        public Round Round { get; }
 
         public void Init()
         {
@@ -57,7 +57,7 @@ namespace SimpleCards.Engine
                 throw new ArgumentException("Unknown action type: " + movement.Action);
             }
 
-            RoundManager.OnMove(movement);
+            Round.OnMove(movement);
         }
 
         private void EnsurePartiesValid(Parties parties)

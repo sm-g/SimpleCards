@@ -3,7 +3,7 @@
 namespace SimpleCards.Engine
 {
     [TestFixture]
-    public class RoundManagerTests
+    public class RoundTests
     {
         private static readonly Rules Rules = new Rules()
         {
@@ -15,9 +15,9 @@ namespace SimpleCards.Engine
         {
             var table = Build.Table();
             var parties = Build.Parties(2);
-            var sut = new RoundManager(table, Rules, parties);
+            var sut = new Round(table, Rules, parties);
 
-            sut.BeginRound();
+            sut.Begin();
 
             Assert.AreSame(parties[0].Players[0], sut.CurrentPlayer);
         }
@@ -27,8 +27,8 @@ namespace SimpleCards.Engine
         {
             var table = Build.Table();
             var parties = Build.Parties(2);
-            var sut = new RoundManager(table, Rules, parties);
-            sut.BeginRound();
+            var sut = new Round(table, Rules, parties);
+            sut.Begin();
 
             sut.OnMove(new Movement((Name)"player", Action.Bid));
 
@@ -40,8 +40,8 @@ namespace SimpleCards.Engine
         {
             var table = Build.Table();
             var parties = Build.Parties(2);
-            var sut = new RoundManager(table, Rules, parties);
-            sut.BeginRound();
+            var sut = new Round(table, Rules, parties);
+            sut.Begin();
 
             sut.OnMove(new Movement((Name)"player1", Action.Bid));
             sut.OnMove(new Movement((Name)"player2", Action.Bid));
@@ -54,12 +54,12 @@ namespace SimpleCards.Engine
         {
             var table = Build.Table();
             var parties = Build.Parties(2);
-            var sut = new RoundManager(table, Rules, parties);
-            sut.BeginRound();
+            var sut = new Round(table, Rules, parties);
+            sut.Begin();
             sut.OnMove(new Movement((Name)"player1", Action.PlayCard));
             sut.OnMove(new Movement((Name)"player2", Action.PlayCard));
 
-            sut.EndRound();
+            sut.End();
 
             Assert.AreEqual(Rules.HandSize, parties[0].Players[0].Hand.Size);
             Assert.AreEqual(Rules.HandSize, parties[1].Players[0].Hand.Size);

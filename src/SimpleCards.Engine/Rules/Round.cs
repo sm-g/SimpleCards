@@ -6,7 +6,7 @@ using MoreLinq;
 
 namespace SimpleCards.Engine
 {
-    public class RoundManager
+    public class Round
     {
         private readonly Table _table;
         private readonly Rules _rules;
@@ -17,7 +17,7 @@ namespace SimpleCards.Engine
         private int _currentPlayerIndex;
         private bool _inTurn;
 
-        public RoundManager(Table table, Rules rules, Parties parties)
+        public Round(Table table, Rules rules, Parties parties)
         {
             _table = table;
             _rules = rules;
@@ -33,7 +33,7 @@ namespace SimpleCards.Engine
         // The player sitting one seat after the declarer (one with the highest bid and not the dealer) in normal rotation
         public Player GetEldestPlayer() => _players[0];
 
-        public void BeginRound()
+        public void Begin()
         {
             if (_inTurn)
                 throw new InvalidOperationException("Round already started");
@@ -60,7 +60,7 @@ namespace SimpleCards.Engine
             _currentPlayerIndex = GetNextPlayerIndex();
         }
 
-        public void EndRound()
+        public void End()
         {
             if (!_inTurn)
                 throw new InvalidOperationException("Round not started yet");

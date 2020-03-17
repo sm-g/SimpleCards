@@ -31,7 +31,7 @@ namespace SimpleCards.ExampleApp
                 do
                 {
                     Log($"Begin round #{roundNumber}");
-                    game.RoundManager.BeginRound();
+                    game.Round.Begin();
 
                     // assume single movement per player
 
@@ -39,19 +39,19 @@ namespace SimpleCards.ExampleApp
 
                     for (var moveNumver = 0; moveNumver < 4; moveNumver++)
                     {
-                        Log($"move #{moveNumver}, wait move of {game.RoundManager.CurrentPlayer}");
-                        ConsoleWriter.PrintHand(game.RoundManager.CurrentPlayer);
+                        Log($"move #{moveNumver}, wait move of {game.Round.CurrentPlayer}");
+                        ConsoleWriter.PrintHand(game.Round.CurrentPlayer);
 
-                        var movement = GetMovement(game.RoundManager.CurrentPlayer);
+                        var movement = GetMovement(game.Round.CurrentPlayer);
 
-                        Log($"{game.RoundManager.CurrentPlayer} plays {ConsoleWriter.GetCardView(movement.Card!)}");
+                        Log($"{game.Round.CurrentPlayer} plays {ConsoleWriter.GetCardView(movement.Card!)}");
                         game.Move(movement);
                     }
 
                     Log($"End round #{roundNumber++}");
                     ConsoleWriter.PrintTable(game.Table, Log);
 
-                    game.RoundManager.EndRound();
+                    game.Round.End();
                 }
                 while (!rules.Ending.IsEnded(game));
 
