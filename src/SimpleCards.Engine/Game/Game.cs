@@ -10,12 +10,12 @@ namespace SimpleCards.Engine
 
         public Game(RankSet ranks, SuitSet suits, Rules rules, Parties parties)
         {
-            RankSet = ranks ?? throw new ArgumentNullException(nameof(ranks));
-            SuitSet = suits ?? throw new ArgumentNullException(nameof(suits));
-            Rules = rules ?? throw new ArgumentNullException(nameof(rules));
+            RankSet = ranks;
+            SuitSet = suits;
+            Rules = rules;
 
             Table = new Table(Rules.ZoneFactory);
-            Parties = parties ?? throw new ArgumentNullException(nameof(parties));
+            Parties = parties;
             RoundManager = new RoundManager(Table, rules, parties);
 
             EnsurePartiesValid(parties);

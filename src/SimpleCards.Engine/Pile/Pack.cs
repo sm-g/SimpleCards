@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace SimpleCards.Engine
 {
@@ -16,10 +15,6 @@ namespace SimpleCards.Engine
         /// <param name="decksCount">How many decks required for game.</param>
         public Pack(SuitSet suits, RankSet ranks, bool shuffle = false, int decksCount = 1)
         {
-            if (suits == null)
-                throw new ArgumentNullException(nameof(suits));
-            if (ranks == null)
-                throw new ArgumentNullException(nameof(ranks));
             if (decksCount < 1)
                 throw new ArgumentOutOfRangeException(nameof(decksCount));
 

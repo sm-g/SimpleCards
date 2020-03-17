@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 using ByValue;
 
@@ -10,7 +9,7 @@ namespace SimpleCards.Engine
         public Suit(string name, Color color)
         {
             Name = new Name(name);
-            Color = color ?? throw new ArgumentNullException(nameof(color));
+            Color = color;
         }
 
         public Name Name { get; }

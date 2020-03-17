@@ -12,9 +12,9 @@ namespace SimpleCards.Engine
 
         public Dealer(Table table, Rules rules, Parties parties)
         {
-            _table = table ?? throw new ArgumentNullException(nameof(table));
-            _rules = rules ?? throw new ArgumentNullException(nameof(rules));
-            _parties = parties ?? throw new ArgumentNullException(nameof(parties));
+            _table = table;
+            _rules = rules;
+            _parties = parties;
         }
 
         public void Deal()
