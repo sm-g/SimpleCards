@@ -106,7 +106,7 @@ namespace SimpleCards.Engine
             var dict = new Dictionary<int, int>();
             for (var i = 0; i < 50; i++)
             {
-                var pile = new Pile(Enumerable.Repeat(RndCard(), 10));
+                var pile = new Pile(Enumerable.Repeat(RndCard(), 4));
 
                 pile.Push(addedCard, PilePosition.Middle);
 
@@ -114,7 +114,7 @@ namespace SimpleCards.Engine
             }
             Assert.That(dict.Select(x => x.Value), Has.All.GreaterThan(1));
             Assert.IsFalse(dict.ContainsKey(0), "not first");
-            Assert.IsFalse(dict.ContainsKey(10), "not last");
+            Assert.IsFalse(dict.ContainsKey(4), "not last");
         }
 
         [Test]

@@ -13,8 +13,8 @@ namespace SimpleCards.Engine
         [Test]
         public void CurrentPlayer_is_the_eldest_after_begin()
         {
-            var table = new Table(new ZoneFactory());
-            var parties = PartiesBuilder.CreateParties(2);
+            var table = Build.Table();
+            var parties = Build.Parties(2);
             var sut = new RoundManager(table, Rules, parties);
 
             sut.BeginRound();
@@ -25,8 +25,8 @@ namespace SimpleCards.Engine
         [Test]
         public void CurrentPlayer_changes_by_rotation_after_move()
         {
-            var table = new Table(new ZoneFactory());
-            var parties = PartiesBuilder.CreateParties(2);
+            var table = Build.Table();
+            var parties = Build.Parties(2);
             var sut = new RoundManager(table, Rules, parties);
             sut.BeginRound();
 
@@ -38,8 +38,8 @@ namespace SimpleCards.Engine
         [Test]
         public void CurrentPlayer_is_the_eldest_again_after_whole_round()
         {
-            var table = new Table(new ZoneFactory());
-            var parties = PartiesBuilder.CreateParties(2);
+            var table = Build.Table();
+            var parties = Build.Parties(2);
             var sut = new RoundManager(table, Rules, parties);
             sut.BeginRound();
 
@@ -52,8 +52,8 @@ namespace SimpleCards.Engine
         [Test]
         public void Players_hands_filled_with_cards_from_stock_after_end()
         {
-            var table = new Table(new ZoneFactory());
-            var parties = PartiesBuilder.CreateParties(2);
+            var table = Build.Table();
+            var parties = Build.Parties(2);
             var sut = new RoundManager(table, Rules, parties);
             sut.BeginRound();
             sut.OnMove(new Movement((Name)"player1", Action.PlayCard));

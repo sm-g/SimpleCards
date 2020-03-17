@@ -29,7 +29,7 @@ namespace SimpleCards.Engine
             {
                 HandSize = 4
             };
-            var parties = PartiesBuilder.CreateParties(5);
+            var parties = Build.Parties(5);
 
             var ex = Assert.Catch<ArgumentException>(() => new Game(_rankset, _suitset, rules, parties));
             Assert.That(ex.Message, Contains.Substring("Too many players").IgnoreCase);

@@ -20,11 +20,11 @@ namespace SimpleCards.ExampleApp
             var dealer = new Dealer(game.Table, rules, game.Parties);
             game.Init();
 
-            for (var gameNumber = 0; gameNumber < 2; gameNumber++)
+            for (var dealNumber = 0; dealNumber < 2; dealNumber++)
             {
-                // score incremented between games
+                // score incremented between deals
 
-                Log($"game #{gameNumber}");
+                Log($"deal #{dealNumber}");
 
                 dealer.Deal();
                 var roundNumber = 0;
@@ -55,7 +55,7 @@ namespace SimpleCards.ExampleApp
                 }
                 while (!rules.Ending.IsEnded(game));
 
-                Log($"game #{gameNumber} ended");
+                Log($"deal #{dealNumber} ended");
             }
         }
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 
 using AutoFixture;
@@ -22,13 +21,13 @@ namespace SimpleCards.Engine
         [Test]
         public void Collects_all_cards_from_the_table()
         {
-            var table = new Table(new ZoneFactory());
+            var table = Build.Table();
             ScatterCardsOnTable(table, 10);
             var rules = new Rules()
             {
                 HandSize = 5
             };
-            var parties = PartiesBuilder.CreateParties(2);
+            var parties = Build.Parties(2);
             var sut = new Dealer(table, rules, parties);
 
             sut.Deal();
@@ -41,13 +40,13 @@ namespace SimpleCards.Engine
         [Test]
         public void Collects_all_cards_from_players_hands()
         {
-            var table = new Table(new ZoneFactory());
+            var table = Build.Table();
             ScatterCardsOnTable(table, 10);
             var rules = new Rules()
             {
                 HandSize = 5
             };
-            var parties = PartiesBuilder.CreateParties(2);
+            var parties = Build.Parties(2);
             parties[0].Players[0].Hand.Push(_f.Create<Card>(), PilePosition.Default);
             parties[1].Players[0].Hand.Push(_f.Create<Card>(), PilePosition.Default);
             var sut = new Dealer(table, rules, parties);
@@ -61,13 +60,13 @@ namespace SimpleCards.Engine
         [Test]
         public void Hands_out_cards_to_players()
         {
-            var table = new Table(new ZoneFactory());
+            var table = Build.Table();
             ScatterCardsOnTable(table, 25);
             var rules = new Rules()
             {
                 HandSize = 5
             };
-            var parties = PartiesBuilder.CreateParties(2);
+            var parties = Build.Parties(2);
             var sut = new Dealer(table, rules, parties);
 
             sut.Deal();
@@ -79,13 +78,13 @@ namespace SimpleCards.Engine
         [Test]
         public void Puts_rest_of_cards_on_stock()
         {
-            var table = new Table(new ZoneFactory());
+            var table = Build.Table();
             ScatterCardsOnTable(table, 25);
             var rules = new Rules()
             {
                 HandSize = 5
             };
-            var parties = PartiesBuilder.CreateParties(2);
+            var parties = Build.Parties(2);
             var sut = new Dealer(table, rules, parties);
 
             sut.Deal();
@@ -99,13 +98,13 @@ namespace SimpleCards.Engine
         [Test]
         public void Stock_remains_empty_when_all_cards_in_hands()
         {
-            var table = new Table(new ZoneFactory());
+            var table = Build.Table();
             ScatterCardsOnTable(table, 10);
             var rules = new Rules()
             {
                 HandSize = 5
             };
-            var parties = PartiesBuilder.CreateParties(2);
+            var parties = Build.Parties(2);
             var sut = new Dealer(table, rules, parties);
 
             sut.Deal();
@@ -116,13 +115,13 @@ namespace SimpleCards.Engine
         [Test]
         public void Should_throw_when_not_enough_free_cards_to_hand_out()
         {
-            var table = new Table(new ZoneFactory());
+            var table = Build.Table();
             ScatterCardsOnTable(table, 10);
             var rules = new Rules()
             {
                 HandSize = 6
             };
-            var parties = PartiesBuilder.CreateParties(2);
+            var parties = Build.Parties(2);
             var sut = new Dealer(table, rules, parties);
 
             var ex = Assert.Catch<InvalidOperationException>(() => sut.Deal());
@@ -132,13 +131,13 @@ namespace SimpleCards.Engine
         [Test]
         public void Should_throw_when_there_is_no_stock_zone_on_table_and_some_cards_not_handed_out()
         {
-            var table = new Table(new NoStockZoneFactory());
+            var table = Build.TableWithoutStock();
             ScatterCardsOnTable(table, 10);
             var rules = new Rules()
             {
                 HandSize = 1
             };
-            var parties = PartiesBuilder.CreateParties(2);
+            var parties = Build.Parties(2);
             var sut = new Dealer(table, rules, parties);
 
             var ex = Assert.Catch<InvalidOperationException>(() => sut.Deal());
@@ -148,9 +147,9 @@ namespace SimpleCards.Engine
         [Test]
         public void Should_throw_when_there_is_no_free_cards()
         {
-            var table = new Table(new ZoneFactory());
+            var table = Build.Table();
             var rules = new Rules();
-            var parties = PartiesBuilder.CreateParties(2);
+            var parties = Build.Parties(2);
             var sut = new Dealer(table, rules, parties);
 
             var ex = Assert.Catch<InvalidOperationException>(() => sut.Deal());
@@ -171,14 +170,6 @@ namespace SimpleCards.Engine
             if (cards.Count > 7)
             {
                 table.Discard?.Pile.Push(cards.Skip(7).ToList(), PilePosition.Default);
-            }
-        }
-
-        private class NoStockZoneFactory : ZoneFactory
-        {
-            public override List<Zone> CreateZones()
-            {
-                return new List<Zone> { GameField() };
             }
         }
     }
