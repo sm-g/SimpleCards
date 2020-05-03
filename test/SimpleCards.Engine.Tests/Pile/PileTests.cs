@@ -218,7 +218,8 @@ namespace SimpleCards.Engine
             var position = _f.Create<PilePosition>();
             var pile = new Pile();
 
-            Assert.Catch<EmptyPileException>(() => pile.Peek(position));
+            var ex = Assert.Catch<InvalidOperationException>(() => pile.Peek(position));
+            Assert.That(ex.Message, Contains.Substring("is empty").IgnoreCase);
         }
 
         [Test]
@@ -274,7 +275,8 @@ namespace SimpleCards.Engine
             var position = _f.Create<PilePosition>();
             var pile = new Pile();
 
-            Assert.Catch<EmptyPileException>(() => pile.Pop(position));
+            var ex = Assert.Catch<InvalidOperationException>(() => pile.Pop(position));
+            Assert.That(ex.Message, Contains.Substring("is empty").IgnoreCase);
         }
 
         [Test]
@@ -283,7 +285,8 @@ namespace SimpleCards.Engine
             var position = _f.Create<PilePosition>();
             var pile = new Pile();
 
-            Assert.Catch<EmptyPileException>(() => pile.Pop(position, 2));
+            var ex = Assert.Catch<InvalidOperationException>(() => pile.Pop(position, 2));
+            Assert.That(ex.Message, Contains.Substring("is empty").IgnoreCase);
         }
 
         [Test]

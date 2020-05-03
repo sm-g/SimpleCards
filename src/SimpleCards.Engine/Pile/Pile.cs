@@ -63,7 +63,7 @@ namespace SimpleCards.Engine
         public Card Peek(PilePosition position)
         {
             if (IsEmpty)
-                throw new EmptyPileException(this);
+                throw new InvalidOperationException("This pile is empty");
 
             return position.Peek(this);
         }
@@ -71,7 +71,7 @@ namespace SimpleCards.Engine
         public Card Pop(PilePosition position)
         {
             if (IsEmpty)
-                throw new EmptyPileException(this);
+                throw new InvalidOperationException("This pile is empty");
 
             return position.Pop(this);
         }
@@ -82,7 +82,7 @@ namespace SimpleCards.Engine
                 throw new ArgumentOutOfRangeException(nameof(count));
 
             if (IsEmpty)
-                throw new EmptyPileException(this);
+                throw new InvalidOperationException("This pile is empty");
 
             return position.Pop(this, count);
         }
