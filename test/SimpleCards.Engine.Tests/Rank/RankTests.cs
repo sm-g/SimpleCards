@@ -38,6 +38,7 @@ namespace SimpleCards.Engine
         {
             var a = new Rank("1", 1, false);
 
+#nullable disable
             Assert.IsTrue(a > null, "gt null");
             Assert.IsTrue(a >= null, "gte null");
             Assert.IsFalse(a < null, "lt null");
@@ -51,6 +52,7 @@ namespace SimpleCards.Engine
 
             Assert.IsTrue(null != a, "null eq");
             Assert.IsTrue(a != null, "neq null");
+#nullable restore
 
 #pragma warning restore SA1131 // Use readable conditions
         }

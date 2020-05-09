@@ -33,8 +33,8 @@ namespace SimpleCards.Engine
             sut.Deal();
 
             CollectionAssert.IsEmpty(table.GameField.Pile);
-            CollectionAssert.IsEmpty(table.Stock.Pile);
-            CollectionAssert.IsEmpty(table.Discard.Pile);
+            CollectionAssert.IsEmpty(table.Stock!.Pile);
+            CollectionAssert.IsEmpty(table.Discard!.Pile);
         }
 
         [Test]
@@ -89,9 +89,9 @@ namespace SimpleCards.Engine
 
             sut.Deal();
 
-            Assert.AreEqual(15, table.Stock.Pile.Size);
+            Assert.AreEqual(15, table.Stock!.Pile.Size);
             Assert.IsInstanceOf<Stock>(table.Stock.Pile);
-            var stockPile = table.Stock.Pile as Stock;
+            var stockPile = (Stock)table.Stock.Pile;
             Assert.IsTrue(stockPile.IsLastVisible);
         }
 
@@ -109,7 +109,7 @@ namespace SimpleCards.Engine
 
             sut.Deal();
 
-            Assert.IsTrue(table.Stock.Pile.IsEmpty);
+            Assert.IsTrue(table.Stock!.Pile.IsEmpty);
         }
 
         [Test]

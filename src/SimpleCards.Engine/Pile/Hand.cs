@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace SimpleCards.Engine
 {
@@ -19,6 +20,10 @@ namespace SimpleCards.Engine
         {
             return CardsInPile.Contains(card);
         }
+
+        public bool HasSuit(Suit suit) => CardsInPile.Any(card => card.Suit == suit);
+
+        public bool HasTrump(Trump trump) => CardsInPile.Any(card => trump.IsTrumpCard(card));
 
         public Card GetCard(Card card)
         {

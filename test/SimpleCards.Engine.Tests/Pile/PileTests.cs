@@ -413,10 +413,7 @@ namespace SimpleCards.Engine
 
         #endregion Pop
 
-        private static Card RndCard(int i = 1)
-        {
-            return new Card(new Rank("rank" + i, i), new Suit("clubs", Color.Red));
-        }
+        private static Card RndCard(int rank = 1) => Stub.Cards.Rnd(rank);
 
         private static void IncValueForKey(Dictionary<int, int> dict, int key)
         {

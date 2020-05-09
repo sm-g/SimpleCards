@@ -27,6 +27,10 @@ namespace SimpleCards.ExampleApp
                 Log($"deal #{dealNumber}");
 
                 dealer.Deal();
+                // TODO case when there is no cards in Stock
+                var trump = Trump.LastCard(game.Table.Stock!.Pile);
+                var trickPile = new TrickPile(rules.FollowSuit, trump);
+                game.Table.GameField.PlacePile(trickPile);
                 var roundNumber = 0;
                 do
                 {

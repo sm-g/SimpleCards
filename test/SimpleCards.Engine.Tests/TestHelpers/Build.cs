@@ -10,7 +10,7 @@ namespace SimpleCards.Engine
         {
             var parties = new List<Party>();
             var totalPlayers = count * playersPerPartyCount;
-            Party party = null;
+            Party? party = null;
 
             // player names must be unique
             for (var playerNumber = 1; playerNumber < totalPlayers + 1; playerNumber++)

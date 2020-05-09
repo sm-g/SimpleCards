@@ -24,6 +24,11 @@ namespace SimpleCards.Engine
             get { return Items.FirstOrDefault(x => x.Name.Equals(name)); }
         }
 
+        public Rank GetWithValue(int value)
+        {
+            return Items.First(x => x.Value.Equals(value));
+        }
+
         /// <summary>
         /// Creates rank set from enum.
         /// </summary>

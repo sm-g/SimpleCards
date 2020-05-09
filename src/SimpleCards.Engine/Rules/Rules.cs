@@ -9,6 +9,8 @@
 
         public GameEnding Ending { get; set; } = GameEnding.NoCardsInHands;
 
+        public FollowSuit FollowSuit { get; set; } = FollowSuit.Regular;
+
         public ZoneFactory ZoneFactory { get; } = new ZoneFactory();
 
         public Pack MaterializeRequiredPack(SuitSet suits, RankSet ranks) => new Pack(suits, ranks, true, DecksCount);

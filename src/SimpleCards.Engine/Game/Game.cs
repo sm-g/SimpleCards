@@ -50,7 +50,9 @@ namespace SimpleCards.Engine
             if (movement.Action == Action.PlayCard)
             {
                 var selectedCard = player.Hand.GetCard(movement.Card!);
-                Table.GameField.Pile.Push(selectedCard, PilePosition.Top);
+
+                var trickPile = (TrickPile)Table.GameField.Pile;
+                trickPile.Push(selectedCard, player);
             }
             else
             {

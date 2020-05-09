@@ -32,14 +32,14 @@
   <Class Name="SimpleCards.Engine.RankSet" Collapsed="true">
     <Position X="3" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgAAAAAAAAAAAAAACQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AgAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Rank\RankSet.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SimpleCards.Engine.SuitSet" Collapsed="true">
     <Position X="5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgAAAAAAAAAAQAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AgAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Suit\SuitSet.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -135,8 +135,84 @@
   <Class Name="SimpleCards.Engine.Action" Collapsed="true">
     <Position X="11.5" Y="8" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAgAEAAAAAA=</HashCode>
       <FileName>Moves\Action.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleCards.Engine.Dealer" Collapsed="true">
+    <Position X="8.25" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAggAAAAAEgAAAAAAAAAAAAAJAAAAAAA=</HashCode>
+      <FileName>Game\Dealer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleCards.Engine.Movement" Collapsed="true">
+    <Position X="9" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Moves\Movement.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Action" />
+      <Property Name="Card" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SimpleCards.Engine.Round" Collapsed="true">
+    <Position X="2.75" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQYAAAAAAABIAoAAAICAAIAAABAAEAAAAAAxgAAAAAA=</HashCode>
+      <FileName>Rules\Round.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Rotation" />
+      <Property Name="CurrentPlayer" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SimpleCards.Engine.Rotation" Collapsed="true">
+    <Position X="2.75" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAQIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Rules\Rotation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleCards.Engine.Rules" Collapsed="true">
+    <Position X="11" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAABAAAAAAAAAAAACAAAAAAAAAIABQAAAAAACQA=</HashCode>
+      <FileName>Rules\Rules.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Ending" />
+      <Property Name="ZoneFactory" />
+      <Property Name="FollowSuit" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SimpleCards.Engine.GameEnding" Collapsed="true">
+    <Position X="13.75" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAEAAAAAAAAgABAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>Rules\GameEnding.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleCards.Engine.ZoneFactory" Collapsed="true">
+    <Position X="13.75" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIAAgAEAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ZoneFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleCards.Engine.FollowSuit" Collapsed="true">
+    <Position X="13.75" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAgABAAAAAAAA=</HashCode>
+      <FileName>Rules\FollowSuit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleCards.Engine.TrickPile" Collapsed="true">
+    <Position X="4.5" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAQAAAAAAAAEAAgQAAAAAAAAAAABAACAA=</HashCode>
+      <FileName>Tricks\TrickPile.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Enum Name="SimpleCards.Engine.DefaultRanks" Collapsed="true">
