@@ -29,9 +29,9 @@ namespace SimpleCards.Engine
 
         public bool IsFace { get; }
 
-        public int CompareTo(Rank other) => Comparison(this, other);
+        public int CompareTo(Rank? other) => Comparison(this, other);
 
-        public static int Comparison(Rank x, Rank y)
+        public static int Comparison(Rank? x, Rank? y)
         {
             if (x is null && y is null)
                 return 0;
@@ -43,17 +43,17 @@ namespace SimpleCards.Engine
             return x.Value.CompareTo(y.Value);
         }
 
-        public static bool operator >(Rank x, Rank y) => Comparison(x, y) > 0;
+        public static bool operator >(Rank? x, Rank? y) => Comparison(x, y) > 0;
 
-        public static bool operator >=(Rank x, Rank y) => Comparison(x, y) >= 0;
+        public static bool operator >=(Rank? x, Rank? y) => Comparison(x, y) >= 0;
 
-        public static bool operator <(Rank x, Rank y) => Comparison(x, y) < 0;
+        public static bool operator <(Rank? x, Rank? y) => Comparison(x, y) < 0;
 
-        public static bool operator <=(Rank x, Rank y) => Comparison(x, y) <= 0;
+        public static bool operator <=(Rank? x, Rank? y) => Comparison(x, y) <= 0;
 
-        public static bool operator ==(Rank x, Rank y) => Comparison(x, y) == 0;
+        public static bool operator ==(Rank? x, Rank? y) => Comparison(x, y) == 0;
 
-        public static bool operator !=(Rank x, Rank y) => Comparison(x, y) != 0;
+        public static bool operator !=(Rank? x, Rank? y) => Comparison(x, y) != 0;
 
         public override string ToString()
         {

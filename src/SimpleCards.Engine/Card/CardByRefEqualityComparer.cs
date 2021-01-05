@@ -6,7 +6,7 @@ namespace SimpleCards.Engine
     {
         public static readonly CardByRefEqualityComparer Instance = new CardByRefEqualityComparer();
 
-        public bool Equals(Card x, Card y)
+        public bool Equals(Card? x, Card? y)
         {
             return ReferenceEquals(x, y);
         }

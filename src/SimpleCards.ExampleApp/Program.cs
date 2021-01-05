@@ -67,7 +67,7 @@ namespace SimpleCards.ExampleApp
         {
             Console.WriteLine($"enter command (0-based number of card to play)");
             var command = Console.ReadLine();
-            var numberOfCardToPlay = int.Parse(command);
+            var numberOfCardToPlay = int.Parse(command!);
 
             // in UI new instance will be created
             var selectedCard = currentPlayer.Hand.ElementAt(numberOfCardToPlay);

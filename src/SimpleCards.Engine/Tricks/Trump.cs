@@ -50,8 +50,15 @@ namespace SimpleCards.Engine
             return card.Suit == _trumpSuit;
         }
 
-        public int Compare(Card x, Card y)
+        public int Compare(Card? x, Card? y)
         {
+            if (x is null && y is null)
+                return 0;
+            if (y is null)
+                return 1;
+            if (x is null)
+                return -1;
+
             if (x.Suit == y.Suit)
                 return x.Rank.CompareTo(y.Rank);
 

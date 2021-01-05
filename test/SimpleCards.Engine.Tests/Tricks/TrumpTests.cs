@@ -92,5 +92,16 @@ namespace SimpleCards.Engine.Tests.Tricks
 
             Assert.That(result, Is.EqualTo(0));
         }
+
+        [Test]
+        public void Null_cases()
+        {
+            var sixTrump = new Card(Stub.Ranks.Six, Stub.Suits.Clubs);
+            var sut = Trump.Static(sixTrump.Suit);
+
+            Assert.That(sut.Compare(null, sixTrump), Is.LessThan(0));
+            Assert.That(sut.Compare(sixTrump, null), Is.GreaterThan(0));
+            Assert.That(sut.Compare(null, null), Is.EqualTo(0));
+        }
     }
 }

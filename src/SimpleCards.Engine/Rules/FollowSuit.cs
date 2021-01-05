@@ -47,8 +47,8 @@ namespace SimpleCards.Engine
                     if (hand.HasTrump(trickPile.Trump))
                     {
                         var hightestTrumpInHand = hand.CardsInPile
+                            .OrderByDescending(card => card, trickPile.Trump)
                             .Where(card => trickPile.Trump.IsTrumpCard(card))
-                            .OrderByDescending(card => card.Rank)
                             .Select(card => card.Rank)
                             .First();
                         if (hightestTrumpInPile < hightestTrumpInHand && card.Rank != hightestTrumpInHand)
