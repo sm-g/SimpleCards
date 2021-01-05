@@ -4,7 +4,7 @@
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Ardalis.SmartEnum" Version="1.0.8" />
+    <PackageReference Include="Ardalis.SmartEnum" Version="2.0.0" />
     <PackageReference Include="morelinq" Version="3.3.2" />
     <PackageReference Include="ByValue" Version="0.2.0" />
   </ItemGroup>
