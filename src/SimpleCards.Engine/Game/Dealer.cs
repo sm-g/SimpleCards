@@ -59,7 +59,7 @@ namespace SimpleCards.Engine
                 if (dealtPacket.Count < _rules.HandSize)
                     throw new NotImplementedException("Can not deal at end of game");
 
-                Debug.Assert(player.Hand.IsEmpty, "hand not empty before HandOut");
+                Debug.Assert(player.Hand.IsEmpty, $"hand of {player.Name} not empty before HandOut");
                 player.Hand.Push(dealtPacket, PilePosition.Default);
             }
         }

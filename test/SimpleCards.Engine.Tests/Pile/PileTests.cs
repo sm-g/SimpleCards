@@ -181,7 +181,7 @@ namespace SimpleCards.Engine
             pile.Push(card, position);
 
             var ex = Assert.Catch<ArgumentException>(() => pile.Push(card, position));
-            Assert.That(ex.Message, Contains.Substring("instance already in pile").IgnoreCase);
+            Assert.That(ex!.Message, Contains.Substring("instance already in pile").IgnoreCase);
         }
 
         [Test]
@@ -192,7 +192,7 @@ namespace SimpleCards.Engine
             var card = RndCard();
 
             var ex = Assert.Catch<ArgumentException>(() => pile.Push(new[] { card, card }, position));
-            Assert.That(ex.Message, Contains.Substring("Duplicate instances").IgnoreCase);
+            Assert.That(ex!.Message, Contains.Substring("Duplicate instances").IgnoreCase);
         }
 
         [Test]
@@ -205,7 +205,7 @@ namespace SimpleCards.Engine
             pile.Push(RndCard(), position);
 
             var ex = Assert.Catch<ArgumentException>(() => pile.Push(new[] { RndCard(), card }, position));
-            Assert.That(ex.Message, Contains.Substring("instance already in pile").IgnoreCase);
+            Assert.That(ex!.Message, Contains.Substring("instance already in pile").IgnoreCase);
         }
 
         #endregion Push
@@ -219,7 +219,7 @@ namespace SimpleCards.Engine
             var pile = new Pile();
 
             var ex = Assert.Catch<InvalidOperationException>(() => pile.Peek(position));
-            Assert.That(ex.Message, Contains.Substring("is empty").IgnoreCase);
+            Assert.That(ex!.Message, Contains.Substring("is empty").IgnoreCase);
         }
 
         [Test]
@@ -276,7 +276,7 @@ namespace SimpleCards.Engine
             var pile = new Pile();
 
             var ex = Assert.Catch<InvalidOperationException>(() => pile.Pop(position));
-            Assert.That(ex.Message, Contains.Substring("is empty").IgnoreCase);
+            Assert.That(ex!.Message, Contains.Substring("is empty").IgnoreCase);
         }
 
         [Test]
@@ -286,7 +286,7 @@ namespace SimpleCards.Engine
             var pile = new Pile();
 
             var ex = Assert.Catch<InvalidOperationException>(() => pile.Pop(position, 2));
-            Assert.That(ex.Message, Contains.Substring("is empty").IgnoreCase);
+            Assert.That(ex!.Message, Contains.Substring("is empty").IgnoreCase);
         }
 
         [Test]

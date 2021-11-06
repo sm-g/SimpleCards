@@ -125,7 +125,7 @@ namespace SimpleCards.Engine
             var sut = new Dealer(table, rules, parties);
 
             var ex = Assert.Catch<InvalidOperationException>(() => sut.Deal());
-            Assert.That(ex.Message, Contains.Substring("Not enough free cards").IgnoreCase);
+            Assert.That(ex!.Message, Contains.Substring("Not enough free cards").IgnoreCase);
         }
 
         [Test]
@@ -141,7 +141,7 @@ namespace SimpleCards.Engine
             var sut = new Dealer(table, rules, parties);
 
             var ex = Assert.Catch<InvalidOperationException>(() => sut.Deal());
-            Assert.That(ex.Message, Contains.Substring("no Stock in current game").IgnoreCase);
+            Assert.That(ex!.Message, Contains.Substring("no Stock in current game").IgnoreCase);
         }
 
         [Test]
@@ -153,7 +153,7 @@ namespace SimpleCards.Engine
             var sut = new Dealer(table, rules, parties);
 
             var ex = Assert.Catch<InvalidOperationException>(() => sut.Deal());
-            Assert.That(ex.Message, Contains.Substring("no cards to be used in next deal").IgnoreCase);
+            Assert.That(ex!.Message, Contains.Substring("no cards to be used in next deal").IgnoreCase);
         }
 
         private void ScatterCardsOnTable(Table table, int count)

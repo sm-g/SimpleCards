@@ -19,7 +19,7 @@ namespace SimpleCards.Engine
 
         public abstract bool IsEnded(Game game);
 
-        private class FirstEmptyGameEnding : GameEnding
+        private sealed class FirstEmptyGameEnding : GameEnding
         {
             public FirstEmptyGameEnding(string name, int value)
                 : base(name, value)
@@ -32,7 +32,7 @@ namespace SimpleCards.Engine
             }
         }
 
-        private class SingleWithCardsGameEnding : GameEnding
+        private sealed class SingleWithCardsGameEnding : GameEnding
         {
             public SingleWithCardsGameEnding(string name, int value)
                 : base(name, value)
@@ -45,7 +45,7 @@ namespace SimpleCards.Engine
             }
         }
 
-        private class NoCardsInHandsGameEnding : GameEnding
+        private sealed class NoCardsInHandsGameEnding : GameEnding
         {
             public NoCardsInHandsGameEnding(string name, int value)
                 : base(name, value)
@@ -58,7 +58,7 @@ namespace SimpleCards.Engine
             }
         }
 
-        private class NoCardsInStockGameEnding : GameEnding
+        private sealed class NoCardsInStockGameEnding : GameEnding
         {
             public NoCardsInStockGameEnding(string name, int value)
                 : base(name, value)

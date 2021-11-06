@@ -32,8 +32,8 @@ namespace SimpleCards.Engine
             var parties = Build.Parties(5);
 
             var ex = Assert.Catch<ArgumentException>(() => new Game(_rankset, _suitset, rules, parties));
-            Assert.That(ex.Message, Contains.Substring("Too many players").IgnoreCase);
-            Assert.That(ex.ParamName, Is.EqualTo("parties"));
+            Assert.That(ex!.Message, Contains.Substring("Too many players").IgnoreCase);
+            Assert.That(ex!.ParamName, Is.EqualTo("parties"));
         }
     }
 }

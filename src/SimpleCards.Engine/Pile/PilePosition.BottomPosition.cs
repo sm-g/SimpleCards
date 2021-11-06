@@ -5,7 +5,7 @@ namespace SimpleCards.Engine
 {
     public abstract partial class PilePosition
     {
-        private class BottomPosition : PilePosition
+        private sealed class BottomPosition : PilePosition
         {
             public BottomPosition(string name, int value)
                 : base(name, value)

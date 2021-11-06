@@ -33,7 +33,7 @@ namespace SimpleCards.Engine
 
 #pragma warning disable S3881 // "IDisposable" should be implemented correctly
 
-        private class Impl : IDisposable
+        private sealed class Impl : IDisposable
         {
             public void Dispose()
             {
