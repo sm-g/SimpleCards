@@ -74,6 +74,7 @@ namespace SimpleCards.Engine
             _inTurn = false;
         }
 
+        // looks like domain event handler
         private void DrawCardsToFillHands(Pile stockPile)
         {
             _movements

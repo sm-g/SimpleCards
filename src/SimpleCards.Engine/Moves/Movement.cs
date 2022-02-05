@@ -2,6 +2,8 @@
 {
     public class Movement
     {
+        // MAYBE subclasess for Movement by Action? not to have nullable Card
+
         public Movement(Name playerName, Action action, Card? card = null)
         {
             PlayerName = playerName;
